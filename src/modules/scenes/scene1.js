@@ -32,9 +32,9 @@ define(["../animations", "scripts/scene1"],function(animations, script){
     //Scene Animations
     //animations that are during the haunting phase
     scene.animations = {};
-    scene.animations["didAlarmClock"] = {
-      spritesheet: animations("alarmclockAnim"),
-      starting: "play",
+    scene.animations["turnoffAlarmClock"] = {
+      spritesheet: animations("alarmclock"),
+      starting: "turnoff",
       location: {x:100, y:100}
     };
 
@@ -50,10 +50,10 @@ define(["../animations", "scripts/scene1"],function(animations, script){
           meterStatAffected: {
             suspense: +1
           },
-          postAnimation: "didAlarmClock",  //from scene.animations, optional
+          postAnimation: scene.animations["turnoffAlarmClock"],  //from scene.animations, optional
           oaAnimation: {  //animation for during RickAction phase
-            spritesheet: animations("alarmclock_action1"),
-            starting: "start",
+            spritesheet: animations("alarmclock"),
+            starting: "objectaction-turnedoff",
             location: {x:150,y:150}
           }
         },
@@ -72,8 +72,8 @@ define(["../animations", "scripts/scene1"],function(animations, script){
       name: "getup from bed",
 
       introAnim: {
-        spritesheet: animations(""),
-        starting: "start",
+        spritesheet: animations("rick_bedroom"),
+        starting: "wake",
         location: {x:300, y:300}
       }
     });
@@ -82,7 +82,7 @@ define(["../animations", "scripts/scene1"],function(animations, script){
       type: "oa", //objectaction animation
       name: "alarmclock",//link to scene.objects
 
-      //objectLink: scene.objects["alarmclock"],  
+      //objectLink: scene.objects["alarmclock"],
 
       rickDialog: {
         script: script.alarm,

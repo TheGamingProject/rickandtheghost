@@ -11,6 +11,8 @@ define(["Scene", "scenes/scene1", "animations"],function(Scene, scene1, animatio
   GAME.state = STATES.pregame;
   GAME.gameplayObject;
 
+  GAME.SIZE = { x: 1280, y: 720 };
+
   GAME.controls = {
     //for moving map
     enter: false
@@ -34,7 +36,7 @@ define(["Scene", "scenes/scene1", "animations"],function(Scene, scene1, animatio
     preContainer = new createjs.Container();
 
     var rectangle = new createjs.Shape();
-    rectangle.graphics.beginFill("black").drawRect(0,0,800,600);
+    rectangle.graphics.beginFill("black").drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
     preContainer.addChild(rectangle);
 
     var spritesheet = animations("menuBG");
