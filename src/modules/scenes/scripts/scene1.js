@@ -11,6 +11,8 @@ define([],function(){
 
   script.introtalk = "i hate life";
 
+  script.alarm = "darn u!";
+
 
   //return an array of all the definitions {}
   return script

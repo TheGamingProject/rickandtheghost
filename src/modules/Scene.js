@@ -29,6 +29,7 @@ define([],function (){
     // parse args
     var sceneDef = args.sceneDef; // from modules/scenes/scene1.js
     if (!sceneDef) throw "No defined scene";
+    sceneDef = sceneDef();
 
     var parentStage = args.parentStage;
     if (!parentStage) throw "No parentStage";
@@ -96,7 +97,7 @@ define([],function (){
     }
 
     that.click = function(loc){
-      if(state != STATE.haunting)
+      if(state != STATES.haunting)
         return;
 
       //we might call clickObject
@@ -128,10 +129,6 @@ define([],function (){
 
       //start animation chain
     };
-   /*
-    var clickContinueButton = function(){
-
-    }*/
 
     that.endScene = function(){
       //clean up sprites? background
