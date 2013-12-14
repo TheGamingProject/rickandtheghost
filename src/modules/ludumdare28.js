@@ -29,6 +29,8 @@ define(["Scene", "scenes/scene1", "animations"],function(Scene, scene1, animatio
     //load shit?
 
     // GAME.gameplayObject = new GamePlay();
+
+    GAME.state = STATES.pregame;
     preContainer = new createjs.Container();
 
     var rectangle = new createjs.Shape();
@@ -54,8 +56,8 @@ define(["Scene", "scenes/scene1", "animations"],function(Scene, scene1, animatio
 
   GAME.update = function(){
 
-
     switch(GAME.state){
+
       case STATES.pregame:
         if(GAME.controls.enter){
           GAME.state = STATES.ingame;
@@ -75,9 +77,16 @@ define(["Scene", "scenes/scene1", "animations"],function(Scene, scene1, animatio
   };
 
   GAME.startScene = function(){
-    GAME.currentScene = new Scene( {sceneDef: scene1} );
+    GAME.currentScene = new Scene( {sceneDef: scene1, parentStage: GAME.stage} );
+    GAME.currentScene.startScene();
 
   };
+  GAME.resetGame = function(){
+    console.log("reseting game");
+    init();
+    console.log("reset State: "+GAME.state)
+  }
+
   GAME.click = function (loc){
     //can be delt with thru http://www.createjs.com/Docs/EaselJS/classes/DisplayObject.html#event_click
   }
@@ -100,7 +109,7 @@ define(["Scene", "scenes/scene1", "animations"],function(Scene, scene1, animatio
         break;
 
       case 82://r
-//    resetGame();
+        GAME.resetGame();
         break;
       case 77://m
 //    togglemusic();
@@ -159,7 +168,7 @@ define(["Scene", "scenes/scene1", "animations"],function(Scene, scene1, animatio
     GAME.init(canvas);
 
     document.onkeydown = GAME.keyPressed;
-    document.onkeyup = GAME.keyPressed;
+    document.onkeyup = GAME.keyReleased;
   }
 
   init();
