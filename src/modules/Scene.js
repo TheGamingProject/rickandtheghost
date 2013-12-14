@@ -3,7 +3,7 @@
  *
  * Scene.js
  */
-define([],function (){
+define(["SceneObject"],function (SceneObject){
 
   var STATES = {
     preinit: -1,
@@ -40,6 +40,9 @@ define([],function (){
 
     //ui variables
     var sceneContainer;
+    var backgroundSprite,
+      objectLayerContainer,
+      uiLayerContainer;
     var continueButton;
 
     var debugText;
@@ -54,7 +57,7 @@ define([],function (){
 
       //temp backdrop
       var rectangle = new createjs.Shape();
-      rectangle.graphics.beginFill("green").drawRect(0,0,800,600);
+      rectangle.graphics.beginFill("green").drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
       sceneContainer.addChild(rectangle);
 
 
@@ -75,6 +78,11 @@ define([],function (){
       debugText.textBaseline = "alphabetic";
       sceneContainer.addChild(debugText);
 
+      //parse sceneDef
+      parseSceneDef();
+
+      //setup UI?
+      //uiLayerContainer
 
       parentStage.addChild(sceneContainer);
       console.log("Scene init-ed: "+sceneDef.name);
@@ -96,6 +104,60 @@ define([],function (){
 
     }
 
+    //parse and create the scene
+    var parseSceneDef = function(){
+      //background
+      //backgroundSprite =
+      //sceneContainer.addChild(backgroundSprite);
+
+
+      objectLayerContainer = new createjs.Container();
+      objectLayerContainer.setBounds(0,0,GAME.SIZE.x,GAME.SIZE.y);
+      sceneContainer.addChild(objectLayerContainer)
+
+      //create objects
+      var objects = sceneDef.objects;
+      if(!objects) throw "No objects defined in scene: "+sceneDef.name;
+
+      for(var o in objects){
+        var object = objects[o];
+
+        var objectSprite = SceneObject(sceneContainer, object, optionsUiCallback);//object and objectSprite
+
+        //objectLayerContainer.addEventListener("click", function(){alert("poop")})//)objectSprite.handleClick);
+        objectLayerContainer.addChild(objectSprite);
+        //debugger;
+      }
+
+
+
+    };
+
+    ////////// ui stuff //////////
+
+    /*
+     { //action 1
+         description: "turn off the alarm clock",
+         meterStatAffected: {
+         suspense: +1
+       },
+       postAnimation: scene.animations["turnoffAlarmClock"],  //from scene.animations, optional
+       oaAnimation: {  //animation for during RickAction phase
+         spritesheet: animations("alarmclock"),
+         starting: "objectaction-turnedoff",
+         location: {x:150,y:150}
+       }
+     }
+     */
+    var optionsUiCallback = function(actionList){
+      for(var a in actionList){
+        var action = actionList[a];
+        console.log(a+ ": "+action.description);
+
+      }
+    }
+
+/*
     that.click = function(loc){
       if(state != STATES.haunting)
         return;
@@ -110,7 +172,7 @@ define([],function (){
     var clickObject = function(name){
       //trigger showing list
     };
-
+*/
     that.startScene = function(){
       setState(STATES.haunting);
 

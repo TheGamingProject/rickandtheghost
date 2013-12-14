@@ -16,7 +16,7 @@
  */
 
 
-define(["../animations", "scripts/scene1"],function(animations, script){
+define(["../animations", "scenes/scripts/scene1"],function(animations, script){
   var scene1 = function (){
     var scene = {};
 
@@ -34,18 +34,28 @@ define(["../animations", "scripts/scene1"],function(animations, script){
     scene.animations = {};
     scene.animations["turnoffAlarmClock"] = {
       spritesheet: animations("alarmclock"),
-      starting: "turnoff",
+      starting: "reaction-turnoff",
       location: {x:100, y:100}
     };
+    scene.animations["setAlarmClockEarly"] = {
+      spritesheet: animations("alarmclock"),
+      starting: "reaction-setearly",
+      location: {x:100, y:100}
+    };
+
 
     //Scene Objects
     scene.objects = {};
     scene.objects["alarmclock"] = {
-      location: {x:200,y:200},
-      size: {width:50, height:50}, //to click it
+      clickBounds: {x:180, y:180, w:90, h:90},//to click it
+      idleAnimation: {
+        spritesheet: animations("alarmclock"),
+        starting: "idle",
+        location: {x:200,y:200}
+      },
 
-      actionList: {
-        action1: { //turn off alarm clock
+      actionList: [
+        { //action 1
           description: "turn off the alarm clock",
           meterStatAffected: {
             suspense: +1
@@ -53,14 +63,31 @@ define(["../animations", "scripts/scene1"],function(animations, script){
           postAnimation: scene.animations["turnoffAlarmClock"],  //from scene.animations, optional
           oaAnimation: {  //animation for during RickAction phase
             spritesheet: animations("alarmclock"),
-            starting: "objectaction-turnedoff",
+            starting: "objectaction-turnoff",
             location: {x:150,y:150}
           }
         },
-        action2: {
-
+        { //action 2
+          description: "set the alarm clock early",
+          meterStatAffected: {
+            goodday: -1
+          },
+          postAnimation: scene.animations["setAlarmClockEarly"],  //from scene.animations, optional
+          oaAnimation: {  //animation for during RickAction phase
+            spritesheet: animations("alarmclock"),
+            starting: "objectaction-setearly",
+            location: {x:150,y:150}
+          }
+        },
+        {
+          description: "do nothing",
+          oaAnimation: {  //animation for during RickAction phase
+            spritesheet: animations("alarmclock"),
+            starting: "objectaction-abstain",
+            location: {x:150,y:150}
+          }
         }
-      }
+      ]
     };
 
     //RickAction Phase Animations

@@ -1,11 +1,13 @@
 //ludumdare28.js
 //coded by @nikpoklitar
 
+var GAME = {};
+
 define(["Scene", "scenes/scene1", "animations"],function(Scene, scene1, animations){
 
   var STATES = {pregame: 0, ingame: 1};
 
-  var GAME = {};
+
 
   GAME.fps = 30;
   GAME.state = STATES.pregame;
@@ -43,7 +45,7 @@ define(["Scene", "scenes/scene1", "animations"],function(Scene, scene1, animatio
     tempPic = new createjs.Sprite(spritesheet,"afk");
     tempPic.x = 200;
     tempPic.y = 100;
-    console.log(tempPic);
+
     preContainer.addChild(tempPic);
 
     GAME.stage.addChild(preContainer);
@@ -174,5 +176,4 @@ define(["Scene", "scenes/scene1", "animations"],function(Scene, scene1, animatio
   }
 
   init();
-  console.log("animations: "+animations);
 });
