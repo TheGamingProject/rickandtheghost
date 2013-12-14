@@ -18,19 +18,33 @@ define(["Scene", "scenes/scene1", "animations"],function(Scene, scene1, animatio
 
   //temporary
   GAME.currentScene;
+  var preContainer;
+
 
   GAME.init = function(canvas){
     GAME.stage = new createjs.Stage(canvas);
 
-    drawStuff(GAME.stage);
+    //drawStuff(GAME.stage);
 
     //load shit?
 
     // GAME.gameplayObject = new GamePlay();
-    tempPic = new createjs.Sprite(animations.menuBG,0);
-    tempPic.x = 0;
-    tempPic.y = 0;
-    GAME.stage.addChild(tempPic);
+    preContainer = new createjs.Container();
+
+    var rectangle = new createjs.Shape();
+    rectangle.graphics.beginFill("black").drawRect(0,0,800,600);
+    preContainer.addChild(rectangle);
+
+    var spritesheet = animations("menuBG");
+    tempPic = new createjs.Sprite(spritesheet,"afk");
+    tempPic.x = 200;
+    tempPic.y = 100;
+    console.log(tempPic);
+    preContainer.addChild(tempPic);
+
+    GAME.stage.addChild(preContainer);
+    //GAME.stage.update();
+    createjs.Ticker.addEventListener("tick", GAME.stage);
 
     setInterval(GAME.update, 1000 / GAME.fps);
 
@@ -43,10 +57,12 @@ define(["Scene", "scenes/scene1", "animations"],function(Scene, scene1, animatio
 
     switch(GAME.state){
       case STATES.pregame:
-        if(GAME.controls.enter)
+        if(GAME.controls.enter){
           GAME.state = STATES.ingame;
           GAME.startScene();
-
+          preContainer.visible = false;
+          console.log("end pregame state");
+        }
         break;
       case STATES.ingame:
 
@@ -70,7 +86,7 @@ define(["Scene", "scenes/scene1", "animations"],function(Scene, scene1, animatio
   GAME.keyPressed = function (evt){
     if(!evt) return;
     switch(evt.keyCode){
-      case 87://enter
+      case 13://enter
         GAME.controls.enter = true;
         break;
     }
@@ -79,7 +95,7 @@ define(["Scene", "scenes/scene1", "animations"],function(Scene, scene1, animatio
   GAME.keyReleased = function (evt){
     if(!evt) return
     switch(evt.keyCode){
-      case 87://enter
+      case 13://enter
         GAME.controls.enter = false;
         break;
 
