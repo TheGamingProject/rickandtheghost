@@ -28,6 +28,7 @@ define(["Scene"],function (Scene){
     var state = STATES.pre;
     var animationNum = 0;
 
+    var rickSprite;
 
 
     var doTimeBlock = function(timeblock){
@@ -38,30 +39,46 @@ define(["Scene"],function (Scene){
         case "intro":
           //always at the beginning of a timeline, is a unique traveling animation
           // -introAnim
-
+          // fixed frames
 
 
           break;
         case "transition":
           //always walking in a direction,
-          // changes x by some amount per second?
+          // changes x by some amount per second? (walk speed)
           // -facing
+          // -distance
+
+
 
           break;
         case "oa":
           // -tag - identifies it to the ObjectAction
+          // fixed amount of frames
+
+          // we want to use ObjectAction(as animator) and make rick sprite not visible
+
 
           break;
 
         default:
           throw "invalid timeblock type";
       }
+      //event listenr
+      addEventListener("animationend", function(target, type, name, next){
+
+      });
 
       //attachables:
 
       //rickDialog
       //etcAnimation
+      if(timeblock.rickDialog && typeof rickDialog === "object"){
+        $.each(timeblock.rickDialog, function(index, value){//value = def
+          //start a timeout that displays stuff
 
+        });
+      }
 
     }
 
