@@ -21,18 +21,19 @@ define([],function(){
   };
 
   animations.alarmclock = {
-    framerate: 1,
-    images: ["assets/a1s1_alarmclock.png"],
-    frames: {width: 50, height: 50, count: 170},
+    framerate: 33,
+    images: ["assets/a1s1/alarmclock.png"],
+    frames: {width: 300, height: 300, count: 90},
     animations: {
       idle: {
         frames: [0]
       },
-      "reaction-turnoff": [10,14,"idle",1], //post-click,
-      "reaction-setearly": [20,39,"idle",1],
-      "objectaction-turnoff": [40,79,"idle",1], //
-      "objectaction-setearly": [80,109,"idle",1], //do nothing and activate
-      "objectaction-abstain": [110,149,"idle",1] //disabled
+
+      "reaction-setearly": [10,39, false],
+      "reaction-turnoff": [40,54, false], //post-click,
+      "objectaction-setearly": [60,69], //
+      "objectaction-turnoff": [70,79], //
+      "objectaction-abstain": [80,89] //
 
     }
 

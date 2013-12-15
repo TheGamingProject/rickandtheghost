@@ -22,7 +22,7 @@ define([],function (){
     if (!args.actionList || !args.idleAnimation || !args.clickBounds || !args.name)
       throw "bad args:" + args;
 
-    console.log(args);
+    //console.log(args);
 
 
     //private instance variables
@@ -31,6 +31,15 @@ define([],function (){
 
     // object definition  and  set idle Animation
     that = new createjs.Sprite(args.idleAnimation.spritesheet, args.idleAnimation.starting);// extends Sprite
+
+    if(DEBUG.showClickArea){
+      var b = args.clickBounds;
+      debugArea = new createjs.Shape();
+      debugArea.mouseEnabled = false;
+      debugArea.graphics.beginFill(createjs.Graphics.getRGB(0,250,0,.2)).drawRect(b.x,b.y,b.w,b.h,.5);
+      parentStage.addChild(debugArea);
+    }
+
 
     //set location
     that.x = args.idleAnimation.location.x;

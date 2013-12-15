@@ -17,11 +17,12 @@ define(["SceneObject"],function (SceneObject){
     x: 0,
     y: 500,
     w: GAME.SIZE.x,
-    h: GAME.SIZE.y - 500
+    h: GAME.SIZE.y - 500,
+    path: "assets/bottomUI.png"
   };
 
   var CONTINUE_BUTTON = {
-    asset: "assets/continueButton.png",
+    path: "assets/continueButton.png",
     x: 40,
     y: 525,
     w: 0,
@@ -186,7 +187,7 @@ define(["SceneObject"],function (SceneObject){
       uiLayerContainer.addChild(purpleRect);
 
       //continue button
-      continueButton = new createjs.Bitmap(CONTINUE_BUTTON.asset);
+      continueButton = new createjs.Bitmap(CONTINUE_BUTTON.path);
       continueButton.x = CONTINUE_BUTTON.x;
       continueButton.y = CONTINUE_BUTTON.y;
       continueButton.addEventListener("click",function(evt){

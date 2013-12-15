@@ -34,12 +34,12 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
     scene.animations["turnoffAlarmClock"] = {
       spritesheet: animations("alarmclock"),
       starting: "reaction-turnoff",
-      location: {x:100, y:100}
+      location: {x:100, y:100} // ??
     };
     scene.animations["setAlarmClockEarly"] = {
       spritesheet: animations("alarmclock"),
       starting: "reaction-setearly",
-      location: {x:100, y:100}
+      location: {x:100, y:100} // ??
     };
 
 
@@ -48,11 +48,11 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
     scene.objects["alarmclock"] = {
       tag: "alarmclock",
       name: "Alarm Clock",
-      clickBounds: {x:900, y:330, w:50, h:50},//to click it
+      clickBounds: {x:900, y:320, w:60, h:60},//to click it
       idleAnimation: {
         spritesheet: animations("alarmclock"),
         starting: "idle",
-        location: {x:900,y:330}
+        location: {x:720,y:200}
       },
 
       actionList: [

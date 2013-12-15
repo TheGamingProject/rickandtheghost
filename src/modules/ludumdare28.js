@@ -4,11 +4,16 @@
 var GAME = {};
 GAME.SIZE = { x: 1280, y: 720 };
 
-define(["Scene", "scenes/scene1", "animations", "Player"],function(Scene, scene1, animations, Player){
+var DEBUG = {showClickArea: true};
+
+var STARTING_SCENE = "scene1";
+
+
+define(["Scene", "SceneManager", "animations", "Player"],function(Scene, SceneManager, animations, Player){
 
   var STATES = {pregame: 0, ingame: 1};
 
-
+  var scene = SceneManager.getScene(STARTING_SCENE);
 
   GAME.fps = 30;
   GAME.state = STATES.pregame;
@@ -27,7 +32,7 @@ define(["Scene", "scenes/scene1", "animations", "Player"],function(Scene, scene1
 
   GAME.init = function(canvas){
     GAME.stage = new createjs.Stage(canvas);
-
+  debugger;
     //drawStuff(GAME.stage);
 
     //load shit?
@@ -83,7 +88,7 @@ define(["Scene", "scenes/scene1", "animations", "Player"],function(Scene, scene1
   };
 
   GAME.startScene = function(){
-    GAME.currentScene = new Scene( {sceneDef: scene1, parentStage: GAME.stage} );
+    GAME.currentScene = new Scene( {sceneDef: scene, parentStage: GAME.stage} );
     GAME.currentScene.startScene();
 
   };
