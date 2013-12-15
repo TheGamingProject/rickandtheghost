@@ -90,12 +90,14 @@ define(["SceneObject"],function (SceneObject){
       sceneContainer = new createjs.Container();
 
       //temp backdrop
-      var rectangle = new createjs.Shape();
+    /*  var rectangle = new createjs.Shape();
       rectangle.graphics.beginFill("green").drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
       sceneContainer.addChild(rectangle);
-
-
-
+    */
+      backgroundSprite = new createjs.Bitmap(sceneDef.background.path);
+      backgroundSprite.x = 0;
+      backgroundSprite.y = 0;
+      sceneContainer.addChild(backgroundSprite);
 
       //debug text
       debugText = new createjs.Text("State: ", "20px Arial", "#ff7700");

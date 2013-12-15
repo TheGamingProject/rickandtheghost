@@ -25,8 +25,7 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
 
     //new createjs.Sprite(spritesheet,"afk");
     scene.background = {
-      spritesheet: animations("menuBG"), //name of animation defined in animations
-      starting: 0 //frame or animation name
+      path: "assets/a1s1/background.png"
     };
 
     //Scene Animations
@@ -49,11 +48,11 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
     scene.objects["alarmclock"] = {
       tag: "alarmclock",
       name: "Alarm Clock",
-      clickBounds: {x:180, y:180, w:90, h:90},//to click it
+      clickBounds: {x:900, y:330, w:50, h:50},//to click it
       idleAnimation: {
         spritesheet: animations("alarmclock"),
         starting: "idle",
-        location: {x:200,y:200}
+        location: {x:900,y:330}
       },
 
       actionList: [
