@@ -18,7 +18,7 @@ define(["SceneObject"],function (SceneObject){
     y: 500,
     w: GAME.SIZE.x,
     h: GAME.SIZE.y - 500,
-    path: "assets/bottomUI.png"
+    path: "assets/lowerbar.png"
   };
 
   var CONTINUE_BUTTON = {
@@ -182,9 +182,12 @@ define(["SceneObject"],function (SceneObject){
       uiLayerContainer = new createjs.Container();
       uiLayerContainer.setBounds(UI_BOTTOM.x,UI_BOTTOM.y,UI_BOTTOM.w,UI_BOTTOM.h);
 
-      var purpleRect = new createjs.Shape();
-      purpleRect.graphics.beginFill("purple").drawRect(UI_BOTTOM.x,UI_BOTTOM.y,UI_BOTTOM.w,UI_BOTTOM.h);
-      uiLayerContainer.addChild(purpleRect);
+     // var purpleRect = new createjs.Shape();
+     // purpleRect.graphics.beginFill("purple").drawRect(UI_BOTTOM.x,UI_BOTTOM.y,UI_BOTTOM.w,UI_BOTTOM.h);
+      var bottomRect = new createjs.Bitmap(UI_BOTTOM.path);
+      bottomRect.x = UI_BOTTOM.x;
+      bottomRect.y = UI_BOTTOM.y;
+      uiLayerContainer.addChild(bottomRect);
 
       //continue button
       continueButton = new createjs.Bitmap(CONTINUE_BUTTON.path);

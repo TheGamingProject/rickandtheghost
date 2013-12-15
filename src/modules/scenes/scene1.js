@@ -13,6 +13,8 @@
  *      - list of transitions and oa animations
  *        - see Classes Doc
  *
+*     http://www.json.org/
+ *
  */
 
 

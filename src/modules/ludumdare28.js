@@ -32,7 +32,7 @@ define(["Scene", "SceneManager", "animations", "Player"],function(Scene, SceneMa
 
   GAME.init = function(canvas){
     GAME.stage = new createjs.Stage(canvas);
-  debugger;
+
     //drawStuff(GAME.stage);
 
     //load shit?
