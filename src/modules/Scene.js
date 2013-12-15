@@ -49,7 +49,9 @@ define(["SceneObject", "SceneTimeline"],function (SceneObject, SceneTimeline){
     x: 410, y: 500, tag: "scared"
   }];
 
-
+  var TIMELINE_UI_TEXT = {
+    x: 800, y:20
+  }
 
   //page 52 the goood parts
   var Scene = function(args){
@@ -66,6 +68,8 @@ define(["SceneObject", "SceneTimeline"],function (SceneObject, SceneTimeline){
 
     //private instance variables
     var state = STATES.preinit;
+    var timeline;
+    var sceneObjects = {};
 
 
     //ui variables
@@ -79,6 +83,7 @@ define(["SceneObject", "SceneTimeline"],function (SceneObject, SceneTimeline){
     var objectActionTitleText;
     var uiOptionsText = [];
     var statsMeterText = [];
+    var sceneTimelineText;
 
     var debugText;
 
@@ -169,13 +174,14 @@ define(["SceneObject", "SceneTimeline"],function (SceneObject, SceneTimeline){
         var object = objects[o];
 
         var objectSprite = SceneObject(sceneContainer, object, optionsUiCallback);//object and objectSprite
+        sceneObjects[object.tag] = objectSprite;
         objectLayerContainer.addChild(objectSprite);
 
       }
 
       //timeline stuff
-      var timeline = SceneTimeline(sceneDef.animationTimeline);
-
+      timeline = SceneTimeline(sceneObjects, sceneDef.animationTimeline);
+      timeline.addUiCallback(sceneTimelineUiCallback);
 
     };
 
@@ -263,6 +269,14 @@ define(["SceneObject", "SceneTimeline"],function (SceneObject, SceneTimeline){
         uiLayerContainer.addChild(buttonRect);
         uiLayerContainer.addChild(uiOptionsText[i]);
       }
+
+      //more debug text
+      sceneTimelineText = new createjs.Text("timeline debug text", "20 Arial", "#0000FF");
+      sceneTimelineText.x = TIMELINE_UI_TEXT.x;
+      sceneTimelineText.y = TIMELINE_UI_TEXT.y;
+      sceneTimelineText.textBaseline = "alphabetic";
+
+      uiLayerContainer.addChild(sceneTimelineText);
 /*
       objectLayerContainer.addEventListener("click",function(evt){
         //clicking anywhere else should unselect SceneObject
@@ -281,6 +295,11 @@ define(["SceneObject", "SceneTimeline"],function (SceneObject, SceneTimeline){
       for(var t in uiOptionsText){
         uiOptionsText[t].text = "option _";
       }
+    }
+
+    var sceneTimelineUiCallback = function(stateObj){
+      if (sceneTimelineText)
+        sceneTimelineText.text = ""+JSON.stringify(stateObj);;
     }
 
     var optionsUiCallback = function( sceneObject){
@@ -370,6 +389,7 @@ define(["SceneObject", "SceneTimeline"],function (SceneObject, SceneTimeline){
       resetOptionsUI();
 
       //start animation chain
+      timeline.start();
     };
 
     that.endScene = function(){

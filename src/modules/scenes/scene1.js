@@ -35,12 +35,12 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
     scene.animations = {};
     scene.animations["turnoffAlarmClock"] = {
       spritesheet: animations("alarmclock"),
-      starting: "reaction-turnoff",
+      starting: "reaction-broken",
       location: {x:100, y:100} // ??
     };
     scene.animations["setAlarmClockEarly"] = {
       spritesheet: animations("alarmclock"),
-      starting: "reaction-setearly",
+      starting: "reaction-activated",
       location: {x:100, y:100} // ??
     };
 
@@ -59,16 +59,16 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
 
       actionList: [
         { //action 1
-          description: "turn off the alarm clock",
+          description: "break the alarm clock",
           meterStatAffected: {
             suspense: +1
           },
           postAnimation: scene.animations["turnoffAlarmClock"],  //from scene.animations, optional
           oaAnimation: {  //animation for during RickAction phase
             spritesheet: animations("alarmclock"),
-            starting: "objectaction-turnoff",
+            starting: "objectaction-interactl",
             location: {x:150,y:150}
-          }
+          }//new oa def {animation, wait, skip}
         },
         { //action 2
           description: "set the alarm clock early",
@@ -78,7 +78,7 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
           postAnimation: scene.animations["setAlarmClockEarly"],  //from scene.animations, optional
           oaAnimation: {  //animation for during RickAction phase
             spritesheet: animations("alarmclock"),
-            starting: "objectaction-setearly",
+            starting: "objectaction-interactl",
             location: {x:150,y:150}
           }
         },
@@ -86,7 +86,7 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
           description: "do nothing",
           oaAnimation: {  //animation for during RickAction phase
             spritesheet: animations("alarmclock"),
-            starting: "objectaction-abstain",
+            starting: "objectaction-interactl",
             location: {x:150,y:150}
           }
         }

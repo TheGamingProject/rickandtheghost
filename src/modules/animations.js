@@ -20,6 +20,61 @@ define([],function(){
     }
   };
 
+
+  //GLOBAL
+
+  animations.rickglobal = {
+    framerate: 33,
+    images: ["assets/global/rickbase.png"],
+    frames: {width: 300, height: 300, count: 190},
+    animations: {
+      idlel: {
+        frames: [0]
+      },
+      idler: {
+        frames: [1]
+      },
+      downl: {
+        frames: [2]
+      },
+      walkl: {
+        frames: [10,39,"idlel"]
+      },
+      walkr: {
+        frames: [40,69,"idler"]
+      },
+      interactl: {
+        frames: [70,99,"idlel"]
+      },
+      interactr: {
+        frames: [100,129,"idler"]
+      },
+      knockdown: {
+        frames: [130,159,"downl"]
+      },
+      getup: {
+        frames: [160,189,"idlel"]
+      }
+    }
+  }
+
+
+  //A1S1
+
+  animations.ricka1s1 = {
+    framerate: 33,
+    images: ["assets/a1s1/ricka1s1.png"],
+    frames: {width: 300, height: 300, count: 40},
+    animations: {
+      sleep: {
+        frames: [0]
+      },
+      wakeup: {
+        frames: [10,39,"idlel"]
+      }
+    }
+  }
+/*
   animations.alarmclock = {
     framerate: 33,
     images: ["assets/a1s1/alarmclock.png"],
@@ -38,6 +93,77 @@ define([],function(){
     }
 
   };
+*/
+  animations.alarmclock = {
+    framerate: 33,
+    images: ["assets/a1s1/alarmclock.png"],
+    frames: {width: 300, height: 300, count: 90},
+    animations: {
+      idle: {
+        frames: [0]
+      },
+      idlebroken: {
+        frames: [1]
+      },
+
+      "reaction-activated": [10,39,"idle"],
+      "reaction-broken": [40,54,"idlebroken"],
+      "objectaction-interactl": [60,89,"idle"]
+
+    }
+  }
+
+  animations.poster = {
+    framerate: 33,
+    images: ["assets/a1s1/poster.png"],
+    frames: {width: 120, height: 250, count: 60},
+    animations: {
+      idlefold: {
+        frames: [0]
+      },
+      idleunfold: {
+        frames: [1]
+      },
+      idlemarked: {
+        frames: [2]
+      },
+      unfold: {
+        frames: [10,24,"idleunfold"]
+      },
+      mark: {
+        frames: [30,59,"idlemarked"]
+      }
+    }
+  }
+
+  animations.switch = {
+    framerate: 33,
+    images: ["assets/a1s1/switch.png"],
+    frames: {width: 300, height: 300, count: 80},
+    animations: {
+      idleoff: {
+        frames: [0]
+      },
+      idleon: {
+        frames: [1]
+      },
+      idleoffbroken: {
+        frames: [2]
+      },
+      idleonbroken: {
+        frames: [3]
+      },
+      break: {
+        frames: [10,39,"idleoffbroken"]
+      },
+      turnon: {
+        frames: [40,54,"idleon"]
+      },
+      turnonbroken: {
+        frames: [60,74,"idleonbroken"]
+      }
+    }
+  }
 
   var animationFactory = function(name){
     if(!animations[name]){

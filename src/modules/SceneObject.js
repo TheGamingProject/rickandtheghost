@@ -77,12 +77,15 @@ define([],function (){
       return choice
     };
     that.setChoice = function(_choice){
-      if(state = STATES.postclicked) return;
+      if(state === STATES.postclicked) return;
       that.choice = _choice;
       state = STATES.postclicked;
     }
     that.getObjDef = function(){
       return args;
+    }
+    that.getChoiceAction = function(){
+      return args.actionList[that.choice];
     }
 
     return that;
