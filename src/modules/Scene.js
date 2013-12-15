@@ -13,12 +13,33 @@ define(["SceneObject"],function (SceneObject){
 
   //ui locations
 
+  var UI_BOTTOM = {
+    x: 0,
+    y: 500,
+    w: GAME.SIZE.x,
+    h: GAME.SIZE.y - 500
+  };
+
   var CONTINUE_BUTTON = {
-    x: 350,
-    y: 400,
+    asset: "assets/continueButton.png",
+    x: 40,
+    y: 525,
     w: 0,
     h: 0
+  };
+
+  var UI_OPTION_TITLE = { // alarm clock
+    x: 600, y: 525
   }
+
+  var UI_OPTION_BUTTONS = [{
+    x: 620, y: 535, w: 400, h: 50
+  },{
+    x: 620, y: 600, w: 400, h: 50
+  },{
+    x: 620, y: 665, w: 400, h: 50
+  }];
+
 
 
   //page 52 the goood parts
@@ -45,6 +66,9 @@ define(["SceneObject"],function (SceneObject){
       uiLayerContainer;
     var continueButton;
 
+    var objectActionTitleText;
+    var uiOptionsText = [];
+
     var debugText;
 
     // object definition
@@ -61,15 +85,7 @@ define(["SceneObject"],function (SceneObject){
       sceneContainer.addChild(rectangle);
 
 
-      //button
-      continueButton = new createjs.Bitmap("assets/continueButton.png");
-      continueButton.x = CONTINUE_BUTTON.x;
-      continueButton.y = CONTINUE_BUTTON.y;
-      continueButton.addEventListener("click",function(evt){
-        console.log("continue button clicked");
-        finishHaunting(evt);
-      });
-      sceneContainer.addChild(continueButton);
+
 
       //debug text
       debugText = new createjs.Text("State: ", "20px Arial", "#ff7700");
@@ -81,8 +97,8 @@ define(["SceneObject"],function (SceneObject){
       //parse sceneDef
       parseSceneDef();
 
-      //setup UI?
-      //uiLayerContainer
+      //////// setup UI ////////////
+      setupUI();
 
       parentStage.addChild(sceneContainer);
       console.log("Scene init-ed: "+sceneDef.name);
@@ -123,12 +139,9 @@ define(["SceneObject"],function (SceneObject){
         var object = objects[o];
 
         var objectSprite = SceneObject(sceneContainer, object, optionsUiCallback);//object and objectSprite
-
-        //objectLayerContainer.addEventListener("click", function(){alert("poop")})//)objectSprite.handleClick);
         objectLayerContainer.addChild(objectSprite);
-        //debugger;
-      }
 
+      }
 
 
     };
@@ -149,12 +162,82 @@ define(["SceneObject"],function (SceneObject){
        }
      }
      */
-    var optionsUiCallback = function(actionList){
+    var setupUI = function(){
+      uiLayerContainer = new createjs.Container();
+      uiLayerContainer.setBounds(UI_BOTTOM.x,UI_BOTTOM.y,UI_BOTTOM.w,UI_BOTTOM.h);
+
+      var purpleRect = new createjs.Shape();
+      purpleRect.graphics.beginFill("purple").drawRect(UI_BOTTOM.x,UI_BOTTOM.y,UI_BOTTOM.w,UI_BOTTOM.h);
+      uiLayerContainer.addChild(purpleRect);
+
+      //continue button
+      continueButton = new createjs.Bitmap(CONTINUE_BUTTON.asset);
+      continueButton.x = CONTINUE_BUTTON.x;
+      continueButton.y = CONTINUE_BUTTON.y;
+      continueButton.addEventListener("click",function(evt){
+        console.log("continue button clicked");
+        finishHaunting(evt);
+      });
+      uiLayerContainer.addChild(continueButton);
+
+      //add meter stats
+
+
+      //action list
+
+      //debug text
+      objectActionTitleText = new createjs.Text("UI_OPTION_TITLE", "20px Arial", "#ff7700");
+      objectActionTitleText.x = UI_OPTION_TITLE.x;
+      objectActionTitleText.y = UI_OPTION_TITLE.y;
+      objectActionTitleText.textBaseline = "alphabetic";
+      uiLayerContainer.addChild(objectActionTitleText);
+
+      for(var i=0; i<3; i++){
+        var b = UI_OPTION_BUTTONS[i];
+
+        var buttonRect = new createjs.Shape();
+        buttonRect.graphics.beginFill("yellow").drawRect(b.x,b.y,b.w,b.h);
+
+        uiOptionsText[i] = new createjs.Text("option "+i, "20px Arial", "#000000");
+        uiOptionsText[i].x = b.x + 5;
+        uiOptionsText[i].y = b.y + 25;
+        uiOptionsText[i].textBaseline = "alphabetic";
+
+        uiLayerContainer.addChild(buttonRect);
+        uiLayerContainer.addChild(uiOptionsText[i]);
+      }
+
+
+      sceneContainer.addChild(uiLayerContainer);
+    }
+
+    var resetOptionsUI = function(){
+      console.log("ui reset");
+
+      objectActionTitleText.text = "UI_OPTION_TITLE";
+
+
+      for(var t in uiOptionsText){
+        uiOptionsText[t].text = "option _";
+      }
+    }
+
+    var optionsUiCallback = function(sceneObjectName,actionList){
+      resetOptionsUI();
+
+      if(state != STATES.haunting)
+        return;
+
+      objectActionTitleText.text = sceneObjectName;
+
       for(var a in actionList){
         var action = actionList[a];
         console.log(a+ ": "+action.description);
+        uiOptionsText[a].text = a + ": "+action.description;
 
       }
+
+      console.log("object clicked");
     }
 
 /*
@@ -188,6 +271,7 @@ define(["SceneObject"],function (SceneObject){
 
       //hide button
       continueButton.visible = false;
+      resetOptionsUI();
 
       //start animation chain
     };

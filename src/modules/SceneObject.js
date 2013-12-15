@@ -19,7 +19,7 @@ define([],function (){
       throw "null parentStage";//container
 
     // parse args
-    if (!args.actionList || !args.idleAnimation || !args.clickBounds)
+    if (!args.actionList || !args.idleAnimation || !args.clickBounds || !args.name)
       throw "bad args:" + args;
 
     console.log(args);
@@ -45,7 +45,7 @@ define([],function (){
       // check if we are within the click
       if (evt.stageX >  clickBounds.x && evt.stageX <  clickBounds.x + clickBounds.w &&
           evt.stageY >  clickBounds.y && evt.stageY <  clickBounds.y + clickBounds.h){
-        optionsUiCallback(args.actionList);// to edit ui. to populate ui
+        optionsUiCallback(args.name, args.actionList);// to edit ui. to populate ui
       }
 
     };

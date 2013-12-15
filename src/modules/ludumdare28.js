@@ -2,6 +2,7 @@
 //coded by @nikpoklitar
 
 var GAME = {};
+GAME.SIZE = { x: 1280, y: 720 };
 
 define(["Scene", "scenes/scene1", "animations"],function(Scene, scene1, animations){
 
@@ -13,7 +14,6 @@ define(["Scene", "scenes/scene1", "animations"],function(Scene, scene1, animatio
   GAME.state = STATES.pregame;
   GAME.gameplayObject;
 
-  GAME.SIZE = { x: 1280, y: 720 };
 
   GAME.controls = {
     //for moving map

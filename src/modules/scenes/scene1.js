@@ -47,6 +47,7 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
     //Scene Objects
     scene.objects = {};
     scene.objects["alarmclock"] = {
+      name: "Alarm Clock",
       clickBounds: {x:180, y:180, w:90, h:90},//to click it
       idleAnimation: {
         spritesheet: animations("alarmclock"),
