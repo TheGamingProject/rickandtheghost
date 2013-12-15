@@ -28,7 +28,7 @@ define([],function(){
       idle: {
         frames: [0]
       },
-      "reaction-turnoff": [10,15,"idle",1], //post-click,
+      "reaction-turnoff": [10,14,"idle",1], //post-click,
       "reaction-setearly": [20,39,"idle",1],
       "objectaction-turnoff": [40,79,"idle",1], //
       "objectaction-setearly": [80,109,"idle",1], //do nothing and activate

@@ -40,6 +40,14 @@ define(["SceneObject"],function (SceneObject){
     x: 620, y: 665, w: 400, h: 50
   }];
 
+  var UI_STATS_COORD = [{
+    x: 10, y: 500, tag: "suspense"
+  },{
+    x: 210, y: 500, tag: "goodday"
+  },{
+    x: 410, y: 500, tag: "scared"
+  }];
+
 
 
   //page 52 the goood parts
@@ -66,8 +74,10 @@ define(["SceneObject"],function (SceneObject){
       uiLayerContainer;
     var continueButton;
 
+    var selectedObject;
     var objectActionTitleText;
     var uiOptionsText = [];
+    var statsMeterText = [];
 
     var debugText;
 
@@ -94,15 +104,31 @@ define(["SceneObject"],function (SceneObject){
       debugText.textBaseline = "alphabetic";
       sceneContainer.addChild(debugText);
 
+      //beginning-tricky (doing tricky thing to see if nothign else is clicked)
+      sceneContainer.addEventListener("click", function(){
+        if (!tricky2)
+          sceneContainer.hit = false;
+      });
+
       //parse sceneDef
       parseSceneDef();
 
       //////// setup UI ////////////
       setupUI();
 
+      //ending-tricky
+      sceneContainer.addEventListener("click", function(){
+        if(!sceneContainer.hit){
+          didntClickaObject();
+        }
+        tricky2 = false;
+      });
+
       parentStage.addChild(sceneContainer);
       console.log("Scene init-ed: "+sceneDef.name);
     }
+
+    var tricky2 = false;
 
     var setState = function(_state){
       switch(_state){
@@ -127,6 +153,7 @@ define(["SceneObject"],function (SceneObject){
       //sceneContainer.addChild(backgroundSprite);
 
 
+
       objectLayerContainer = new createjs.Container();
       objectLayerContainer.setBounds(0,0,GAME.SIZE.x,GAME.SIZE.y);
       sceneContainer.addChild(objectLayerContainer)
@@ -148,20 +175,6 @@ define(["SceneObject"],function (SceneObject){
 
     ////////// ui stuff //////////
 
-    /*
-     { //action 1
-         description: "turn off the alarm clock",
-         meterStatAffected: {
-         suspense: +1
-       },
-       postAnimation: scene.animations["turnoffAlarmClock"],  //from scene.animations, optional
-       oaAnimation: {  //animation for during RickAction phase
-         spritesheet: animations("alarmclock"),
-         starting: "objectaction-turnedoff",
-         location: {x:150,y:150}
-       }
-     }
-     */
     var setupUI = function(){
       uiLayerContainer = new createjs.Container();
       uiLayerContainer.setBounds(UI_BOTTOM.x,UI_BOTTOM.y,UI_BOTTOM.w,UI_BOTTOM.h);
@@ -180,8 +193,27 @@ define(["SceneObject"],function (SceneObject){
       });
       uiLayerContainer.addChild(continueButton);
 
-      //add meter stats
 
+      //add meter stats
+      $.each(UI_STATS_COORD, function(index, value){
+        var newLabel;
+        newLabel = new createjs.Text("T: 0", "20px Arial", "#ff7700");
+        newLabel.x = value.x;
+        newLabel.y = value.y;
+        newLabel.textBaseline = "alphabetic";
+        newLabel.tag = value.tag;
+
+        statsMeterText.push(newLabel);
+        uiLayerContainer.addChild(newLabel);
+      });
+
+
+      GAME.player.addChangeStatCallback(function (){
+        // to update labels
+        $.each(statsMeterText, function(index, value){
+          value.text = UI_STATS_COORD[index].tag+": "+GAME.player.getStat(value.tag);
+        });
+      });
 
       //action list
 
@@ -192,11 +224,27 @@ define(["SceneObject"],function (SceneObject){
       objectActionTitleText.textBaseline = "alphabetic";
       uiLayerContainer.addChild(objectActionTitleText);
 
+      var helper = function (i){
+        return function(e){
+          //mid tricky
+          sceneContainer.hit = true;
+          tricky2 = true;
+          //console.log("hit");
+
+          if(selectedObject)
+            selectObjectAction(i);
+        };
+      };
+
       for(var i=0; i<3; i++){
         var b = UI_OPTION_BUTTONS[i];
 
         var buttonRect = new createjs.Shape();
         buttonRect.graphics.beginFill("yellow").drawRect(b.x,b.y,b.w,b.h);
+
+
+
+        buttonRect.addEventListener("click", helper(i));
 
         uiOptionsText[i] = new createjs.Text("option "+i, "20px Arial", "#000000");
         uiOptionsText[i].x = b.x + 5;
@@ -206,8 +254,12 @@ define(["SceneObject"],function (SceneObject){
         uiLayerContainer.addChild(buttonRect);
         uiLayerContainer.addChild(uiOptionsText[i]);
       }
-
-
+/*
+      objectLayerContainer.addEventListener("click",function(evt){
+        //clicking anywhere else should unselect SceneObject
+        resetOptionsUI();
+      });
+*/
       sceneContainer.addChild(uiLayerContainer);
     }
 
@@ -215,23 +267,25 @@ define(["SceneObject"],function (SceneObject){
       console.log("ui reset");
 
       objectActionTitleText.text = "UI_OPTION_TITLE";
-
+      selectedObject = undefined;
 
       for(var t in uiOptionsText){
         uiOptionsText[t].text = "option _";
       }
     }
 
-    var optionsUiCallback = function(sceneObjectName,actionList){
-      resetOptionsUI();
+    var optionsUiCallback = function( sceneObject){
+      /*if(!sceneObject)*/ resetOptionsUI();
 
       if(state != STATES.haunting)
         return;
 
-      objectActionTitleText.text = sceneObjectName;
+      var objDef = sceneObject.getObjDef()
+      objectActionTitleText.text = objDef.name;
+      selectedObject = sceneObject;
 
-      for(var a in actionList){
-        var action = actionList[a];
+      for(var a in objDef.actionList){
+        var action = objDef.actionList[a];
         console.log(a+ ": "+action.description);
         uiOptionsText[a].text = a + ": "+action.description;
 
@@ -240,22 +294,55 @@ define(["SceneObject"],function (SceneObject){
       console.log("object clicked");
     }
 
-/*
-    that.click = function(loc){
-      if(state != STATES.haunting)
-        return;
+    var didntClickaObject = function(){
+      resetOptionsUI();
 
-      //we might call clickObject
-      //are we clicking a object?
-
-      //are we clicking continueButton?
-
-    }
-
-    var clickObject = function(name){
-      //trigger showing list
     };
-*/
+
+    /*
+     { //action 1
+     description: "turn off the alarm clock",
+     meterStatAffected: {
+     suspense: +1
+     },
+     postAnimation: scene.animations["turnoffAlarmClock"],  //from scene.animations, optional
+     oaAnimation: {  //animation for during RickAction phase
+     spritesheet: animations("alarmclock"),
+     starting: "objectaction-turnedoff",
+     location: {x:150,y:150}
+     }
+     }
+     */
+    var selectObjectAction = function(actionNum){
+      if (!selectedObject)
+        throw "invalid Object String";
+      var objDef = selectedObject.getObjDef();
+      //var sceneObj = sceneDef.objects[selectedObject.getObjDef().tag];
+      console.log("Selected Object:" + objDef.name +": action-"+actionNum);
+
+      if(actionNum != 2)
+        selectedObject.setChoice(actionNum);
+
+      //selected action
+      var action = objDef.actionList[actionNum];
+
+      //apply stats
+      GAME.player.changeStat( action.meterStatAffected);
+
+      //start the animation
+      console.log("started postAnimation");
+
+      if (action.postAnimation)
+        selectedObject.gotoAndPlay(action.postAnimation.starting);
+
+      //debugger;
+
+      selectedObject = undefined;
+      resetOptionsUI();
+
+
+    };
+
     that.startScene = function(){
       setState(STATES.haunting);
 

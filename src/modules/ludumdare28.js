@@ -4,7 +4,7 @@
 var GAME = {};
 GAME.SIZE = { x: 1280, y: 720 };
 
-define(["Scene", "scenes/scene1", "animations"],function(Scene, scene1, animations){
+define(["Scene", "scenes/scene1", "animations", "Player"],function(Scene, scene1, animations, Player){
 
   var STATES = {pregame: 0, ingame: 1};
 
@@ -33,6 +33,8 @@ define(["Scene", "scenes/scene1", "animations"],function(Scene, scene1, animatio
     //load shit?
 
     // GAME.gameplayObject = new GamePlay();
+
+    GAME.player = Player();
 
     GAME.state = STATES.pregame;
     preContainer = new createjs.Container();

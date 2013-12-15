@@ -47,6 +47,7 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
     //Scene Objects
     scene.objects = {};
     scene.objects["alarmclock"] = {
+      tag: "alarmclock",
       name: "Alarm Clock",
       clickBounds: {x:180, y:180, w:90, h:90},//to click it
       idleAnimation: {
@@ -80,7 +81,7 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
             location: {x:150,y:150}
           }
         },
-        {
+        {//action 3
           description: "do nothing",
           oaAnimation: {  //animation for during RickAction phase
             spritesheet: animations("alarmclock"),

@@ -13,7 +13,7 @@ define([],function (){
 
   var SceneObject = function(parentStage, args, optionsUiCallback){
     var that;
-    args = args || {};
+    args = args || {};//args is definition via scene1.js
 
     if(!parentStage)
       throw "null parentStage";//container
@@ -42,10 +42,17 @@ define([],function (){
     var clickBounds = args.clickBounds;
 
     var handleClick = function(evt){
+      if(state == STATES.postclicked) return;
+
       // check if we are within the click
       if (evt.stageX >  clickBounds.x && evt.stageX <  clickBounds.x + clickBounds.w &&
           evt.stageY >  clickBounds.y && evt.stageY <  clickBounds.y + clickBounds.h){
-        optionsUiCallback(args.name, args.actionList);// to edit ui. to populate ui
+        optionsUiCallback(that);// to edit ui. to populate ui
+        parentStage.hit = true;
+
+
+      }else{
+
       }
 
     };
@@ -60,6 +67,14 @@ define([],function (){
     that.getChoice = function(){
       return choice
     };
+    that.setChoice = function(_choice){
+      if(state = STATES.postclicked) return;
+      that.choice = _choice;
+      state = STATES.postclicked;
+    }
+    that.getObjDef = function(){
+      return args;
+    }
 
     return that;
   };
