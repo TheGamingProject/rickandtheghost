@@ -3,7 +3,7 @@
  *
  * Scene.js
  */
-define(["SceneObject"],function (SceneObject){
+define(["SceneObject", "SceneTimeline"],function (SceneObject, SceneTimeline){
 
   var STATES = {
     preinit: -1,
@@ -172,6 +172,9 @@ define(["SceneObject"],function (SceneObject){
         objectLayerContainer.addChild(objectSprite);
 
       }
+
+      //timeline stuff
+      var timeline = SceneTimeline(sceneDef.animationTimeline);
 
 
     };

@@ -97,8 +97,8 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
     scene.animationTimeline = [];
 
     scene.animationTimeline.push({
-      type: "transition",
-      transtype: "intro", //this is a special animation
+      type: "intro",
+  //    transtype: "intro", //this is a special animation
       name: "getup from bed",
 
       introAnim: {
@@ -110,7 +110,7 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
 
     scene.animationTimeline.push({
       type: "oa", //objectaction animation
-      name: "alarmclock",//link to scene.objects
+      tag: "alarmclock",//link to scene.objects
 
       //objectLink: scene.objects["alarmclock"],
 
@@ -122,7 +122,7 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
 
     scene.animationTimeline.push({
       type: "transition",
-      transtype: "walking", //walking off the side
+    //  transtype: "walking", //walking off the side
       name: "getup from bed",
 
       facing: "right",
