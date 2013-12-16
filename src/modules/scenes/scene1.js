@@ -102,7 +102,7 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
                 location: {x: 200, y:200},
                 offset: 100,  //timer
                 script: "..maybe in my next dream I'll be a king",
-                displayLength: 1500
+                displayLength: 3000
               }
             ]
           }
@@ -126,7 +126,7 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
               location: {x: 200, y:200},
               offset: 100,
               script: "And the award for latest work goes to: Rick",
-              displayLength: 1500
+              displayLength: 2500
             }
           }
         },
@@ -144,7 +144,7 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
               location: {x: 200, y:200},
               offset: 100,
               script: "*cough cough*",
-              displayLength: 1500
+              displayLength: 2000
             }
           }
         }
@@ -268,6 +268,12 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
         spritesheet: animations.get("ricka1s1"),
         starting: "wake",
         location: {x:500, y:200}
+      },
+      timerDef: {
+        type: "fade",
+        offset: 10,
+        opaque: "in",
+        displayLength: 2500
       }
     });
 
@@ -337,10 +343,12 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
       type: "oa", //objectaction animation
       tag: "poster",
 
-
-      rickDialog: {
-        script: script.alarm,
-        time: 25 // 25ms after this animation starts
+      timerDef: {
+        type: "fade",
+        offset: 5000,
+        opaque: "out",
+        exit: true,
+        displayLength: 10000
       }
     });
 

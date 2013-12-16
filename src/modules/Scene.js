@@ -133,6 +133,11 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
 
       parentStage.addChild(sceneContainer);
       console.log("Scene init-ed: "+sceneDef.name);
+
+      SceneTimer.setExitSceneCallback(function(){
+        console.log("Scene exited");
+      });
+
     }
 
     var tricky2 = false;
