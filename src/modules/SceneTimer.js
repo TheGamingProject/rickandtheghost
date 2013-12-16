@@ -83,7 +83,8 @@ define(["Utils"],function (Utils){
               Utils.updateSprite(sprite, animSpec);
             else{
               var s = Utils.makeSprite(animSpec);
-              objectContainer.addChild(s);
+              objectContainer.addChildAt(s,0);
+
             }
 
             break;
@@ -173,7 +174,7 @@ define(["Utils"],function (Utils){
                 r.graphics.beginFill(createjs.Graphics.getRGB(color.r,color.g,color.b,o)).drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
                 r.mouseEnabled = false;
                 var delta = (refreshTime/displayLength) * totalChange // * 5;totalChange * 5;
-                console.log("fade o: "+o + " c: "+delta+" silly: "+dialogContainer.children.length);
+                //console.log("fade o: "+o + " c: "+delta+" silly: "+dialogContainer.children.length);
 
                 dialogContainer.addChild(r);
 
@@ -185,7 +186,7 @@ define(["Utils"],function (Utils){
 
             break;
         }
-        console.log("Timer fired "+timerDef.type+" desc: "+timerDef.desclog);
+        console.log("Timer fired "+timerDef.type+" desc: "+timerDef.desc);
       },timerDef.offset || 0);
       console.log("added "+timerDef.type+" to TimerQueue");
     };

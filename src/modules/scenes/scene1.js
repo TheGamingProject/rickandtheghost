@@ -18,7 +18,7 @@
  */
 
 
-define(["../animations", "scenes/scripts/scene1"],function(animations, script){
+define(["../animations", "scenes/scripts/script1"],function(animations, script){
   var scene1 = function (){
     var scene = {};
 
@@ -181,6 +181,7 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
           postAnimation: scene.animations["turnLightsOn"],  //from scene.animations, optional
           postTimerDef: {
             type: "fade",
+            desc: "haunting turn lights on, instant",
             offset: 1,
             opaque: {
               start:.5,
@@ -190,9 +191,15 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
           },
           oaDef: {//new oa def {animation, wait, skip}
             type: "wait",
-            wait: 5000, //ms
-            rickDialog: script.alarm
-          }//TODO queue lights on animation
+            wait: 2000, //ms
+            timerDef: {
+              type: "rickdialog",
+              location: {x: 800, y:200},
+              offset: 100,  //timer
+              script: script["switch-option1"],
+              displayLength: 3000
+            }
+          }//TODO queue lights on animation   ???????????
         },
         { //action 2
           description: "Break Switch",
@@ -205,6 +212,13 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
 
           oaDef: {
             type: "animation",
+            timerDef: {
+              type: "rickdialog",
+              location: {x: 800, y:200},
+              offset: 100,  //timer
+              script: script["switch-option2"],
+              displayLength: 3000
+            },
             animation: {  //animation for during RickAction phase
               spritesheet: animations.get("switch"),
               starting: "objectaction-turnonbroken",
@@ -218,16 +232,17 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
 
           oaDef: {
             type: "animation",
-            timerDef: {
-              type: "fade",
-              desc: "fading to light when we hit the light switch",
-              offset: 1,
-              opaque: {
-                start:.5,
-                stop:0
-              },
-              displayLength: 10
-            },
+            timerDef: [
+              {
+                type: "fade",
+                desc: "fading to light when we hit the light switch",
+                offset: 1,
+                opaque: {
+                  start:.5,
+                  stop:0
+                },
+                displayLength: 10
+            }],
             animation: {  //animation for during RickAction phase
               spritesheet: animations.get("switch"),
               starting: "objectaction-turnon",
@@ -261,7 +276,13 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
           oaDef: {
             type: "wait",
             wait: 5000, //ms
-            rickDialog: script.alarm
+            timerDef: {
+              type: "rickdialog",
+              location: {x: 400, y:300},
+              offset: 100,  //timer
+              script: script["poster-option1"],
+              displayLength: 3000
+            }
           }
         },
         { //action 2
@@ -274,7 +295,13 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
           oaDef: {
             type: "wait",
             wait: 5000, //ms
-            rickDialog: script.alarm
+            timerDef: {
+              type: "rickdialog",
+              location: {x: 400, y:300},
+              offset: 100,  //timer
+              script: script["poster-option2"],
+              displayLength: 3000
+            }
           }
         },
         {//action 3
@@ -293,6 +320,7 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
     ///////////TIME BLOCKS/////////////
     scene.startSceneTimerDef = {
       type: "fade",
+      desc: "pre-haunting fade",
       offset: 0,
       opaque: {
         start: 1,
@@ -343,22 +371,17 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
     scene.animationTimeline.push({
       type: "transition",
       //walking somewhere
-      name: "walking from to alarmclock",
+      name: "walking from  alarmclock to switch",
 
       facing: "right",
-      length: 300, //timelength til rick stops and goes to his idle
+      length: 300 //timelength til rick stops and goes to his idle
 
-      rickDialog: {
-        script: script.introtalk,
-        time: 50 // 50ms after this animation starts
-      }
+
     });
 
     scene.animationTimeline.push({
       type: "oa", //objectaction animation
       tag: "switch"//link to scene.objects
-
-
     });
 
     scene.animationTimeline.push({
@@ -381,6 +404,7 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
 
       timerDef: {
         type: "fade",
+        desc: "end fade",
         offset: 5000,
         opaque: {stop: 0},
         exit: true,
