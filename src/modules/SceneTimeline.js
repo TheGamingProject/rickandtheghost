@@ -178,7 +178,7 @@ define(["Scene", "Utils", "animations", "SceneTimer"],function (Scene, Utils, an
                 rickSprite.visible = false;
                 Utils.updateSprite(sceneObjects[timeblock.tag], objAction.oaDef.animation, function(){
                   console.log("after oa animation");
-                  if(!timeblock.keepRick) rickSprite.visible = true;
+                  rickSprite.visible = true;
                   callbackFromMainloop();
                 });
 

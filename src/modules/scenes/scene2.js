@@ -29,7 +29,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
     scene.startingIdle = {
       spritesheet: animations.get("rickglobal"),
       starting: "sitl",
-      location: {x:900, y:200}
+      location: {x:900, y:175}
     };
 
     scene.background = {
@@ -74,16 +74,16 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
     scene.objects["oatmeal"] = {
       tag: "oatmeal",
       name: "Oatmeal",
-      clickBounds: {x:950, y:350, w:50, h:50},//to click it
+      clickBounds: {x:950, y:320, w:50, h:50},//to click it
       idleAnimation: {
         spritesheet: animations.get("oatmeal"),
         starting: "idle",
-        location: {x:910,y:198}
+        location: {x:910,y:168}
       },
 
       actionList: [
         { //action 1
-          description: script["Oatmeal Hot"],
+          description: "warm oatmeal",
           meterStatAffected: {
             goodday: -4
           },
@@ -103,7 +103,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         { //action 2
-          description: script["Oatmeal Cold"],
+          description: "make the oatmeal cold",
           meterStatAffected: {
             goodday: -8,
             suspense: +3
@@ -124,7 +124,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         {//action 3
-          description: script["Oatmeal Null"],
+          description: "do nothing",
           oaDef: {//action def
             type: "wait",
             wait: 1000, //ms
@@ -154,7 +154,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
 
       actionList: [
         { //action 1
-          description: script["Calendar Mom"],
+          description: "mark mother's birthday",
           meterStatAffected: {
             goodday: -5,
             suspense: +7
@@ -183,7 +183,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         { //action 2
-          description: script["Calendar Switch"],
+          description: "switch to locamotive calendar",
           meterStatAffected: {
             goodday: -5,
             suspense: +7,
@@ -204,7 +204,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         {//action 3
-          description: script["Calendar Null"],
+          description: "do nothing",
 
 
           oaDef: {
@@ -235,7 +235,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
 
       actionList: [
         { //action 1
-          description: script["Fridge Set"],
+          description: "Set fridge to attack",
           meterStatAffected: {
             goodday: -2,
             suspense: +3,
@@ -244,11 +244,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           //postAnimation: scene.animations["markPoster"],  //from scene.animations, optional
           oaDef: {
             type: "animation",
-            animation: {  //animation for during RickAction phase
-              spritesheet: animations.get("fridge"),
-              starting: "objectaction-attack",
-              location: {x:72,y:205}
-            },
+            wait: 5000, //ms
             timerDef: {
               type: "rickdialog",
               location: {x: 600, y:300},
@@ -259,45 +255,29 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         { //action 2
-          description: script["Fridge Eggs"],
+          description: "Switch all his food for eggs",
           meterStatAffected: {
             goodday: +2,
             suspense: +2
           },//reaction-eggs
           postAnimation: scene.animations["eggTheFridge"],  //from scene.animations, optional
           oaDef: {
-            type: "animation",
-            animation: {  //animation for during RickAction phase
-              spritesheet: animations.get("fridge"),
-              starting: "objectaction-openeggs",
-              location: {x:72,y:205}
-            },
+            type: "wait",
+            wait: 5000, //ms
             timerDef: {
               type: "rickdialog",
               location: {x: 400, y:300},
               offset: 100,  //timer
-              script: script["fridge-option2"],
+              script: script["poster-option2"],
               displayLength: 3000
             }
           }
         },
         {//action 3
-          description: script["Fridge Null"],
+          description: "do nothing",
           oaDef: {
-            type: "animation",
-            animation: {  //animation for during RickAction phase
-              spritesheet: animations.get("fridge"),
-              starting: "objectaction-open",
-              location: {x:72,y:205}
-            },
-            timerDef: {
-              type: "rickdialog",
-              location: {x: 500, y:200},
-              offset: 100,  //timer
-              script: script["fridge-option3"],
-              displayLength: 2000
-            }
-
+            type: "wait",
+            wait: 1000 //ms
           }
         }
       ]
@@ -345,7 +325,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
       name: "walking from  alarmclock to switch",
 
       facing: "left",
-   //   translate: {y: 25},
+      translate: {y: 25},
       length: 300 //timelength til rick stops and goes to his idle
 
 
@@ -365,10 +345,10 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
       length: 500 //timelength til rick stops and goes to his idle
 
     });
-
+    /*
     scene.animationTimeline.push({
       type: "oa", //objectaction animation
-      tag: "fridge",
+      tag: "poster",
 
       timerDef: {
         type: "fade",
@@ -377,10 +357,9 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
         opaque: {stop: 0},
         exit: true,
         displayLength: 1000
-      },
-      keepRick: true //keep him hidden
+      }
     });
-
+*/
     return scene;
   }
 

@@ -274,13 +274,14 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
         var b = UI_OPTION_BUTTONS[i];
 
         var buttonRect = new createjs.Shape();
-        buttonRect.graphics.beginFill("yellow").drawRect(b.x,b.y,b.w,b.h);
+        var buttonRect = new createjs.Shape();
+        buttonRect.graphics.beginFill("black").drawRect(b.x,b.y,b.w,b.h);
 
 
 
         buttonRect.addEventListener("click", helper(i));
 
-        uiOptionsText[i] = new createjs.Text("option "+i, "20px Arial", "#000000");
+        uiOptionsText[i] = new createjs.Text("option "+i, "24px RBNo2", "#ffffff");
         uiOptionsText[i].x = b.x + 5;
         uiOptionsText[i].y = b.y + 25;
         uiOptionsText[i].textBaseline = "alphabetic";
@@ -370,9 +371,6 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
       if(actionNum != 2)
         selectedObject.setChoice(actionNum);
 
-      //selected action
-      var action = objDef.actionList[actionNum];
-
       //apply stats
       GAME.player.changeStat( action.meterStatAffected);
 
@@ -390,6 +388,11 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
 
       selectedObject = undefined;
       resetOptionsUI();
+
+      //selected action
+      var action = objDef.actionList[actionNum];
+
+
     };
 
     that.startScene = function(){

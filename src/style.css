@@ -1,0 +1,43 @@
+body{
+    background-color:#1a1a1a;
+    overflow:hidden;
+    -webkit-font-smoothing: none;
+}
+
+p {
+    font-family: "RBNo2", Verdana, "Helvetica Neue";
+    font-size: 24pt;
+    color: #fff;
+}
+
+a {
+    color: #3fa9f5;
+    text-decoration: none;
+}
+
+img {
+    margin-top:15px;
+    margin-bottom:-20px;
+}
+
+img.logo {
+	margin-right:auto;
+	margin-left:auto;
+}
+
+img.social {
+    margin:0px;
+    margin-bottom:-6px;
+}
+
+table {
+    border-width: 0px;
+    margin: 5px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+td.right {
+    padding: 3px;
+    text-align: right;
+}
