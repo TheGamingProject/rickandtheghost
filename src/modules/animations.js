@@ -167,7 +167,7 @@ define([],function(){
       "reaction-eggs": [10,24,"idle"],
       "objectaction-open": [30,44,false],
       "objectaction-openeggs": [50,64,false],
-      "objectaction-attack": [70,119,false],
+      "objectaction-attack": [70,119,false]
     }
   }
 

@@ -5,7 +5,7 @@
  */
 
 
-define(["Scene", "Utils", "animations"],function (Scene, Utils, animations){
+define(["Scene", "Utils", "animations", "SceneTimer"],function (Scene, Utils, animations, SceneTimer){
   var STATES = {
     pre: 0,
     inIntro: 1,
@@ -35,27 +35,6 @@ define(["Scene", "Utils", "animations"],function (Scene, Utils, animations){
     that.start = function(endCallback){
       state = STATES.inIntro;
 
-
-      /*$.each(timelineDef, function(index, timeblock){
-        doTimeBlock(timeblock);
-      });
-
-      doTimeBlock(timelineDef[1], function(){
-        console.log("done timeblock 1");
-      });*/
-
-      //do x white (timeblockCount < timelineDef.length)
-/*
-      doTimeBlock(timelineDef[0], function(){
-        console.log("done timeblock 0");
-        doTimeBlock(timelineDef[1], function(){
-          console.log("done timeblock 1");
-          doTimeBlock(timelineDef[2], function(){
-            console.log("done timeblock 2");
-          });
-        });
-      });
-*/
       var recursiveCallback = function(num){
         doTimeBlock(timelineDef[num], function(){
           timeblockCount++;
@@ -76,18 +55,7 @@ define(["Scene", "Utils", "animations"],function (Scene, Utils, animations){
 
       if(!timeblock)
         throw "null timeblock";
-      /*
-       {
-       type: "intro",
-       name: "getup from bed",
 
-       introAnim: {
-         spritesheet: animations("ricka1s1"),
-         starting: "wake",
-         location: {x:500, y:200}
-         }
-       }
-      */
       var part1;
       switch(timeblock.type){
         case "intro":
@@ -206,6 +174,7 @@ define(["Scene", "Utils", "animations"],function (Scene, Utils, animations){
               default:
                 throw "invalid oaDef.type: " + objAction.oaDef.type;
             }
+            SceneTimer.startTimer(objAction.oaDef.timerDef);
 
 
 
@@ -218,23 +187,10 @@ define(["Scene", "Utils", "animations"],function (Scene, Utils, animations){
         default:
           throw "invalid timeblock type";
       }
-      //event listenr
-      /*addEventListener("animationend", function(target, type, name, next){
-
-      });*/
 
       //attachables:
       var part2;
-
-      //rickDialog
-      //etcAnimation
-      if(timeblock.rickDialog && typeof rickDialog === "object"){
-        $.each(timeblock.rickDialog, function(index, value){//value = def
-          //start a timeout that displays stuff
-
-        });
-      }
-
+      SceneTimer.startTimer(timeblock.timerDef);
 
       return function(cb){
         if(part1 && typeof part1 === "function")

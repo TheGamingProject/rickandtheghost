@@ -3,7 +3,7 @@
  *
  * Scene.js
  */
-define(["SceneObject", "SceneTimeline","Utils"],function (SceneObject, SceneTimeline, Utils){
+define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObject, SceneTimeline, Utils, SceneTimer){
 
   var STATES = {
     preinit: -1,
@@ -226,6 +226,9 @@ define(["SceneObject", "SceneTimeline","Utils"],function (SceneObject, SceneTime
         statsMeterText.push(newLabel);
         uiLayerContainer.addChild(newLabel);
       });
+
+      //set timer container
+      SceneTimer.setUIContainerForDialog(uiLayerContainer);
 
 
       GAME.player.addChangeStatCallback(function (){

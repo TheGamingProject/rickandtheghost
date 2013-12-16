@@ -93,14 +93,16 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
             goodday: -4
           },
           postAnimation: scene.animations["turnoffAlarmClock"],  //from scene.animations, optional
-          oaDef: {//new oa def {animation, wait, skip}
+          oaDef: {//action def
             type: "wait",
             wait: 1000, //ms
             timerDef: [
               {
                 type: "rickdialog",
                 location: {x: 200, y:200},
-                offset: 100  //timer
+                offset: 100,  //timer
+                script: "..maybe in my next dream I'll be a king",
+                displayLength: 1500
               }
             ]
           }
@@ -118,6 +120,13 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
               spritesheet: animations.get("alarmclock"),
               starting: "objectaction-interactl",
               location: {x:720,y:200}
+            },
+            timerDef: {
+              type: "rickdialog",
+              location: {x: 200, y:200},
+              offset: 100,
+              script: "And the award for latest work goes to: Rick",
+              displayLength: 1500
             }
           }
         },
@@ -129,6 +138,13 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
               spritesheet: animations.get("alarmclock"),
               starting: "objectaction-interactl",
               location: {x:720,y:200}
+            },
+            timerDef: {
+              type: "rickdialog",
+              location: {x: 200, y:200},
+              offset: 100,
+              script: "*cough cough*",
+              displayLength: 1500
             }
           }
         }
