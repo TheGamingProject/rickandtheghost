@@ -268,7 +268,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
               type: "rickdialog",
               location: {x: 400, y:300},
               offset: 100,  //timer
-              script: script["fridge-option2"],
+              script: script["poster-option2"],
               displayLength: 3000
             }
           }
@@ -277,14 +277,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           description: script["Fridge Null"],
           oaDef: {
             type: "wait",
-            wait: 1000, //ms
-            timerDef: {
-              type: "rickdialog",
-              location: {x: 500, y:200},
-              offset: 100,  //timer
-              script: script["fridge-option3"],
-              displayLength: 2000
-            }
+            wait: 1000 //ms
           }
         }
       ]
@@ -352,21 +345,21 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
       length: 500 //timelength til rick stops and goes to his idle
 
     });
-
+    /*
     scene.animationTimeline.push({
       type: "oa", //objectaction animation
-      tag: "fridge",
+      tag: "poster",
 
       timerDef: {
         type: "fade",
         desc: "end fade",
-        offset: 10000,
+        offset: 5000,
         opaque: {stop: 0},
         exit: true,
         displayLength: 1000
       }
     });
-
+*/
     return scene;
   }
 
