@@ -22,9 +22,9 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
   };
 
   var CONTINUE_BUTTON = {
-    path: "assets/ui/arrow3.png",
-    x: 40,
-    y: 525,
+    path: "assets/ui/arrow0.png",
+    x: 575,
+    y: 572,
     w: 0,
     h: 0
   };
@@ -34,11 +34,11 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
   }
 
   var UI_OPTION_BUTTONS = [{
-    x: 620, y: 535, w: 400, h: 50
+    x: 775, y: 545, w: 400, h: 50
   },{
-    x: 620, y: 600, w: 400, h: 50
+    x: 775, y: 595, w: 400, h: 50
   },{
-    x: 620, y: 665, w: 400, h: 50
+    x: 775, y: 645, w: 400, h: 50
   }];
 
   var UI_STATS_COORD = [{
