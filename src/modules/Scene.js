@@ -370,6 +370,9 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
       if(actionNum != 2)
         selectedObject.setChoice(actionNum);
 
+      //selected action
+      var action = objDef.actionList[actionNum];
+
       //apply stats
       GAME.player.changeStat( action.meterStatAffected);
 
@@ -387,10 +390,6 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
 
       selectedObject = undefined;
       resetOptionsUI();
-
-      //selected action
-      var action = objDef.actionList[actionNum];
-
 
     };
 
