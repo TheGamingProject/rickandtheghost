@@ -29,7 +29,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
     scene.startingIdle = {
       spritesheet: animations.get("rickglobal"),
       starting: "sitl",
-      location: {x:900, y:175}
+      location: {x:900, y:205}
     };
 
     scene.background = {
@@ -345,7 +345,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
       length: 500 //timelength til rick stops and goes to his idle
 
     });
-    /*
+
     scene.animationTimeline.push({
       type: "oa", //objectaction animation
       tag: "poster",
@@ -359,7 +359,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
         displayLength: 1000
       }
     });
-*/
+
     return scene;
   }
 
