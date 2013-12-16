@@ -11,12 +11,12 @@ var STARTING_SCENE = "scene1";
 
 define(["Scene", "SceneManager", "animations", "Player"],function(Scene, SceneManager, animations, Player){
 
-  var STATES = {pregame: 0, ingame: 1};
+  var STATES = {pregame: 0, ingame: 1, loading: 2};
 
   var scene = SceneManager.getScene(STARTING_SCENE);
 
   GAME.fps = 30;
-  GAME.state = STATES.pregame;
+  GAME.state;
   GAME.gameplayObject;
 
 
@@ -32,7 +32,7 @@ define(["Scene", "SceneManager", "animations", "Player"],function(Scene, SceneMa
 
   GAME.init = function(canvas){
     GAME.stage = new createjs.Stage(canvas);
-
+    GAME.state = STATES.pregame;
     //drawStuff(GAME.stage);
 
     //load shit?
@@ -41,14 +41,14 @@ define(["Scene", "SceneManager", "animations", "Player"],function(Scene, SceneMa
 
     GAME.player = Player();
 
-    GAME.state = STATES.pregame;
+    //GAME.state = STATES.pregame;
     preContainer = new createjs.Container();
 
     var rectangle = new createjs.Shape();
     rectangle.graphics.beginFill("black").drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
     preContainer.addChild(rectangle);
 
-    var spritesheet = animations("menuBG");
+    var spritesheet = animations.get("menuBG");
     tempPic = new createjs.Sprite(spritesheet,"afk");
     tempPic.x = 200;
     tempPic.y = 100;
@@ -182,5 +182,7 @@ define(["Scene", "SceneManager", "animations", "Player"],function(Scene, SceneMa
     document.onkeyup = GAME.keyReleased;
   }
 
-  init();
+  //animations.loadAnimations(function(){
+    init();
+  //});
 });

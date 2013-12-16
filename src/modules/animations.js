@@ -37,22 +37,12 @@ define([],function(){
       downl: {
         frames: [2]
       },
-      walkl: {
-        frames: [10,39,"idlel"]
-      },
+      walkl: [10,39],
       walkr: [40,69],
-      interactl: {
-        frames: [70,99,"idlel"]
-      },
-      interactr: {
-        frames: [100,129,"idler"]
-      },
-      knockdown: {
-        frames: [130,159,"downl"]
-      },
-      getup: {
-        frames: [160,189,"idlel"]
-      }
+      interactl: [70,99,"idlel"],
+      interactr: [100,129,"idler"],
+      knockdown: [130,159,"downl"],
+      getup: [160,189,"idlel"]
     }
   }
 
@@ -89,32 +79,9 @@ define([],function(){
       "objectaction-interactl": [60,89,"idle"]
 
     }
-  }
+  };
 
-  animations.poster = {
-    framerate: 33,
-    images: ["assets/a1s1/poster.png"],
-    frames: {width: 120, height: 250, count: 60},
-    animations: {
-      idlefold: {
-        frames: [0]
-      },
-      idleunfold: {
-        frames: [1]
-      },
-      idlemarked: {
-        frames: [2]
-      },
-      unfold: {
-        frames: [10,24,"idleunfold"]
-      },
-      mark: {
-        frames: [30,59,"idlemarked"]
-      }
-    }
-  }
-
-  animations.switch = {
+  animations["switch"] = {
     framerate: 33,
     images: ["assets/a1s1/switch.png"],
     frames: {width: 300, height: 300, count: 80},
@@ -131,25 +98,66 @@ define([],function(){
       idleonbroken: {
         frames: [3]
       },
-      break: {
-        frames: [10,39,"idleoffbroken"]
+      "reaction-break": [10,39,"idleoffbroken"],
+      "objectaction-turnon":  [40,54,"idleon"],
+      "objectaction-turnonbroken": [60,74,"idleonbroken"]
+    }
+  };
+
+  animations.poster = {
+    framerate: 33,
+    images: ["assets/a1s1/poster.png"],
+    frames: {width: 120, height: 250, count: 60},
+    animations: {
+      idlefold: {
+        frames: [0]
       },
-      turnon: {
-        frames: [40,54,"idleon"]
+      idleunfold: {
+        frames: [1]
       },
-      turnonbroken: {
-        frames: [60,74,"idleonbroken"]
-      }
+      idlemarked: {
+        frames: [2]
+      },
+      "reaction-unfold": [10,24,"idleunfold"],
+      "reaction-mark": [30,59,"idlemarked"]
     }
   }
 
-  var animationFactory = function(name){
+
+  var that = {};
+
+  var spriteSheets = {};
+  var loaded = false;
+
+  that.loadAnimations = function(callback){
+    /*var total = 0;
+    $.each(animations,function(index, value){
+      spriteSheets[index] = new createjs.SpriteSheet(value);
+      if (!spriteSheets[index].complete)
+          spriteSheets[index].addEventListener("complete", function(){
+          total++;
+            debugger;
+        });
+    });
+
+
+    setTimeout(function(){
+      loaded = true;
+      callback();
+    },10000)*/
+
+  };
+
+  that.get = function(name){
+    /*if(!loaded)
+      throw "we need to load!"
+*/
     if(!animations[name]){
-      console.log("Animation doesn't exist: "+name);
-      //throw "Animation doesn't exist: "+name;
+      throw "Animation doesn't exist: "+name;
     }
-    return new createjs.SpriteSheet(animations[name]);
+
+    return new createjs.SpriteSheet( animations[name]);
   }
 
-  return animationFactory;
+  return that;
 });

@@ -28,7 +28,7 @@ define(["Scene", "Utils", "animations"],function (Scene, Utils, animations){
 
     //private instance variables
     var state = STATES.pre;
-    var animationNum = 0;
+    var timeblockCount = 0;
 
     var rickSprite;
 
@@ -44,6 +44,8 @@ define(["Scene", "Utils", "animations"],function (Scene, Utils, animations){
         console.log("done timeblock 1");
       });*/
 
+      //do x white (timeblockCount < timelineDef.length)
+/*
       doTimeBlock(timelineDef[0], function(){
         console.log("done timeblock 0");
         doTimeBlock(timelineDef[1], function(){
@@ -53,6 +55,15 @@ define(["Scene", "Utils", "animations"],function (Scene, Utils, animations){
           });
         });
       });
+*/
+      var recursiveCallback = function(num){
+        doTimeBlock(timelineDef[num], function(){
+          timeblockCount++;
+          if(timeblockCount < timelineDef.length)
+            recursiveCallback(num+1);
+        });
+      }
+      recursiveCallback(0);
 
 
       if(endCallback && typeof endCallback === "function")
@@ -93,7 +104,7 @@ define(["Scene", "Utils", "animations"],function (Scene, Utils, animations){
                 facing = "idlel";
 
               Utils.updateSprite(rickSprite,{
-                spritesheet: animations("rickglobal"),
+                spritesheet: animations.get("rickglobal"),
                 starting: facing//,
                 //location: {x:500, y:200}
               },function(){
@@ -124,7 +135,7 @@ define(["Scene", "Utils", "animations"],function (Scene, Utils, animations){
               dir = -1;
             }
             var tempDef = {
-              spritesheet: animations("rickglobal"),
+              spritesheet: animations.get("rickglobal"),
               starting: _startingWalk
             };
 
@@ -140,7 +151,7 @@ define(["Scene", "Utils", "animations"],function (Scene, Utils, animations){
                 callbackFromMainloop();*/
 
                 Utils.updateSprite(rickSprite,{
-                  spritesheet: animations("rickglobal"),
+                  spritesheet: animations.get("rickglobal"),
                   starting: _startingIdle
                 },function(){
                   console.log("after intro animation");
@@ -243,7 +254,8 @@ define(["Scene", "Utils", "animations"],function (Scene, Utils, animations){
 
     that.getStateObj = function(){
       return {
-        state: state
+        state: state,
+        number: timeblockCount
       };
     }
 

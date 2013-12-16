@@ -22,7 +22,7 @@ define(["SceneObject", "SceneTimeline","Utils"],function (SceneObject, SceneTime
   };
 
   var CONTINUE_BUTTON = {
-    path: "assets/continueButton.png",
+    path: "assets/ui/arrow/arrow3.png",
     x: 40,
     y: 525,
     w: 0,
@@ -167,7 +167,7 @@ define(["SceneObject", "SceneTimeline","Utils"],function (SceneObject, SceneTime
       //make rick
       rickSprite = Utils.makeSprite(sceneDef.startingIdle);
       //rickSprite.stop();
-      objectLayerContainer.addChild(rickSprite);
+
 
       //create objects
       var objects = sceneDef.objects;
@@ -181,6 +181,8 @@ define(["SceneObject", "SceneTimeline","Utils"],function (SceneObject, SceneTime
         objectLayerContainer.addChild(objectSprite);
 
       }
+
+      objectLayerContainer.addChild(rickSprite);
 
       //timeline stuff
       timeline = SceneTimeline(rickSprite, sceneObjects, sceneDef.animationTimeline);
