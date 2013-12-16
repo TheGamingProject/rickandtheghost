@@ -54,7 +54,7 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
     //light switch
     scene.animations["turnLightsOn"] = {
       spritesheet: animations.get("switch"),
-      starting: "idleoffbroken",
+      starting: "idleon",
       location: {x:100, y:100} // ??
     };
     scene.animations["breakLightSwitch"] = {
@@ -179,6 +179,15 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
             suspense: +7
           },
           postAnimation: scene.animations["turnLightsOn"],  //from scene.animations, optional
+          postTimerDef: {
+            type: "fade",
+            offset: 1,
+            opaque: {
+              start:.5,
+              stop:0
+            },
+            displayLength: 10
+          },
           oaDef: {//new oa def {animation, wait, skip}
             type: "wait",
             wait: 5000, //ms
@@ -193,6 +202,7 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
             scared: +5
           },
           postAnimation: scene.animations["breakLightSwitch"],  //from scene.animations, optional
+
           oaDef: {
             type: "animation",
             animation: {  //animation for during RickAction phase
@@ -204,8 +214,20 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
         },
         {//action 3
           description: "do nothing",
+
+
           oaDef: {
             type: "animation",
+            timerDef: {
+              type: "fade",
+              desc: "fading to light when we hit the light switch",
+              offset: 1,
+              opaque: {
+                start:.5,
+                stop:0
+              },
+              displayLength: 10
+            },
             animation: {  //animation for during RickAction phase
               spritesheet: animations.get("switch"),
               starting: "objectaction-turnon",
@@ -213,6 +235,7 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
             }
           }
         }
+
       ]
     };
     //////////// POSTER /////////////
@@ -268,6 +291,16 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
     scene.animationTimeline = [];
 
     ///////////TIME BLOCKS/////////////
+    scene.startSceneTimerDef = {
+      type: "fade",
+      offset: 0,
+      opaque: {
+        start: 1,
+        stop:.5
+      },
+      displayLength: 500
+    };
+
 
     scene.animationTimeline.push({
       type: "intro",
@@ -278,13 +311,8 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
         spritesheet: animations.get("ricka1s1"),
         starting: "wake",
         location: {x:500, y:200}
-      },
-      timerDef: {
-        type: "fade",
-        offset: 10,
-        opaque: "in",
-        displayLength: 2500
-      }
+      }//,
+      //timerDef:
     });
 
     scene.animationTimeline.push({
@@ -328,12 +356,9 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
 
     scene.animationTimeline.push({
       type: "oa", //objectaction animation
-      tag: "switch",//link to scene.objects
+      tag: "switch"//link to scene.objects
 
-      rickDialog: {
-        script: script.alarm,
-        time: 25 // 25ms after this animation starts
-      }
+
     });
 
     scene.animationTimeline.push({
@@ -357,9 +382,9 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
       timerDef: {
         type: "fade",
         offset: 5000,
-        opaque: "out",
+        opaque: {stop: 0},
         exit: true,
-        displayLength: 10000
+        displayLength: 1000
       }
     });
 

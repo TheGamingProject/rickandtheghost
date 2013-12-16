@@ -195,6 +195,8 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
       timeline = SceneTimeline(rickSprite, sceneObjects, sceneDef.animationTimeline);
       timeline.addUiCallback(sceneTimelineUiCallback);
 
+
+      SceneTimer.startTimer(sceneDef.startSceneTimerDef);
     };
 
     ////////// ui stuff //////////
@@ -236,6 +238,7 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
 
       //set timer container
       SceneTimer.setUIContainerForDialog(uiLayerContainer);
+      SceneTimer.setObjectContainer(objectLayerContainer)
 
 
 
@@ -375,6 +378,9 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
 
       //start the animation
       console.log("started postAnimation");
+
+      //start possible timers
+      SceneTimer.startTimer(action.postTimerDef);
 
       if (action.postAnimation)
         selectedObject.gotoAndPlay(action.postAnimation.starting);

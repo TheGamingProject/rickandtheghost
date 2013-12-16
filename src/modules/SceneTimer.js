@@ -22,19 +22,24 @@ define(["Utils"],function (Utils){
     var that = {};
 
     //private instance variables
-    var dialogContainer
-    var exitCallback
+    var objectContainer;
+    var dialogContainer;
+    var exitCallback;
 
-    var startFadeRect
+    var startFadeRect;
 
     //public methods
     that.setUIContainerForDialog = function(_container){
       dialogContainer = _container;
     }
+    that.setObjectContainer = function(_container){
+      objectContainer = _container;
+    }
     that.setStartFade = function(color){
       startFadeRect = new createjs.Shape();
       startFadeRect.graphics.beginFill(createjs.Graphics.getRGB(color.r,color.g,color.b,color.o)).drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
       startFadeRect.mouseEnabled = false;
+      prevOpaque = color.o;
       dialogContainer.addChild(startFadeRect);
     };
 
@@ -75,9 +80,11 @@ define(["Utils"],function (Utils){
             var sprite = timerDef.sprite;
 
             if(sprite)
-              Utils.updateSprite(sprite,animSpec);
-            else
-              Utils.makeSprite(animSpec);
+              Utils.updateSprite(sprite, animSpec);
+            else{
+              var s = Utils.makeSprite(animSpec);
+              objectContainer.addChild(s);
+            }
 
             break;
 
@@ -122,7 +129,14 @@ define(["Utils"],function (Utils){
             var startingOpaque = 0, //defaults to out
               endingOpaque = 1;
 
-            if(timerDef.opaque === "in"){
+            if(typeof timerDef.opaque === "object" && typeof timerDef.opaque.start === "number" && typeof timerDef.opaque.stop === "number"){
+              if(timerDef.opaque.start)
+                startingOpaque = timerDef.opaque.start;
+              else
+                timerDef.opaque.start = prevOpaque;
+
+              endingOpaque = timerDef.opaque.stop;
+            }else if(timerDef.opaque === "in"){
               startingOpaque = 1;
               endingOpaque = 0;
             }
@@ -138,7 +152,9 @@ define(["Utils"],function (Utils){
               setTimeout(function(o, r){
                 if(Math.abs(startingOpaque - o ) > Math.abs(totalChange)){
                   //end fade
-                  dialogContainer.removeChild(r);
+                  //dialogContainer.removeChild(r);
+                  startFadeRect = r;
+                  prevOpaque = o;
                   if(exit){
                     if(exitCallback)
                       exitCallback();
@@ -155,8 +171,10 @@ define(["Utils"],function (Utils){
 
                 var r = new createjs.Shape();
                 r.graphics.beginFill(createjs.Graphics.getRGB(color.r,color.g,color.b,o)).drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
-                var delta = (refreshTime/displayLength) * totalChange * 5;
-                //console.log("fade o: "+o + " c: "+delta+" silly: "+dialogContainer.children.length);
+                r.mouseEnabled = false;
+                var delta = (refreshTime/displayLength) * totalChange // * 5;totalChange * 5;
+                console.log("fade o: "+o + " c: "+delta+" silly: "+dialogContainer.children.length);
+
                 dialogContainer.addChild(r);
 
                 fadeFunc(o - delta,r);
@@ -167,7 +185,7 @@ define(["Utils"],function (Utils){
 
             break;
         }
-        console.log("Timer fired "+timerDef.type);
+        console.log("Timer fired "+timerDef.type+" desc: "+timerDef.desclog);
       },timerDef.offset || 0);
       console.log("added "+timerDef.type+" to TimerQueue");
     };

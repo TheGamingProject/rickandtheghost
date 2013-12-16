@@ -174,6 +174,7 @@ define(["Scene", "Utils", "animations", "SceneTimer"],function (Scene, Utils, an
               default:
                 throw "invalid oaDef.type: " + objAction.oaDef.type;
             }
+            //debugger;
             SceneTimer.startTimer(objAction.oaDef.timerDef);
 
 
