@@ -9,17 +9,17 @@
 define([],function(){
   var script = {}
 
-  script["oatmeal-option1"] = "How did this happen?";
-  script["oatmeal-option2"] = "What demon caused this??";
-  script["oatmeal-option3"] = "Mmm slop";
+  script["Heat up Rick's oatmeal"] = "Ouch! Where's the fire??";
+  script["Cool down Rick's oatmeal"] = "Mmm perfectly cold oatmeal";
+  script["Do nothing"] = "Mmm slop";
 
-  script["calendar-option1"] = "...There is a guilty phone call in my future.";
-  script["calendar-option2"] = "I knew this calendar was bad, but when did it get THIS bad?";
-  script["calendar-option3"] = "Time is money";
+  script["Mark Rick's calendar with his Mother's birthday as yesterday"] = "...There is a guilty phone call in my future.";
+  script["Switch Rick's calendar to a locomotive calendar"] = "I knew this calendar was bad, but when did it get THIS bad?";
+  script["Do nothing"] = "Time is money";
 
-  script["fridge-option1"] = "WWWAAaaaaaahhhhh! Guess I’ve got no lunch today.";
-  script["fridge-option2"] = "Glorious";
-  script["fridge-option3"] = "Ham & Cheese Rick style";
+  script["Set fridge to attack Rick"] = "WWWAAaaaaaahhhhh! Guess I’ve got no lunch today.";
+  script["Replace all of Rick's food with eggs"] = "Glorious";
+  script["Do Nothing"] = "Ham & Cheese Rick style";
 
   //return an array of all the definitions {}
   return script
