@@ -240,6 +240,89 @@ define([],function(){
   }
 
 
+  //A2S1
+
+
+  animations.cabinet = {
+    framerate: 33,
+    images: ["assets/a2s1/cabinet.png"],
+    frames: {width: 300, height: 300, count: 170},
+    animations: {
+	  "idle": [0],
+	  "idleopen": [1],
+      "objectaction-open": [10,24,"idleopen"],
+      "objectaction-close": [30,44,"idle"],
+      "reaction-sort": [50,109,"idle"],
+      "reaction-possess": [110,169,"idle"]
+    }
+  };
+
+  animations.motiv = {
+    framerate: 33,
+    images: ["assets/a2s1/motiv.png"],
+    frames: {width: 300, height: 300, count: 70},
+    animations: {
+      "idle": [0],
+	  "idlealt": [1],
+	  "idlenone": [2],
+      "reaction-positive": [10,39,"idle"],
+      "reaction-negative": [40,69,"idlealt"]
+    }
+  }
+  
+  animations.radio = {
+    framerate: 33,
+    images: ["assets/a2s1/radio.png"],
+    frames: {width: 300, height: 300, count: 20},
+    animations: {
+      "idle": [0],
+      "reaction-on": [10,19]
+    }
+  }
+  
+  
+  //A3S1
+
+
+  animations.bookshelf = {
+    framerate: 33,
+    images: ["assets/a3s1/bookshelf.png"],
+    frames: {width: 300, height: 320, count: 70},
+    animations: {
+	  "idle": [0],
+	  "idlesorted": [1],
+	  "idleempty": [2],
+      "reaction-sort": [10,39,"idlesorted"],
+      "reaction-empty": [40,69,"idleempty"]
+    }
+  };
+
+  animations.motiv = {
+    framerate: 33,
+    images: ["assets/a3s1/phone.png"],
+    frames: {width: 300, height: 300, count: 40},
+    animations: {
+      "idle": [0],
+	  "idlebroken": [1],
+      "objectaction-possess": [10,21,"idle"],
+      "reaction-break": [30,39,"idlebroken"]
+    }
+  }
+  
+  animations.radio = {
+    framerate: 33,
+    images: ["assets/a3s1/vent.png"],
+    frames: {width: 300, height: 300, count: 70},
+    animations: {
+      "idle": [0],
+      "idlemarbles": [1],
+      "idlerug": [2],
+      "reaction-marbles": [10,39,"idlemarbles"],
+      "reaction-rug": [40,69,"idlerug"]
+    }
+  }
+
+
   var that = {};
 
   var spriteSheets = {};
