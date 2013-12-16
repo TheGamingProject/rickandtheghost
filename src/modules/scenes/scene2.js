@@ -74,11 +74,11 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
     scene.objects["oatmeal"] = {
       tag: "oatmeal",
       name: "Oatmeal",
-      clickBounds: {x:950, y:320, w:50, h:50},//to click it
+      clickBounds: {x:970, y:360, w:40, h:40},//to click it
       idleAnimation: {
         spritesheet: animations.get("oatmeal"),
         starting: "idle",
-        location: {x:910,y:168}
+        location: {x:910,y:193}
       },
 
       actionList: [
