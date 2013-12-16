@@ -24,6 +24,11 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
 
     scene.name = "Bedroom";
 
+    scene.startingIdle = {
+      spritesheet: animations("ricka1s1"),
+      starting: "sleep",
+      location: {x:500, y:200}
+    };
 
     //new createjs.Sprite(spritesheet,"afk");
     scene.background = {
@@ -64,11 +69,11 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
             suspense: +1
           },
           postAnimation: scene.animations["turnoffAlarmClock"],  //from scene.animations, optional
-          oaAnimation: {  //animation for during RickAction phase
-            spritesheet: animations("alarmclock"),
-            starting: "objectaction-interactl",
-            location: {x:150,y:150}
-          }//new oa def {animation, wait, skip}
+          oaDef: {//new oa def {animation, wait, skip}
+            type: "wait",
+            wait: 5000, //ms
+            rickDialog: script.alarm
+          }
         },
         { //action 2
           description: "set the alarm clock early",
@@ -76,18 +81,24 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
             goodday: -1
           },
           postAnimation: scene.animations["setAlarmClockEarly"],  //from scene.animations, optional
-          oaAnimation: {  //animation for during RickAction phase
-            spritesheet: animations("alarmclock"),
-            starting: "objectaction-interactl",
-            location: {x:150,y:150}
+          oaDef: {
+            type: "animation",
+            animation: {  //animation for during RickAction phase
+              spritesheet: animations("alarmclock"),
+              starting: "objectaction-interactl",
+              location: {x:720,y:200}
+            }
           }
         },
         {//action 3
           description: "do nothing",
-          oaAnimation: {  //animation for during RickAction phase
-            spritesheet: animations("alarmclock"),
-            starting: "objectaction-interactl",
-            location: {x:150,y:150}
+          oaDef: {
+            type: "animation",
+            animation: {  //animation for during RickAction phase
+              spritesheet: animations("alarmclock"),
+              starting: "objectaction-interactl",
+              location: {x:720,y:200}
+            }
           }
         }
       ]
@@ -98,13 +109,27 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
 
     scene.animationTimeline.push({
       type: "intro",
-  //    transtype: "intro", //this is a special animation
       name: "getup from bed",
+      facing: "left",
 
       introAnim: {
-        spritesheet: animations("rick_bedroom"),
+        spritesheet: animations("ricka1s1"),
         starting: "wake",
-        location: {x:300, y:300}
+        location: {x:500, y:200}
+      }
+    });
+
+    scene.animationTimeline.push({
+      type: "transition",
+      //walking somewhere
+      name: "walking from to alarmclock",
+
+      facing: "right",
+      length: 220, //timelength til rick stops and goes to his idle
+
+      rickDialog: {
+        script: script.introtalk,
+        time: 50 // 50ms after this animation starts
       }
     });
 
@@ -120,19 +145,7 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
       }
     });
 
-    scene.animationTimeline.push({
-      type: "transition",
-    //  transtype: "walking", //walking off the side
-      name: "getup from bed",
 
-      facing: "right",
-      length: 100, //timelength til rick stops and goes to his idle
-
-      rickDialog: {
-        script: script.introtalk,
-        time: 50 // 50ms after this animation starts
-      }
-    });
 
 
     return scene;

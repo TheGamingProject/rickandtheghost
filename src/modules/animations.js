@@ -40,9 +40,7 @@ define([],function(){
       walkl: {
         frames: [10,39,"idlel"]
       },
-      walkr: {
-        frames: [40,69,"idler"]
-      },
+      walkr: [40,69],
       interactl: {
         frames: [70,99,"idlel"]
       },
@@ -67,33 +65,13 @@ define([],function(){
     frames: {width: 300, height: 300, count: 40},
     animations: {
       sleep: {
-        frames: [0]
+        frames: [0,0, false]
       },
-      wakeup: {
-        frames: [10,39,"idlel"]
-      }
+      awoke: [39],
+      wakeup: [10,39,false,.2]
     }
   }
-/*
-  animations.alarmclock = {
-    framerate: 33,
-    images: ["assets/a1s1/alarmclock.png"],
-    frames: {width: 300, height: 300, count: 90},
-    animations: {
-      idle: {
-        frames: [0]
-      },
 
-      "reaction-setearly": [10,39, false],
-      "reaction-turnoff": [40,54, false], //post-click,
-      "objectaction-setearly": [60,69], //
-      "objectaction-turnoff": [70,79], //
-      "objectaction-abstain": [80,89] //
-
-    }
-
-  };
-*/
   animations.alarmclock = {
     framerate: 33,
     images: ["assets/a1s1/alarmclock.png"],

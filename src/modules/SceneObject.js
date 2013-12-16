@@ -4,12 +4,14 @@
  * Created by niko on 12/14/13.
  */
 
-define([],function (){
+define(["Utils"],function (Utils){
   var STATES = {
     idle: 0,
     beingclicked: 1, //showing list with options
     postclicked: 2  //cant reclick and change options
   }
+
+  var DEFAULT_CHOICE = 2;// 3rd
 
   var SceneObject = function(parentStage, args, optionsUiCallback){
     var that;
@@ -27,10 +29,13 @@ define([],function (){
 
     //private instance variables
     var state = STATES.idle;
-    var choice; //which objectAction was picked
+    var choice = DEFAULT_CHOICE; //which objectAction was picked
 
     // object definition  and  set idle Animation
-    that = new createjs.Sprite(args.idleAnimation.spritesheet, args.idleAnimation.starting);// extends Sprite
+    //that = new createjs.Sprite(args.idleAnimation.spritesheet, args.idleAnimation.starting);// extends Sprite
+    that = Utils.makeSprite(args.idleAnimation,function(){
+      console.log("created objectSprite: "+args.name);
+    })
 
     if(DEBUG.showClickArea){
       var b = args.clickBounds;
@@ -78,14 +83,14 @@ define([],function (){
     };
     that.setChoice = function(_choice){
       if(state === STATES.postclicked) return;
-      that.choice = _choice;
+      choice = _choice;
       state = STATES.postclicked;
     }
     that.getObjDef = function(){
       return args;
     }
     that.getChoiceAction = function(){
-      return args.actionList[that.choice];
+      return args.actionList[choice];
     }
 
     return that;

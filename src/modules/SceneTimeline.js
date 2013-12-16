@@ -5,7 +5,7 @@
  */
 
 
-define(["Scene", "Utils"],function (Scene, Utils){
+define(["Scene", "Utils", "animations"],function (Scene, Utils, animations){
   var STATES = {
     pre: 0,
     inIntro: 1,
@@ -14,7 +14,9 @@ define(["Scene", "Utils"],function (Scene, Utils){
     over: 4
   };
 
-  var SceneTimeline = function(sceneObjects, timelineDef){
+  var WALKSPEED = 4; //20 pixel x per second?
+
+  var SceneTimeline = function(rickSprite, sceneObjects, timelineDef){
     var that = {};
 
     // args should be an array starting with type:intro,
@@ -36,12 +38,21 @@ define(["Scene", "Utils"],function (Scene, Utils){
 
       /*$.each(timelineDef, function(index, timeblock){
         doTimeBlock(timeblock);
-      });*/
+      });
 
       doTimeBlock(timelineDef[1], function(){
         console.log("done timeblock 1");
-      });
+      });*/
 
+      doTimeBlock(timelineDef[0], function(){
+        console.log("done timeblock 0");
+        doTimeBlock(timelineDef[1], function(){
+          console.log("done timeblock 1");
+          doTimeBlock(timelineDef[2], function(){
+            console.log("done timeblock 2");
+          });
+        });
+      });
 
 
       if(endCallback && typeof endCallback === "function")
@@ -54,15 +65,43 @@ define(["Scene", "Utils"],function (Scene, Utils){
 
       if(!timeblock)
         throw "null timeblock";
+      /*
+       {
+       type: "intro",
+       name: "getup from bed",
 
-
+       introAnim: {
+         spritesheet: animations("ricka1s1"),
+         starting: "wake",
+         location: {x:500, y:200}
+         }
+       }
+      */
       var part1;
       switch(timeblock.type){
         case "intro":
           //always at the beginning of a timeline, is a unique traveling animation
           // -introAnim
           // fixed frames
+          part1 = function(callbackFromMainloop){
+            Utils.updateSprite(rickSprite,timeblock.introAnim, function(){
 
+
+              var facing = "idler";
+              //set to standing idle
+              if(timeblock.facing && timeblock.facing === "left")
+                facing = "idlel";
+
+              Utils.updateSprite(rickSprite,{
+                spritesheet: animations("rickglobal"),
+                starting: facing//,
+                //location: {x:500, y:200}
+              },function(){
+                console.log("after intro animation");
+                callbackFromMainloop();
+              });
+            });
+          };
 
           break;
         case "transition":
@@ -70,6 +109,54 @@ define(["Scene", "Utils"],function (Scene, Utils){
           // changes x by some amount per second? (walk speed)
           // -facing
           // -distance
+          part1 = function(callbackFromMainloop){
+            var _startingWalk = "walkr",
+              _startingIdle = "idler";
+            var dir = 1;
+            var i = 0;
+
+            if(!timeblock.length)
+              throw "invlaid timeblock length: "+timeblock.length;
+
+            if(timeblock.facing && timeblock.facing === "left"){
+              _startingWalk = "walkl";
+              _startingIdle = "idlel";
+              dir = -1;
+            }
+            var tempDef = {
+              spritesheet: animations("rickglobal"),
+              starting: _startingWalk
+            };
+
+            Utils.updateSprite(rickSprite,tempDef);
+
+            var listener = createjs.Ticker.addEventListener("tick", function(){
+              rickSprite.x += dir * WALKSPEED;
+              i += WALKSPEED;
+
+
+              if(i >= timeblock.length){
+               /* console.log("after intro animation");
+                callbackFromMainloop();*/
+
+                Utils.updateSprite(rickSprite,{
+                  spritesheet: animations("rickglobal"),
+                  starting: _startingIdle
+                },function(){
+                  console.log("after intro animation");
+                  callbackFromMainloop();
+                });
+                createjs.Ticker.removeEventListener("tick",listener);
+              }
+
+            });
+
+            //end after walking a certain amount
+            /*setTimeout(function(){
+              console.log("after intro animation");
+              callbackFromMainloop();
+            }, timeblock.length * WALKSPEED);*/
+          };
 
 
 
@@ -83,13 +170,35 @@ define(["Scene", "Utils"],function (Scene, Utils){
           part1 = function(callbackFromMainloop){
             var objAction = sceneObjects[timeblock.tag].getChoiceAction();
 
-            Utils.updateSprite(sceneObjects[timeblock.tag], objAction.oaAnimation, function(){
-              console.log("after oa animation");
-              callbackFromMainloop();
-              uiUpdateCallback();
-            });
+            switch(objAction.oaDef.type){
+              case "wait":
+                setTimeout(function(){
+                  console.log("done waiting");
+                  callbackFromMainloop();
+                },objAction.oaDef.wait)
+
+                break;
+
+              case "skip":
+                break;
+
+              case "animation":
+                rickSprite.visible = false;
+                Utils.updateSprite(sceneObjects[timeblock.tag], objAction.oaDef.animation, function(){
+                  console.log("after oa animation");
+                  rickSprite.visible = true;
+                  callbackFromMainloop();
+                });
+
+                break;
+
+              default:
+                throw "invalid oaDef.type: " + objAction.oaDef.type;
+            }
 
 
+
+            //end 'part1()'
           };
 
 
@@ -122,7 +231,10 @@ define(["Scene", "Utils"],function (Scene, Utils){
         if(part2 && typeof part2 === "function")
           part2();
 
-      }(callback);
+      }(function(){
+        callback();
+        uiUpdateCallback();
+      });
     }
 
     that.getState = function(){

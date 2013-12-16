@@ -3,7 +3,7 @@
  *
  * Scene.js
  */
-define(["SceneObject", "SceneTimeline"],function (SceneObject, SceneTimeline){
+define(["SceneObject", "SceneTimeline","Utils"],function (SceneObject, SceneTimeline, Utils){
 
   var STATES = {
     preinit: -1,
@@ -79,6 +79,8 @@ define(["SceneObject", "SceneTimeline"],function (SceneObject, SceneTimeline){
       uiLayerContainer;
     var continueButton;
 
+    var rickSprite;
+
     var selectedObject;
     var objectActionTitleText;
     var uiOptionsText = [];
@@ -100,10 +102,7 @@ define(["SceneObject", "SceneTimeline"],function (SceneObject, SceneTimeline){
       rectangle.graphics.beginFill("green").drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
       sceneContainer.addChild(rectangle);
     */
-      backgroundSprite = new createjs.Bitmap(sceneDef.background.path);
-      backgroundSprite.x = 0;
-      backgroundSprite.y = 0;
-      sceneContainer.addChild(backgroundSprite);
+
 
       //debug text
       debugText = new createjs.Text("State: ", "20px Arial", "#ff7700");
@@ -156,15 +155,19 @@ define(["SceneObject", "SceneTimeline"],function (SceneObject, SceneTimeline){
 
     //parse and create the scene
     var parseSceneDef = function(){
-      //background
-      //backgroundSprite =
-      //sceneContainer.addChild(backgroundSprite);
-
-
+      backgroundSprite = new createjs.Bitmap(sceneDef.background.path);
+      backgroundSprite.x = 0;
+      backgroundSprite.y = 0;
+      sceneContainer.addChild(backgroundSprite);
 
       objectLayerContainer = new createjs.Container();
       objectLayerContainer.setBounds(0,0,GAME.SIZE.x,GAME.SIZE.y);
       sceneContainer.addChild(objectLayerContainer)
+
+      //make rick
+      rickSprite = Utils.makeSprite(sceneDef.startingIdle);
+      //rickSprite.stop();
+      objectLayerContainer.addChild(rickSprite);
 
       //create objects
       var objects = sceneDef.objects;
@@ -180,7 +183,7 @@ define(["SceneObject", "SceneTimeline"],function (SceneObject, SceneTimeline){
       }
 
       //timeline stuff
-      timeline = SceneTimeline(sceneObjects, sceneDef.animationTimeline);
+      timeline = SceneTimeline(rickSprite, sceneObjects, sceneDef.animationTimeline);
       timeline.addUiCallback(sceneTimelineUiCallback);
 
     };
@@ -299,7 +302,7 @@ define(["SceneObject", "SceneTimeline"],function (SceneObject, SceneTimeline){
 
     var sceneTimelineUiCallback = function(stateObj){
       if (sceneTimelineText)
-        sceneTimelineText.text = ""+JSON.stringify(stateObj);;
+        sceneTimelineText.text = ""+JSON.stringify(stateObj);
     }
 
     var optionsUiCallback = function( sceneObject){
