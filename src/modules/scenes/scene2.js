@@ -244,7 +244,11 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           //postAnimation: scene.animations["markPoster"],  //from scene.animations, optional
           oaDef: {
             type: "animation",
-            wait: 5000, //ms
+            animation: {  //animation for during RickAction phase
+              spritesheet: animations.get("fridge"),
+              starting: "objectaction-attack",
+              location: {x:72,y:205}
+            },
             timerDef: {
               type: "rickdialog",
               location: {x: 600, y:300},
@@ -262,8 +266,12 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           },//reaction-eggs
           postAnimation: scene.animations["eggTheFridge"],  //from scene.animations, optional
           oaDef: {
-            type: "wait",
-            wait: 5000, //ms
+            type: "animation",
+            animation: {  //animation for during RickAction phase
+              spritesheet: animations.get("fridge"),
+              starting: "objectaction-openeggs",
+              location: {x:72,y:205}
+            },
             timerDef: {
               type: "rickdialog",
               location: {x: 400, y:300},
@@ -276,8 +284,12 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
         {//action 3
           description: "do nothing",
           oaDef: {
-            type: "wait",
-            wait: 1000, //ms
+            type: "animation",
+            animation: {  //animation for during RickAction phase
+              spritesheet: animations.get("fridge"),
+              starting: "objectaction-open",
+              location: {x:72,y:205}
+            },
             timerDef: {
               type: "rickdialog",
               location: {x: 500, y:200},
@@ -364,7 +376,8 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
         opaque: {stop: 0},
         exit: true,
         displayLength: 1000
-      }
+      },
+      keepRick: true
     });
 
     return scene;
