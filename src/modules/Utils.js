@@ -47,7 +47,7 @@ define([],function (){
     return sprite;
   }
 
-  that.updateSprite = function(sprite, ourAnimSpec, callback){
+  that.updateSprite = function(sprite, ourAnimSpec, animationFinishedCallback){
     if(!ourAnimSpec.spritesheet || !ourAnimSpec.starting)
       throw "invalid animSpec (update): "+ourAnimSpec;
 
@@ -61,24 +61,12 @@ define([],function (){
     sprite.spriteSheet = ourAnimSpec.spritesheet;
 
     var listener;
-    /*listener = sprite.addEventListener("animationend", function(target, type, name, next){
-      if(target.name === ourAnimSpec.starting){
-        sprite.removeEventListener("animationend", listener);
-        debugger;
-        if(callback)
-          callback();
-      }else{
-        //sprite.gotoAndPlay(ourAnimSpec.starting);
-        sprite.play();
-        debugger;
-      }
-    });*/
-    var listener;
     listener = sprite.on("animationend",function(evt,data){
       //sprite.removeEventListener("animationend", listener);
       console.log("updated sprite animation finished: "+evt.name)
+//TODO      if(evt.name === null) debugger;
     //  sprite.stop();
-      if(callback) callback();
+      if(animationFinishedCallback) animationFinishedCallback();
     },null, true)
 
 
@@ -87,11 +75,7 @@ define([],function (){
     sprite._animation = undefined;
     sprite.gotoAndPlay(ourAnimSpec.starting);
     console.log("started: "+ourAnimSpec.starting + " ["+sprite.currentAnimation+"]");
-    /*
-    console.log(sprite)
 
-    debugger;
-*/
     //sprite.gotoAndPlay(ourAnimSpec.starting);
 
     return sprite;

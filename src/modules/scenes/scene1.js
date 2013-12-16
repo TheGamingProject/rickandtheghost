@@ -24,6 +24,8 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
 
     scene.name = "Bedroom";
 
+    scene.startFade = {r: 0, g: 0, b: 0, o: .5};
+
     scene.startingIdle = {
       spritesheet: animations.get("ricka1s1"),
       starting: "sleep",
@@ -71,6 +73,14 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
       starting: "reaction-mark",
       location: {x:100, y:100} // ??
     };
+
+    //window rays
+    scene.animations["idleWindowRays"] = {
+      spritesheet: animations.get("windowrays"),
+      starting: "idle",
+      location: {x:440,y:50}
+    };
+
 
     //Scene Objects
     scene.objects = {};
@@ -295,9 +305,10 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
       type: "oa", //objectaction animation
       tag: "alarmclock",//link to scene.objects
 
-      rickDialog: {
-        script: script.alarm,
-        time: 25 // 25ms after this animation starts
+      timerDef: {
+        type: "animation",
+        animSpec: scene.animations["idleWindowRays"],
+        offset: 5
       }
     });
 

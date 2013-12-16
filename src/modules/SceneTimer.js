@@ -15,7 +15,7 @@
 
 
 
-define([],function (){
+define(["Utils"],function (Utils){
   var DEFAULT_DIALOG_LENGTH = 2000;
 
   var SceneTimer = function(args){
@@ -25,10 +25,18 @@ define([],function (){
     var dialogContainer
     var exitCallback
 
+    var startFadeRect
+
     //public methods
     that.setUIContainerForDialog = function(_container){
       dialogContainer = _container;
     }
+    that.setStartFade = function(color){
+      startFadeRect = new createjs.Shape();
+      startFadeRect.graphics.beginFill(createjs.Graphics.getRGB(color.r,color.g,color.b,color.o)).drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
+      startFadeRect.mouseEnabled = false;
+      dialogContainer.addChild(startFadeRect);
+    };
 
     that.startTimer = function( timerDefs){
       if(!timerDefs) return;
@@ -54,8 +62,23 @@ define([],function (){
 
       //-offset (ms)
       setTimeout(function(){
+
         switch(timerDef.type){
           case "animation":
+            //-ourAnimSpec
+            //-existing sprite -(including sceneObject) optional
+
+            var animSpec = timerDef.animSpec;
+            if(!animSpec)
+              throw "undefined animSpec";
+
+            var sprite = timerDef.sprite;
+
+            if(sprite)
+              Utils.updateSprite(sprite,animSpec);
+            else
+              Utils.makeSprite(animSpec);
+
             break;
 
           case "rickdialog":
@@ -109,6 +132,8 @@ define([],function (){
             //rect.graphics.beginFill(createjs.Graphics.getRGB(color.r,color.g,color.b,startingOpaque)).drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
             //dialogContainer.addChild(rect);
 
+
+            dialogContainer.removeChild(startFadeRect);
             var fadeFunc = function(opaqueness,rect){
               setTimeout(function(o, r){
                 if(Math.abs(startingOpaque - o ) > Math.abs(totalChange)){

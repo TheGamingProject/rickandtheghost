@@ -123,6 +123,8 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
       //////// setup UI ////////////
       setupUI();
 
+      SceneTimer.setStartFade(sceneDef.startFade || {r: 0, g: 0, b: 0, o: 0});
+
       //ending-tricky
       sceneContainer.addEventListener("click", function(){
         if(!sceneContainer.hit){
@@ -234,6 +236,7 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
 
       //set timer container
       SceneTimer.setUIContainerForDialog(uiLayerContainer);
+
 
 
       GAME.player.addChangeStatCallback(function (){

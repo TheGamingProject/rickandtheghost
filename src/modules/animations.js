@@ -45,7 +45,7 @@ define([],function(){
       getup: [150,179,"idlel"],
       sitstand: [180,209,"idlel"]
     }
-  }
+  };
 
 
   //A1S1
@@ -61,7 +61,19 @@ define([],function(){
       awoke: [39],
       wakeup: [10,39,false,.2]
     }
-  }
+  };
+
+  //misc
+  animations.windowrays = {
+    framerate: 33,
+    images: ["assets/a1s1/windowrays.png"],
+    frames: {width: 280, height: 340, count: 1},
+    animations: {
+      idle: [0]
+    }
+  };
+
+  //scene objects
 
   animations.alarmclock = {
     framerate: 33,
