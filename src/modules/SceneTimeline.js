@@ -91,6 +91,7 @@ define(["Scene", "Utils", "animations", "SceneTimer"],function (Scene, Utils, an
           // changes x by some amount per second? (walk speed)
           // -facing
           // -distance
+          // - translate {x,y}
           part1 = function(callbackFromMainloop){
             var _startingWalk = "walkr",
               _startingIdle = "idler";
@@ -110,6 +111,13 @@ define(["Scene", "Utils", "animations", "SceneTimer"],function (Scene, Utils, an
               starting: _startingWalk
             };
 
+            //optionally translate
+            if(timeblock.translate){
+              if(typeof timeblock.translate.x === "number")
+                rickSprite.x += timeblock.translate.x;
+              if(typeof timeblock.translate.y === "number")
+                rickSprite.y += timeblock.translate.y;
+            }
             Utils.updateSprite(rickSprite,tempDef);
 
             var listener = createjs.Ticker.addEventListener("tick", function(){
@@ -147,6 +155,8 @@ define(["Scene", "Utils", "animations", "SceneTimer"],function (Scene, Utils, an
           // -tag - identifies it to the ObjectAction
           // fixed amount of frames
 
+          if(!timeblock.tag || !sceneObjects[timeblock.tag])
+            throw "oa animation tag needed";
           // we want to use ObjectAction(as animator) and make rick sprite not visible
 
           part1 = function(callbackFromMainloop){

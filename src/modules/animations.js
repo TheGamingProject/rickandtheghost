@@ -139,6 +139,18 @@ define([],function(){
   
   //A1S2
 
+  animations.oatmeal = {
+    framerate: 33,
+    images: ["assets/a1s2/oatmeal.png"],
+    frames: {width: 300, height: 300, count: 30},
+    animations: {
+      idle: {
+        frames: [0]
+      },
+      "reaction-heat": [10,19,false],
+      "reaction-cool": [20,29,false]
+    }
+  }
 
   animations.calendar = {
     framerate: 33,
@@ -155,18 +167,6 @@ define([],function(){
     }
   };
 
-  animations.oatmeal = {
-    framerate: 33,
-    images: ["assets/a1s2/oatmeal.png"],
-    frames: {width: 300, height: 300, count: 30},
-    animations: {
-      idle: {
-        frames: [0]
-      },
-      "reaction-heat": [10,19,false],
-      "reaction-cool": [20,29,false]
-    }
-  }
   
   animations.fridge = {
     framerate: 33,

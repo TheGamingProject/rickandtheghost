@@ -6,7 +6,7 @@ GAME.SIZE = { x: 1280, y: 720 };
 
 var DEBUG = {showClickArea: true};
 
-var STARTING_SCENE = "scene1";
+var STARTING_SCENE = "scene2";
 
 
 define(["Scene", "SceneManager", "animations", "Player"],function(Scene, SceneManager, animations, Player){

@@ -370,15 +370,13 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
       if(actionNum != 2)
         selectedObject.setChoice(actionNum);
 
-      //selected action
-      var action = objDef.actionList[actionNum];
-
       //apply stats
       GAME.player.changeStat( action.meterStatAffected);
 
       //start the animation
-      console.log("started postAnimation");
-
+      if(action.postAnimation){
+        console.log("started postAnimation: "+action.postAnimation.starting);
+      }
       //start possible timers
       SceneTimer.startTimer(action.postTimerDef);
 
@@ -389,6 +387,9 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
 
       selectedObject = undefined;
       resetOptionsUI();
+
+      //selected action
+      var action = objDef.actionList[actionNum];
 
 
     };

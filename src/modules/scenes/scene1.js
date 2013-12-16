@@ -391,11 +391,6 @@ define(["../animations", "scenes/scripts/script1"],function(animations, script){
 
       facing: "left",
       length: 850, //timelength til rick stops and goes to his idle
-
-      rickDialog: {
-        script: script.introtalk,
-        time: 50
-      }
     });
 
     scene.animationTimeline.push({
