@@ -64,7 +64,8 @@ define([],function (){
     listener = sprite.on("animationend",function(evt,data){
       //sprite.removeEventListener("animationend", listener);
       console.log("updated sprite animation finished: "+evt.name)
-//TODO      if(evt.name === null) debugger;
+
+     // if(evt.name+"" === "null") debugger;
     //  sprite.stop();
       if(animationFinishedCallback) animationFinishedCallback();
     },null, true)
@@ -72,7 +73,7 @@ define([],function (){
 
   //  console.log(sprite);
     //sprite.stop();
-    sprite._animation = undefined;
+    if (ourAnimSpec.hax) sprite._animation = undefined;
     sprite.gotoAndPlay(ourAnimSpec.starting);
     console.log("started: "+ourAnimSpec.starting + " ["+sprite.currentAnimation+"]");
 

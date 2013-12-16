@@ -62,7 +62,10 @@ define(["Scene", "Utils", "animations", "SceneTimer"],function (Scene, Utils, an
           //always at the beginning of a timeline, is a unique traveling animation
           // -introAnim
           // fixed frames
+
           part1 = function(callbackFromMainloop){
+            //rickSprite._animation = undefined;
+            timeblock.introAnim.hax = true;
             Utils.updateSprite(rickSprite,timeblock.introAnim, function(){
 
 
