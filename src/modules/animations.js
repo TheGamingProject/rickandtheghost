@@ -240,6 +240,47 @@ define([],function(){
   }
 
 
+  //A2S1
+
+
+  animations.cabinet = {
+    framerate: 33,
+    images: ["assets/a2s1/cabinet.png"],
+    frames: {width: 300, height: 300, count: 170},
+    animations: {
+	  "idle": [0],
+	  "idleopen": [1],
+      "objectaction-open": [10,24,"idleopen"],
+      "objectaction-close": [30,44,"idle"],
+      "reaction-sort": [50,109,"idle"],
+      "reaction-possess": [110,169,"idle"]
+    }
+  };
+
+  animations.motiv = {
+    framerate: 33,
+    images: ["assets/a2s1/motiv.png"],
+    frames: {width: 300, height: 300, count: 70},
+    animations: {
+      "idle": [0],
+	  "idlealt": [1],
+	  "idlenone": [2],
+      "reaction-positive": [10,39,"idle"],
+      "reaction-negative": [40,69,"idlealt"]
+    }
+  }
+  
+  animations.radio = {
+    framerate: 33,
+    images: ["assets/a2s1/radio.png"],
+    frames: {width: 300, height: 300, count: 20},
+    animations: {
+      "idle": [0],
+      "reaction-on": [10,19]
+    }
+  }
+
+
   var that = {};
 
   var spriteSheets = {};
