@@ -390,7 +390,7 @@ define(["../animations", "scenes/scripts/script1"],function(animations, script){
       name: "walking from to the poster from the lights",
 
       facing: "left",
-      length: 850 //timelength til rick stops and goes to his idle
+      length: 850, //timelength til rick stops and goes to his idle
     });
 
     scene.animationTimeline.push({
