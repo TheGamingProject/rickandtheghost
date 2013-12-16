@@ -49,6 +49,7 @@ define(["Utils"],function (Utils){
       if(timerDefs.type){
         //just do this object
         startHelper( timerDefs);
+        return;
       }
       $.each(timerDefs, function(index, value){
         if(value.type)

@@ -83,7 +83,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
 
       actionList: [
         { //action 1
-          description: "warm oatmeal",
+          description:  script["oatmeal-button1"],
           meterStatAffected: {
             goodday: -4
           },
@@ -103,7 +103,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         { //action 2
-          description: "make the oatmeal cold",
+          description: script["oatmeal-button2"],
           meterStatAffected: {
             goodday: -8,
             suspense: +3
@@ -124,7 +124,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         {//action 3
-          description: "do nothing",
+          description: script["oatmeal-button3"],
           oaDef: {//action def
             type: "wait",
             wait: 1000, //ms
@@ -154,7 +154,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
 
       actionList: [
         { //action 1
-          description: "mark mother's birthday",
+          description: script["calendar-button1"],
           meterStatAffected: {
             goodday: -5,
             suspense: +7
@@ -183,7 +183,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         { //action 2
-          description: "switch to locamotive calendar",
+          description: script["calendar-button2"],
           meterStatAffected: {
             goodday: -5,
             suspense: +7,
@@ -204,7 +204,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         {//action 3
-          description: "do nothing",
+          description: script["calendar-option3"],
 
 
           oaDef: {
@@ -235,7 +235,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
 
       actionList: [
         { //action 1
-          description: "Set fridge to attack",
+          description: script["fridge-button1"],
           meterStatAffected: {
             goodday: -2,
             suspense: +3,
@@ -255,7 +255,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         { //action 2
-          description: "Switch all his food for eggs",
+          description: script["fridge-button2"],
           meterStatAffected: {
             goodday: +2,
             suspense: +2
@@ -268,16 +268,23 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
               type: "rickdialog",
               location: {x: 400, y:300},
               offset: 100,  //timer
-              script: script["poster-option2"],
+              script: script["fridge-option2"],
               displayLength: 3000
             }
           }
         },
         {//action 3
-          description: "do nothing",
+          description: script["fridge-button3"],
           oaDef: {
             type: "wait",
-            wait: 1000 //ms
+            wait: 1000, //ms
+            timerDef: {
+              type: "rickdialog",
+              location: {x: 400, y:300},
+              offset: 100,  //timer
+              script: script["fridge-option3"],
+              displayLength: 3000
+            }
           }
         }
       ]
@@ -297,20 +304,6 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
       },
       displayLength: 500
     };
-
-/*
-    scene.animationTimeline.push({
-      type: "intro",
-      name: "getup from bed",
-      facing: "left",
-
-      introAnim: {
-        spritesheet: animations.get("rickglobal"),
-        starting: "sitl",
-        location: {x:500, y:200}
-      }
-    });
-*/
 
     scene.animationTimeline.push({
       type: "oa", //objectaction animation
