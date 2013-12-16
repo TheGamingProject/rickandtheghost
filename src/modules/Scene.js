@@ -18,11 +18,11 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
     y: 500,
     w: GAME.SIZE.x,
     h: GAME.SIZE.y - 500,
-    path: "assets/lowerbar.png"
+    path: "assets/ui/lowerbar.png"
   };
 
   var CONTINUE_BUTTON = {
-    path: "assets/ui/arrow/arrow3.png",
+    path: "assets/ui/arrow3.png",
     x: 40,
     y: 525,
     w: 0,
