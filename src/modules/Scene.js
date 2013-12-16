@@ -347,25 +347,11 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
 
     };
 
-    /*
-     { //action 1
-     description: "turn off the alarm clock",
-     meterStatAffected: {
-     suspense: +1
-     },
-     postAnimation: scene.animations["turnoffAlarmClock"],  //from scene.animations, optional
-     oaAnimation: {  //animation for during RickAction phase
-     spritesheet: animations("alarmclock"),
-     starting: "objectaction-turnedoff",
-     location: {x:150,y:150}
-     }
-     }
-     */
     var selectObjectAction = function(actionNum){
       if (!selectedObject)
         throw "invalid Object String";
       var objDef = selectedObject.getObjDef();
-      //var sceneObj = sceneDef.objects[selectedObject.getObjDef().tag];
+
       console.log("Selected Object:" + objDef.name +": action-"+actionNum);
 
       if(actionNum != 2)
