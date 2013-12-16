@@ -182,7 +182,9 @@ define(["Scene", "SceneManager", "animations", "Player"],function(Scene, SceneMa
     document.onkeyup = GAME.keyReleased;
   }
 
-  //animations.loadAnimations(function(){
+  console.log("loading resources");
+  animations.loadAnimations(["rickglobal","ricka1s1","alarmclock","switch","poster"],function(){
+    console.log("resources loaded");
     init();
-  //});
+  });
 });

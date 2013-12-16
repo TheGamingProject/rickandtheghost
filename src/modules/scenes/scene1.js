@@ -96,7 +96,13 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
           oaDef: {//new oa def {animation, wait, skip}
             type: "wait",
             wait: 1000, //ms
-            rickDialog: script.alarm
+            timerDef: [
+              {
+                type: "rickdialog",
+                location: {x: 200, y:200},
+                offset: 100  //timer
+              }
+            ]
           }
         },
         { //action 2
@@ -234,6 +240,8 @@ define(["../animations", "scenes/scripts/scene1"],function(animations, script){
 
     //RickAction Phase Animations
     scene.animationTimeline = [];
+
+    ///////////TIME BLOCKS/////////////
 
     scene.animationTimeline.push({
       type: "intro",

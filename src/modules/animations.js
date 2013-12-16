@@ -129,22 +129,32 @@ define([],function(){
   var spriteSheets = {};
   var loaded = false;
 
-  that.loadAnimations = function(callback){
-    /*var total = 0;
-    $.each(animations,function(index, value){
+  that.loadAnimations = function (listToBeLoaded,callback){
+    var total = 0;
+    $.each(listToBeLoaded,function(index, value){
+      if(!animations[name]){
+        return;
+      }
+      if(spriteSheets[index].complete)
+        return;//already loaded
       spriteSheets[index] = new createjs.SpriteSheet(value);
-      if (!spriteSheets[index].complete)
-          spriteSheets[index].addEventListener("complete", function(){
-          total++;
-            debugger;
-        });
+
     });
 
 
     setTimeout(function(){
+
+      do{
+        var not = false;
+        $.each(spriteSheets,function(index, value){
+          if(!spriteSheets[index].complete)
+            not = true;
+        })
+      }while(not);
+
       loaded = true;
       callback();
-    },10000)*/
+    },10);
 
   };
 
@@ -155,8 +165,14 @@ define([],function(){
     if(!animations[name]){
       throw "Animation doesn't exist: "+name;
     }
+    if(spriteSheets[name]){
+      console.log("getting cached spritesheet:" +name);
+      return spriteSheets[name];
+    }
+    console.log("loading spritesheet:"+name);
+    spriteSheets[name] = new createjs.SpriteSheet( animations[name]);
 
-    return new createjs.SpriteSheet( animations[name]);
+    return spriteSheets[name];
   }
 
   return that;

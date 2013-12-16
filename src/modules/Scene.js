@@ -411,7 +411,5 @@ define(["SceneObject", "SceneTimeline","Utils"],function (SceneObject, SceneTime
     return that;
   };
 
-
-  console.log("Scene loaded")
   return Scene ;
 });
