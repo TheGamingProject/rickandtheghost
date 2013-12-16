@@ -182,6 +182,62 @@ define([],function(){
       "objectaction-attack": [70,119,false]
     }
   }
+  
+
+  //A1S3
+
+
+  animations.faucet = {
+    framerate: 33,
+    images: ["assets/a1s3/faucet.png"],
+    frames: {width: 300, height: 300, count: 100},
+    animations: {
+      idle: {
+        frames: [0]
+      },
+      idlepuddle: {
+        frames: [1]
+      },
+
+      "reaction-cover": [10,19,false],
+      "reaction-on": [20,49,"idlepuddle"],
+      "objectaction-slip": [50,65,"objectaction-getup"],
+      "objectaction-getup": [70,99,"idlepuddle"]
+
+    }
+  };
+
+  animations.garbage = {
+    framerate: 33,
+    images: ["assets/a1s3/garbage.png"],
+    frames: {width: 300, height: 300, count: 50},
+    animations: {
+      idle: {
+        frames: [0]
+      },
+      idleswap: {
+        frames: [1]
+      },
+      "reaction-swap": [10,24,"idleswap"],
+      "reaction-sort": [30,44,"idle"]
+    }
+  }
+  
+  animations.leaves = {
+    framerate: 33,
+    images: ["assets/a1s3/leaves.png"],
+    frames: {width: 300, height: 500, count: 70},
+    animations: {
+      idle: {
+        frames: [0]
+      },
+      idlenone: {
+        frames: [1]
+      },
+      "objectaction-fallartful": [10,39,"idlenone"],
+      "objectaction-fallattack": [40,69,false]
+    }
+  }
 
 
   var that = {};
