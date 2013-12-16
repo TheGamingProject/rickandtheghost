@@ -29,7 +29,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
     scene.startingIdle = {
       spritesheet: animations.get("rickglobal"),
       starting: "sitl",
-      location: {x:900, y:175}
+      location: {x:900, y:200}
     };
 
     scene.background = {
@@ -83,7 +83,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
 
       actionList: [
         { //action 1
-          description: "warm oatmeal",
+          description: script["Oatmeal Hot"],
           meterStatAffected: {
             goodday: -4
           },
@@ -103,7 +103,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         { //action 2
-          description: "make the oatmeal cold",
+          description: script["Oatmeal Cold"],
           meterStatAffected: {
             goodday: -8,
             suspense: +3
@@ -124,7 +124,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         {//action 3
-          description: "do nothing",
+          description: script["Oatmeal Null"],
           oaDef: {//action def
             type: "wait",
             wait: 1000, //ms
@@ -154,7 +154,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
 
       actionList: [
         { //action 1
-          description: "mark mother's birthday",
+          description: script["Calendar Mom"],
           meterStatAffected: {
             goodday: -5,
             suspense: +7
@@ -183,7 +183,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         { //action 2
-          description: "switch to locamotive calendar",
+          description: script["Calendar Switch"],
           meterStatAffected: {
             goodday: -5,
             suspense: +7,
@@ -204,7 +204,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         {//action 3
-          description: "do nothing",
+          description: script["Calendar Null"],
 
 
           oaDef: {
@@ -235,7 +235,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
 
       actionList: [
         { //action 1
-          description: "Set fridge to attack",
+          description: script["Fridge Set"],
           meterStatAffected: {
             goodday: -2,
             suspense: +3,
@@ -259,7 +259,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         { //action 2
-          description: "Switch all his food for eggs",
+          description: script["Fridge Eggs"],
           meterStatAffected: {
             goodday: +2,
             suspense: +2
@@ -282,7 +282,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         {//action 3
-          description: "do nothing",
+          description: script["Fridge Null"],
           oaDef: {
             type: "animation",
             animation: {  //animation for during RickAction phase
@@ -297,6 +297,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
               script: script["fridge-option3"],
               displayLength: 2000
             }
+
           }
         }
       ]
@@ -344,7 +345,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
       name: "walking from  alarmclock to switch",
 
       facing: "left",
-      translate: {y: 25},
+   //   translate: {y: 25},
       length: 300 //timelength til rick stops and goes to his idle
 
 
@@ -372,12 +373,12 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
       timerDef: {
         type: "fade",
         desc: "end fade",
-        offset: 10000,
+        offset: 5000,
         opaque: {stop: 0},
         exit: true,
         displayLength: 1000
       },
-      keepRick: true
+      keepRick: true //keep him hidden
     });
 
     return scene;

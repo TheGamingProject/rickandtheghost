@@ -21,6 +21,20 @@ define([],function(){
   script["Fridge Eggs"] = "Replace all of Rick's food with eggs";
   script["Fridge Null"] = "Do nothing";
 
+
+
+  script["oatmeal-option1"] = "How did this happen?";
+  script["oatmeal-option2"] = "What demon caused this??";
+  script["oatmeal-option3"] = "Mmm slop";
+
+  script["calendar-option1"] = "...There is a guilty phone call in my future.";
+  script["calendar-option2"] = "I knew this calendar was bad, but when did it get THIS bad?";
+  script["calendar-option3"] = "Time is money";
+
+  script["fridge-option1"] = "WWWAAaaaaaahhhhh! Guess I’ve got no lunch today.";
+  script["fridge-option2"] = "Glorious";
+  script["fridge-option3"] = "Ham & Cheese Rick style";
+
   //return an array of all the definitions {}
   return script
 });
