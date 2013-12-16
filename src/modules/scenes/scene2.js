@@ -83,7 +83,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
 
       actionList: [
         { //action 1
-          description: "warm oatmeal",
+          description: script["Oatmeal Hot"],
           meterStatAffected: {
             goodday: -4
           },
@@ -103,7 +103,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         { //action 2
-          description: "make the oatmeal cold",
+          description: script["Oatmeal Cold"],
           meterStatAffected: {
             goodday: -8,
             suspense: +3
@@ -124,7 +124,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         {//action 3
-          description: "do nothing",
+          description: script["Oatmeal Null"],
           oaDef: {//action def
             type: "wait",
             wait: 1000, //ms
@@ -154,7 +154,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
 
       actionList: [
         { //action 1
-          description: "mark mother's birthday",
+          description: script["Calendar Mom"],
           meterStatAffected: {
             goodday: -5,
             suspense: +7
@@ -183,7 +183,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         { //action 2
-          description: "switch to locamotive calendar",
+          description: script["Calendar Switch"],
           meterStatAffected: {
             goodday: -5,
             suspense: +7,
@@ -204,7 +204,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         {//action 3
-          description: "do nothing",
+          description: script["Calendar Null"],
 
 
           oaDef: {
@@ -235,7 +235,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
 
       actionList: [
         { //action 1
-          description: "Set fridge to attack",
+          description: script["Fridge Set"],
           meterStatAffected: {
             goodday: -2,
             suspense: +3,
@@ -255,7 +255,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         { //action 2
-          description: "Switch all his food for eggs",
+          description: script["Fridge Eggs"],
           meterStatAffected: {
             goodday: +2,
             suspense: +2
@@ -274,7 +274,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         {//action 3
-          description: "do nothing",
+          description: script["Fridge Null"],
           oaDef: {
             type: "wait",
             wait: 1000, //ms
