@@ -26,7 +26,7 @@ define([],function(){
   animations.rickglobal = {
     framerate: 33,
     images: ["assets/global/rickbase.png"],
-    frames: {width: 300, height: 300, count: 190},
+    frames: {width: 300, height: 300, count: 210},
     animations: {
       idlel: {
         frames: [0]
@@ -34,15 +34,16 @@ define([],function(){
       idler: {
         frames: [1]
       },
-      downl: {
+      sitl: {
         frames: [2]
       },
       walkl: [10,39],
       walkr: [40,69],
       interactl: [70,99,"idlel"],
       interactr: [100,129,"idler"],
-      knockdown: [130,159,"downl"],
-      getup: [160,189,"idlel"]
+      knockdown: [130,144,"getup"],
+      getup: [150,179,"idlel"],
+      sitstand: [180,209,"idlel"]
     }
   }
 
@@ -120,6 +121,53 @@ define([],function(){
       },
       "reaction-unfold": [10,24,"idleunfold"],
       "reaction-mark": [30,59,"idlemarked"]
+    }
+  }
+  
+  
+  //A1S2
+
+
+  animations.calendar = {
+    framerate: 33,
+    images: ["assets/a1s2/calendar.png"],
+    frames: {width: 75, height: 140, count: 30},
+    animations: {
+      idle: {
+        frames: [0]
+      },
+
+      "reaction-swap": [10,19,false],
+      "reaction-mark": [20,29,false]
+
+    }
+  };
+
+  animations.oatmeal = {
+    framerate: 33,
+    images: ["assets/a1s2/oatmeal.png"],
+    frames: {width: 300, height: 300, count: 30},
+    animations: {
+      idle: {
+        frames: [0]
+      },
+      "reaction-heat": [10,19,false],
+      "reaction-cool": [20,29,false]
+    }
+  }
+  
+  animations.fridge = {
+    framerate: 33,
+    images: ["assets/a1s2/fridge.png"],
+    frames: {width: 600, height: 300, count: 120},
+    animations: {
+      idle: {
+        frames: [0]
+      },
+      "reaction-eggs": [10,24,"idle"],
+      "objectaction-open": [30,44,false],
+      "objectaction-openeggs": [50,64,false],
+      "objectaction-attack": [70,119,false],
     }
   }
 
