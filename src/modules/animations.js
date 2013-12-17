@@ -135,8 +135,8 @@ define([],function(){
       "reaction-mark": [30,59,"idlemarked"]
     }
   }
-  
-  
+
+
   //A1S2
 
   animations.oatmeal = {
@@ -275,11 +275,10 @@ define([],function(){
     images: ["assets/a2s1/radio.png"],
     frames: {width: 300, height: 300, count: 20},
     animations: {
-      "idle": [0],
-      "reaction-on": [10,19]
+      "idle": [0]
     }
   }
-  
+
   
   //A3S1
 
@@ -297,7 +296,7 @@ define([],function(){
     }
   };
 
-  animations.motiv = {
+  animations.phone = {
     framerate: 33,
     images: ["assets/a3s1/phone.png"],
     frames: {width: 300, height: 300, count: 40},
@@ -309,7 +308,7 @@ define([],function(){
     }
   }
   
-  animations.radio = {
+  animations.vent = {
     framerate: 33,
     images: ["assets/a3s1/vent.png"],
     frames: {width: 300, height: 300, count: 70},

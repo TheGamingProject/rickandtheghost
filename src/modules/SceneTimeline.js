@@ -154,6 +154,7 @@ define(["Scene", "Utils", "animations", "SceneTimer"],function (Scene, Utils, an
         case "oa":
           // -tag - identifies it to the ObjectAction
           // fixed amount of frames
+          // -keepNoRick
 
           if(!timeblock.tag || !sceneObjects[timeblock.tag])
             throw "oa animation tag needed";
@@ -178,7 +179,7 @@ define(["Scene", "Utils", "animations", "SceneTimer"],function (Scene, Utils, an
                 rickSprite.visible = false;
                 Utils.updateSprite(sceneObjects[timeblock.tag], objAction.oaDef.animation, function(){
                   console.log("after oa animation");
-                  rickSprite.visible = true;
+                  if(!timeblock.keepNoRick) rickSprite.visible = true;
                   callbackFromMainloop();
                 });
 

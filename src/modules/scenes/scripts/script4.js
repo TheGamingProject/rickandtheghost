@@ -16,7 +16,7 @@ define([],function(){
 
   script["motiv-option1"] = "How did they know I LOVE GHOST CAT";
   script["motiv-option2"] = "Am I ...Am I being watched??";
-  //script["motiv-option3"] = "";
+  script["motiv-option3"] = "";
 
   script["radio-option1"] = "I don't understand dubstep at all";
   script["radio-option2"] = "Sounds just like home";

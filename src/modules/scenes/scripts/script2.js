@@ -13,7 +13,7 @@ define([],function(){
   //Oatmeal buttons
   script["oatmeal-button1"] = "Heat up Rick's oatmeal";
   script["oatmeal-button2"] = "Cool down Rick's oatmeal";
-  script["oatmeal-button2"] = "Do nothing";
+  script["oatmeal-button3"] = "Do nothing";
   
   //Calendar
   script["calendar-button1"] = "Mark Rick's calendar with his Mother's birthday as yesterday";
@@ -38,8 +38,8 @@ define([],function(){
   
   //Fridge
   script["fridge-option1"] = "WWWAAaaaaaahhhhh! Guess I’ve got no lunch today.";
-  script["fridge-option1"] = "Glorious";
-  script["fridge-option1"] = "Ham & Cheese Rick style";
+  script["fridge-option2"] = "Glorious";
+  script["fridge-option3"] = "Ham & Cheese Rick style";
 
   //return an array of all the definitions {}
   return script

@@ -85,7 +85,10 @@ define(["../animations", "scenes/scripts/script4"],function(animations, script){
           postAnimation: scene.animations["possessCabinet"],  //from scene.animations, optional
           oaDef: {
             type: "animation",
-            wait: 5000, //ms
+            animation: {  //animation for during RickAction phase
+              spritesheet: animations.get("cabinet"),
+              starting: "objectaction-open"
+            },
             timerDef: {
               type: "rickdialog",
               location: {x: 290, y:150},
@@ -104,7 +107,10 @@ define(["../animations", "scenes/scripts/script4"],function(animations, script){
           postAnimation: scene.animations["sortCabinet"],  //from scene.animations, optional
           oaDef: {
             type: "animation",
-            wait: 5000, //ms
+            animation: {  //animation for during RickAction phase
+              spritesheet: animations.get("cabinet"),
+              starting: "objectaction-open"
+            },
             timerDef: {
               type: "rickdialog",
               location: {x: 290, y:150},
@@ -118,7 +124,10 @@ define(["../animations", "scenes/scripts/script4"],function(animations, script){
           description: script["cabinet-button3"],
           oaDef: {
             type: "animation",
-            wait: 5000, //ms
+            animation: {  //animation for during RickAction phase
+              spritesheet: animations.get("cabinet"),
+              starting: "objectaction-open"
+            },
             timerDef: {
               type: "rickdialog",
               location: {x: 290, y:150},
@@ -170,7 +179,7 @@ define(["../animations", "scenes/scripts/script4"],function(animations, script){
             suspense: +7,
             scared: +5
           },
-          postAnimation: scene.animations["placeMotivGood"],  //from scene.animations, optional
+          postAnimation: scene.animations["placeMotivBad"],  //from scene.animations, optional
 
           oaDef: {
             type: "wait",
@@ -222,8 +231,8 @@ define(["../animations", "scenes/scripts/script4"],function(animations, script){
           },
           //postAnimation: scene.animations["markPoster"],  //from scene.animations, optional
           oaDef: {
-            type: "animation",
-            wait: 5000, //ms
+            type: "wait",
+            wait: 1000,
             timerDef: {
               type: "rickdialog",
               location: {x: 600, y:300},
@@ -256,7 +265,14 @@ define(["../animations", "scenes/scripts/script4"],function(animations, script){
           description: script["radio-button3"],
           oaDef: {
             type: "wait",
-            wait: 1000 //ms
+            wait: 1000, //ms
+            timerDef: {
+              type: "rickdialog",
+              location: {x: 400, y:300},
+              offset: 100,  //timer
+              script: script["radio-option3"],
+              displayLength: 3000
+            }
           }
         }
       ]
@@ -290,6 +306,16 @@ define(["../animations", "scenes/scripts/script4"],function(animations, script){
       }
     });
 
+    scene.animationTimeline.push({
+      type: "transition",
+      //walking somewhere
+      name: "walking from chair to cabinet",
+
+      facing: "left",
+      length: 300 //timelength til rick stops and goes to his idle
+
+
+    });
 
     scene.animationTimeline.push({
       type: "oa", //objectaction animation
@@ -301,10 +327,9 @@ define(["../animations", "scenes/scripts/script4"],function(animations, script){
     scene.animationTimeline.push({
       type: "transition",
       //walking somewhere
-      name: "walking from chair to switch",
+      name: "walking from cabinet to radio",
 
-      facing: "left",
-      translate: {y: 25},
+      facing: "right",
       length: 300 //timelength til rick stops and goes to his idle
 
 
@@ -312,27 +337,27 @@ define(["../animations", "scenes/scripts/script4"],function(animations, script){
 
     scene.animationTimeline.push({
       type: "oa", //objectaction animation
-      tag: "motiv" //link to scene.objects
+      tag: "radio" //link to scene.objects
     });
 
     scene.animationTimeline.push({
       type: "transition",
       //walking somewhere
-      name: "walking from the motiv to the fridege",
+      name: "walking from the radio to the motiv",
 
-      facing: "left",
-      length: 500 //timelength til rick stops and goes to his idle
+      facing: "right",
+      length: 200 //timelength til rick stops and goes to his idle
 
     });
 
     scene.animationTimeline.push({
       type: "oa", //objectaction animation
-      tag: "poster",
+      tag: "motiv",
 
       timerDef: {
         type: "fade",
         desc: "end fade",
-        offset: 5000,
+        offset: 3000,
         opaque: {stop: 0},
         exit: true,
         displayLength: 1000

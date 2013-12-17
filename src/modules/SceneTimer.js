@@ -100,7 +100,12 @@ define(["Utils"],function (Utils){
               throw "invalid location for timerDef: "+timerDef;
 
             var displayLength = timerDef.displayLength || DEFAULT_DIALOG_LENGTH;
-            var script = timerDef.script || "missing script";
+
+            var script;
+            if(typeof timerDef.script === "string")
+              script = timerDef.script;
+            else
+              script = "missing script";
 
             //create label
             var dialogText = new createjs.Text(script, "20px Arial", "#ff7700");

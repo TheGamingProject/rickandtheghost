@@ -244,7 +244,10 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           //postAnimation: scene.animations["markPoster"],  //from scene.animations, optional
           oaDef: {
             type: "animation",
-            wait: 5000, //ms
+            animation: {  //animation for during RickAction phase
+              spritesheet: animations.get("fridge"),
+              starting: "objectaction-attack"
+            },
             timerDef: {
               type: "rickdialog",
               location: {x: 600, y:300},
@@ -262,8 +265,11 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           },//reaction-eggs
           postAnimation: scene.animations["eggTheFridge"],  //from scene.animations, optional
           oaDef: {
-            type: "wait",
-            wait: 5000, //ms
+            type: "animation",
+            animation: {  //animation for during RickAction phase
+              spritesheet: animations.get("fridge"),
+              starting: "objectaction-openeggs"
+            },
             timerDef: {
               type: "rickdialog",
               location: {x: 400, y:300},
@@ -276,8 +282,11 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
         {//action 3
           description: script["fridge-button3"],
           oaDef: {
-            type: "wait",
-            wait: 1000, //ms
+            type: "animation",
+            animation: {  //animation for during RickAction phase
+              spritesheet: animations.get("fridge"),
+              starting: "objectaction-open"
+            },
             timerDef: {
               type: "rickdialog",
               location: {x: 400, y:300},
@@ -342,6 +351,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
     scene.animationTimeline.push({
       type: "oa", //objectaction animation
       tag: "fridge",
+      keepNoRick: true,
 
       timerDef: {
         type: "fade",

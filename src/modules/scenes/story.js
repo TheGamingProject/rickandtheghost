@@ -9,9 +9,9 @@ define([],function(){
     name: "Rick and the Ghost",
 
     scenes: [
-      "scene4",
       "scene1",
-      "scene2"
+      "scene2",
+      "scene4"
     ],
 
 
