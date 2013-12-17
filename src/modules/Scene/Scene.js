@@ -322,12 +322,11 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer"],
       objectActionTitleText.text = objDef.name;
       selectedObject = sceneObject;
 
-      for(var a in objDef.actionList){      //TODO to $.each
+      $.each(objDef.actionList, function(index, action){
         var action = objDef.actionList[a];
-        console.log(a+ ": "+action.description);
-        uiOptionsText[a].text = a + ": "+action.description;
-
-      }
+        console.log(index+ ": "+action.description);
+        uiOptionsText[index].text = a + ": "+action.description;
+      });
 
       console.log("object clicked");
     }

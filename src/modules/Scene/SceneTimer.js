@@ -18,6 +18,9 @@
 define(["../Utils"],function (Utils){
   var DEFAULT_DIALOG_LENGTH = 2000;
 
+  var DEFAULT_FADE_RECT = {x: 0, y: 0, w: GAME.SIZE.x, h: 500};
+  var DEFAULT_FADE_COLOR = {r: 0, g: 0, b: 0};
+
   var SceneTimer = function(args){
     var that = {};
 
@@ -26,6 +29,7 @@ define(["../Utils"],function (Utils){
     var dialogContainer;
     var exitCallback;
 
+    var prevOpaque;
     var startFadeRect;
 
     //public methods
@@ -37,7 +41,8 @@ define(["../Utils"],function (Utils){
     }
     that.setStartFade = function(color){
       startFadeRect = new createjs.Shape();
-      startFadeRect.graphics.beginFill(createjs.Graphics.getRGB(color.r,color.g,color.b,color.o)).drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
+      var r = DEFAULT_FADE_RECT;
+      startFadeRect.graphics.beginFill(createjs.Graphics.getRGB(color.r,color.g,color.b,color.o)).drawRect(r.x, r.y, r.w, r.h);
       startFadeRect.mouseEnabled = false;
       prevOpaque = color.o;
       dialogContainer.addChild(startFadeRect);
@@ -85,7 +90,6 @@ define(["../Utils"],function (Utils){
             else{
               var s = Utils.makeSprite(animSpec);
               objectContainer.addChildAt(s,0);
-
             }
 
             break;
@@ -129,7 +133,7 @@ define(["../Utils"],function (Utils){
             //-displayLength (ms)
             //-exit (ends scene if true)
             var refreshTime = 5;
-            var color = timerDef.color || {r: 0, g: 0, b: 0};
+            var color = timerDef.color || DEFAULT_FADE_COLOR;
             var displayLength = timerDef.displayLength || 5000;
             var exit = timerDef.exit;
 
@@ -149,12 +153,8 @@ define(["../Utils"],function (Utils){
             }
             var totalChange = startingOpaque - endingOpaque;
 
-            //var rect = new createjs.Shape();
-            //rect.graphics.beginFill(createjs.Graphics.getRGB(color.r,color.g,color.b,startingOpaque)).drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
-            //dialogContainer.addChild(rect);
-
-
             dialogContainer.removeChild(startFadeRect);
+
             var fadeFunc = function(opaqueness,rect){
               setTimeout(function(o, r){
                 if(Math.abs(startingOpaque - o ) > Math.abs(totalChange)){
@@ -177,10 +177,12 @@ define(["../Utils"],function (Utils){
                 }
 
                 var r = new createjs.Shape();
-                r.graphics.beginFill(createjs.Graphics.getRGB(color.r,color.g,color.b,o)).drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
+                r.graphics.beginFill(createjs.Graphics.getRGB(color.r,color.g,color.b,o)).drawRect(DEFAULT_FADE_RECT.x, DEFAULT_FADE_RECT.y, DEFAULT_FADE_RECT.w, DEFAULT_FADE_RECT.h);
                 r.mouseEnabled = false;
                 var delta = (refreshTime/displayLength) * totalChange // * 5;totalChange * 5;
-                //console.log("fade o: "+o + " c: "+delta+" silly: "+dialogContainer.children.length);
+
+                // Advanced debug:
+                // console.log("fade o: "+o + " c: "+delta+" silly: "+dialogContainer.children.length);
 
                 dialogContainer.addChild(r);
 
