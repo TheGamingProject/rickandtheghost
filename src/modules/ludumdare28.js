@@ -69,7 +69,7 @@ define(["Scene", "SceneManager", "animations", "Player", "StoryTimeline"],
     switch(GAME.state){
 
       case STATES.pregame:
-        if(GAME.controls.enter){
+        if(true || GAME.controls.enter){
           GAME.state = STATES.ingame;
           GAME.startStory();
           preContainer.visible = false;
