@@ -341,7 +341,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
 
     scene.animationTimeline.push({
       type: "oa", //objectaction animation
-      tag: "poster",
+      tag: "fridge",
 
       timerDef: {
         type: "fade",
