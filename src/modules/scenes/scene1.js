@@ -98,7 +98,7 @@ define(["../animations", "scenes/scripts/script1"],function(animations, script){
 
       actionList: [
         { //action 1
-          description: "break the alarm clock",
+          description: script["alarm-button1"],
           meterStatAffected: {
             goodday: -4
           },
@@ -109,16 +109,16 @@ define(["../animations", "scenes/scripts/script1"],function(animations, script){
             timerDef: [
               {
                 type: "rickdialog",
-                location: {x: 200, y:200},
+                location: {x: 240, y:200},
                 offset: 100,  //timer
-                script: "..maybe in my next dream I'll be a king",
+                script: script["alarm-option1"],
                 displayLength: 3000
               }
             ]
           }
         },
         { //action 2
-          description: "set the alarm clock early",
+          description: script["alarm-button2"],
           meterStatAffected: {
             goodday: -8,
             suspense: +3
@@ -133,15 +133,15 @@ define(["../animations", "scenes/scripts/script1"],function(animations, script){
             },
             timerDef: {
               type: "rickdialog",
-              location: {x: 200, y:200},
+              location: {x: 280, y:200},
               offset: 100,
-              script: "And the award for latest work goes to: Rick",
+              script: script["alarm-option2"],
               displayLength: 2500
             }
           }
         },
         {//action 3
-          description: "do nothing",
+          description: script["alarm-button3"],
           oaDef: {
             type: "animation",
             animation: {  //animation for during RickAction phase
@@ -153,7 +153,7 @@ define(["../animations", "scenes/scripts/script1"],function(animations, script){
               type: "rickdialog",
               location: {x: 200, y:200},
               offset: 100,
-              script: "*cough cough*",
+              script: script["alarm-option3"],
               displayLength: 2000
             }
           }
@@ -173,7 +173,7 @@ define(["../animations", "scenes/scripts/script1"],function(animations, script){
 
       actionList: [
         { //action 1
-          description: "Turn lights on",
+          description: script["light-button1"],
           meterStatAffected: {
             goodday: -5,
             suspense: +7
@@ -194,7 +194,7 @@ define(["../animations", "scenes/scripts/script1"],function(animations, script){
             wait: 2000, //ms
             timerDef: {
               type: "rickdialog",
-              location: {x: 800, y:200},
+              location: {x: 910, y:200},
               offset: 100,  //timer
               script: script["switch-option1"],
               displayLength: 3000
@@ -202,7 +202,7 @@ define(["../animations", "scenes/scripts/script1"],function(animations, script){
           }//TODO queue lights on animation   ???????????
         },
         { //action 2
-          description: "Break Switch",
+          description: script["light-button2"],
           meterStatAffected: {
             goodday: -5,
             suspense: +7,
@@ -227,7 +227,7 @@ define(["../animations", "scenes/scripts/script1"],function(animations, script){
           }
         },
         {//action 3
-          description: "do nothing",
+          description: script["light-button3"],
 
 
           oaDef: {
@@ -266,7 +266,7 @@ define(["../animations", "scenes/scripts/script1"],function(animations, script){
 
       actionList: [
         { //action 1
-          description: "Mark Poster",
+          description: script["poster-button1"],
           meterStatAffected: {
             goodday: -2,
             suspense: +3,
@@ -278,7 +278,7 @@ define(["../animations", "scenes/scripts/script1"],function(animations, script){
             wait: 5000, //ms
             timerDef: {
               type: "rickdialog",
-              location: {x: 400, y:300},
+              location: {x: 265, y:190},
               offset: 100,  //timer
               script: script["poster-option1"],
               displayLength: 3000
@@ -286,7 +286,7 @@ define(["../animations", "scenes/scripts/script1"],function(animations, script){
           }
         },
         { //action 2
-          description: "Fold Poster",
+          description: script["poster-button2"],
           meterStatAffected: {
             goodday: +2,
             suspense: +2
@@ -297,7 +297,7 @@ define(["../animations", "scenes/scripts/script1"],function(animations, script){
             wait: 5000, //ms
             timerDef: {
               type: "rickdialog",
-              location: {x: 400, y:300},
+              location: {x: 400, y:280},
               offset: 100,  //timer
               script: script["poster-option2"],
               displayLength: 3000
@@ -305,7 +305,7 @@ define(["../animations", "scenes/scripts/script1"],function(animations, script){
           }
         },
         {//action 3
-          description: "do nothing",
+          description: script["poster-button3"],
           oaDef: {
             type: "wait",
             wait: 1000 //ms
