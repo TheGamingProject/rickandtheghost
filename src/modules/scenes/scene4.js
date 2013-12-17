@@ -78,7 +78,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
 
       actionList: [
         { //action 1
-          description: "possess cabinet",
+          description: script["cabinet-button1"],
           meterStatAffected: {
             goodday: -4
           },
@@ -96,7 +96,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         { //action 2
-          description: "sort cabinet",
+          description: script["cabinet-button2"],
           meterStatAffected: {
             goodday: -8,
             suspense: +3
@@ -115,7 +115,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         {//action 3
-          description: "do nothing",
+          description: script["cabinet-button3"],
           oaDef: {
             type: "animation",
             wait: 5000, //ms
@@ -142,8 +142,8 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
       },
 
       actionList: [
-        { //action 2
-          description: "place good motiv",
+        { //action 1
+          description: script["motiv-button1"],
           meterStatAffected: {
             goodday: -8,
             suspense: +3
@@ -164,7 +164,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         { //action 2
-          description: "place bad motiv",
+          description: script["motiv-button2"],
           meterStatAffected: {
             goodday: -5,
             suspense: +7,
@@ -185,7 +185,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         {//action 3
-          description: "do nothing",
+          description: script["motiv-button3"],
           oaDef: {
             type: "wait",
             wait: 1000,
@@ -214,7 +214,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
 
       actionList: [
         { //action 1
-          description: "put on bad music",
+          description: script["radio-button1"],
           meterStatAffected: {
             goodday: -2,
             suspense: +3,
@@ -234,7 +234,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         { //action 2
-          description: "put on good music",
+          description: script["radio-button2"],
           meterStatAffected: {
             goodday: +2,
             suspense: +2
@@ -253,7 +253,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
           }
         },
         {//action 3
-          description: "do nothing",
+          description: script["radio-button3"],
           oaDef: {
             type: "wait",
             wait: 1000 //ms
