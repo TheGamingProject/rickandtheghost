@@ -18,8 +18,8 @@
  */
 
 
-define(["../animations", "scenes/scripts/script3"],function(animations, script){
-  var scene1 = function (){
+define(["../animations", "scenes/scripts/script2"],function(animations, script){
+  var scene4 = function (){
     var scene = {};
 
     scene.name = "Cubicle";
@@ -33,7 +33,7 @@ define(["../animations", "scenes/scripts/script3"],function(animations, script){
     };
 
     scene.background = {
-      path: "assets/a1s3/background.png"
+      path: "assets/a2s1/background.png"
     };
 
     //Scene Animations
@@ -342,5 +342,5 @@ define(["../animations", "scenes/scripts/script3"],function(animations, script){
     return scene;
   }
 
-  return scene1;
+  return scene4;
 });
