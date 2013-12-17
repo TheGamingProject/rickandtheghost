@@ -6,19 +6,14 @@ GAME.SIZE = { x: 1280, y: 720 };
 
 var DEBUG = {showClickArea: true};
 
-var STARTING_SCENE = "scene2";
-
 
 define(["Scene/Scene", "Scene/SceneManager", "animations", "Player", "StoryTimeline"],
     function(Scene, SceneManager, animations, Player, StoryTimeline){
 
   var STATES = {pregame: 0, ingame: 1, loading: 2};
 
-  var scene = SceneManager.getScene(STARTING_SCENE);
-
   GAME.fps = 30;
   GAME.state;
-  GAME.gameplayObject;
 
 
   GAME.controls = {
@@ -27,7 +22,6 @@ define(["Scene/Scene", "Scene/SceneManager", "animations", "Player", "StoryTimel
   };
 
   //temporary
-  GAME.currentScene;
   var preContainer;
 
 
@@ -64,7 +58,7 @@ define(["Scene/Scene", "Scene/SceneManager", "animations", "Player", "StoryTimel
 
   };
 
-  var tempPic;
+  //var tempPic;
 
   GAME.update = function(){
 
@@ -98,11 +92,11 @@ define(["Scene/Scene", "Scene/SceneManager", "animations", "Player", "StoryTimel
     console.log("reseting game");
     init();
     console.log("reset State: "+GAME.state)
-  }
+  };
 
   GAME.click = function (loc){
     //can be delt with thru http://www.createjs.com/Docs/EaselJS/classes/DisplayObject.html#event_click
-  }
+  };
 
   //process key presses
   GAME.keyPressed = function (evt){
@@ -133,48 +127,8 @@ define(["Scene/Scene", "Scene/SceneManager", "animations", "Player", "StoryTimel
     }
   };
 
-
-
-
-
-  function drawStuff(stage){
-    //Create a stage by getting a reference to the canvas
-    // stage = new createjs.Stage("demoCanvas");
-    //Create a Shape DisplayObject.
-    circle = new createjs.Shape();
-    circle.graphics.beginFill("red").drawCircle(0, 0, 40);
-    //Set position of Shape instance.
-    circle.x = circle.y = 50;
-    //Add Shape instance to stage display list.
-    stage.addChild(circle);
-
-    var container = new createjs.Container();
-    container.x = 20;
-    container.y = 20;
-    stage.addChild(container);
-
-    circle = new createjs.Shape();
-    circle.graphics.beginFill("black").drawCircle(2,2,10);
-    container.addChild(circle);
-
-
-    circle = new createjs.Shape();
-    circle.graphics.beginFill("blue").drawCircle(0, 0, 25);
-
-    circle.x = circle.y = 60;
-    stage.addChild(circle);
-
-
-
-
-    //Update stage will render next frame
-    stage.update();
-  }
-
-
-
+  ////////// MAIN /////////////
   var canvas;
-  var stage;
   function init() {
     canvas = document.getElementById('myCanvas');
 

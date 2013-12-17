@@ -17,7 +17,7 @@ define([ "../scenes/scene1", "scenes/scene2", "scenes/scene4"],function(scene1, 
       default:
         throw "We don't have that scene";
     }
-  }
+  };
 
   return that;
 });

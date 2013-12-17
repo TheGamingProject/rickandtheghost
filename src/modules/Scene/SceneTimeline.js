@@ -30,8 +30,6 @@ define(["", "Utils", "animations", "Scene/SceneTimer"],function (Scene, Utils, a
     var state = STATES.pre;
     var timeblockCount = 0;
 
-    var rickSprite;
-
     that.start = function(endCallback){
       state = STATES.inIntro;
 

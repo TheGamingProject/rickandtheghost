@@ -171,7 +171,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer"],
       var objects = sceneDef.objects;
       if(!objects) throw "No objects defined in scene: "+sceneDef.name;
 
-      for(var o in objects){
+      for(var o in objects){       //TODO to $.each
         var object = objects[o];
 
         var objectSprite = SceneObject(sceneContainer, object, optionsUiCallback);//object and objectSprite
@@ -229,7 +229,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer"],
 
       //set timer container
       SceneTimer.setUIContainerForDialog(uiLayerContainer);
-      SceneTimer.setObjectContainer(objectLayerContainer)
+      SceneTimer.setObjectContainer(objectLayerContainer);
 
 
 
@@ -264,7 +264,6 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer"],
       for(var i=0; i<3; i++){
         var b = UI_OPTION_BUTTONS[i];
 
-        var buttonRect = new createjs.Shape();
         var buttonRect = new createjs.Shape();
         buttonRect.graphics.beginFill("black").drawRect(b.x,b.y,b.w,b.h);
 
@@ -303,7 +302,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer"],
       objectActionTitleText.text = "UI_OPTION_TITLE";
       selectedObject = undefined;
 
-      for(var t in uiOptionsText){
+      for(var t in uiOptionsText){     //TODO make $.each
         uiOptionsText[t].text = "option _";
       }
     }
@@ -323,7 +322,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer"],
       objectActionTitleText.text = objDef.name;
       selectedObject = sceneObject;
 
-      for(var a in objDef.actionList){
+      for(var a in objDef.actionList){      //TODO to $.each
         var action = objDef.actionList[a];
         console.log(a+ ": "+action.description);
         uiOptionsText[a].text = a + ": "+action.description;

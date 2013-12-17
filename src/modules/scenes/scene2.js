@@ -364,7 +364,7 @@ define(["../animations", "scenes/scripts/script2"],function(animations, script){
     });
 
     return scene;
-  }
+  };
 
   return scene1;
 });
