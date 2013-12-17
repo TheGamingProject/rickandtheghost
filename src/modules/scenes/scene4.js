@@ -33,7 +33,7 @@ define(["../animations", "scenes/scripts/script4"],function(animations, script){
     };
 
     scene.background = {
-      path: "assets/a2s1/background.png"
+      path: "assets/scenes/a2s1/background.png"
     };
 
     //Scene Animations

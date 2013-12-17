@@ -5,7 +5,7 @@
  */
 
 
-define(["Scene", "Utils", "animations", "SceneTimer"],function (Scene, Utils, animations, SceneTimer){
+define(["", "Utils", "animations", "Scene/SceneTimer"],function (Scene, Utils, animations, SceneTimer){
   var STATES = {
     pre: 0,
     inIntro: 1,

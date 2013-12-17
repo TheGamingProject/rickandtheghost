@@ -3,7 +3,7 @@
  *
  * Scene.js
  */
-define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObject, SceneTimeline, Utils, SceneTimer){
+define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer"],function (SceneObject, SceneTimeline, Utils, SceneTimer){
 
   var STATES = {
     preinit: -1,

@@ -6,7 +6,7 @@
  * Created by niko on 12/16/13.
  */
 
-define(["scenes/story", "SceneManager", "Scene"],function(story, SceneManager, Scene){
+define(["scenes/story", "Scene/SceneManager", "Scene/Scene"],function(story, SceneManager, Scene){
   var RECIEVE_GOAL_BG = {
     path: "assets/start/startSuspicionLow.png"
   };

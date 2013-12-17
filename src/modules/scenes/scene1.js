@@ -34,7 +34,7 @@ define(["../animations", "scenes/scripts/script1"],function(animations, script){
 
     //new createjs.Sprite(spritesheet,"afk");
     scene.background = {
-      path: "assets/a1s1/background.png"
+      path: "assets/scenes/a1s1/background.png"
     };
 
     //Scene Animations

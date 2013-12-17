@@ -15,7 +15,7 @@
 
 
 
-define(["Utils"],function (Utils){
+define(["../Utils"],function (Utils){
   var DEFAULT_DIALOG_LENGTH = 2000;
 
   var SceneTimer = function(args){

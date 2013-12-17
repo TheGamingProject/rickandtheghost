@@ -9,7 +9,7 @@ var DEBUG = {showClickArea: true};
 var STARTING_SCENE = "scene2";
 
 
-define(["Scene", "SceneManager", "animations", "Player", "StoryTimeline"],
+define(["Scene/Scene", "Scene/SceneManager", "animations", "Player", "StoryTimeline"],
     function(Scene, SceneManager, animations, Player, StoryTimeline){
 
   var STATES = {pregame: 0, ingame: 1, loading: 2};
@@ -47,12 +47,14 @@ define(["Scene", "SceneManager", "animations", "Player", "StoryTimeline"],
     rectangle.graphics.beginFill("black").drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
     preContainer.addChild(rectangle);
 
+  /*
     var spritesheet = animations.get("menuBG");
     tempPic = new createjs.Sprite(spritesheet,"afk");
     tempPic.x = 200;
     tempPic.y = 100;
 
     preContainer.addChild(tempPic);
+  */
 
     GAME.stage.addChild(preContainer);
     //GAME.stage.update();

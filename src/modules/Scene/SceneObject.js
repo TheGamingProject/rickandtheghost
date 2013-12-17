@@ -4,7 +4,7 @@
  * Created by niko on 12/14/13.
  */
 
-define(["Utils"],function (Utils){
+define(["../Utils"],function (Utils){
   var STATES = {
     idle: 0,
     beingclicked: 1, //showing list with options
