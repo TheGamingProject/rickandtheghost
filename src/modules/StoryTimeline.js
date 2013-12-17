@@ -7,6 +7,14 @@
  */
 
 define(["scenes/story", "SceneManager", "Scene"],function(story, SceneManager, Scene){
+  var RECIEVE_GOAL_BG = {
+    path: "assets/start/startSuspicionLow.png"
+  };
+
+  var CONTINUE_BUTTON = {
+    x: 600, y:700,
+    path: "assets/ui/arrow0.png"
+  }
 
 
   var StoryTimeline = function(args){
@@ -18,6 +26,8 @@ define(["scenes/story", "SceneManager", "Scene"],function(story, SceneManager, S
     //private instance variables
     var currentScene;
     var currentNum = 0;
+
+    var parentStage = args.parentStage;
 
 
     // public functions
@@ -32,7 +42,7 @@ define(["scenes/story", "SceneManager", "Scene"],function(story, SceneManager, S
       console.log("startPlayScreen: "+ourStory.scenes[key]);
 
       currentNum = key;
-      currentScene = new Scene( {sceneDef: SceneManager.getScene(ourStory.scenes[key]), parentStage: args.parentStage} );
+      currentScene = new Scene( {sceneDef: SceneManager.getScene(ourStory.scenes[key]), parentStage: parentStage} );
       currentScene.startScene(exitSceneCallback);
     };
 
@@ -45,7 +55,22 @@ define(["scenes/story", "SceneManager", "Scene"],function(story, SceneManager, S
     var startGoalScreenHandler = function(){
       console.log("startGoalScreen");
 
-      startSceneHandler(0);
+      var tempBG = new createjs.Bitmap(RECIEVE_GOAL_BG.path);
+      tempBG.x = 0;
+      tempBG.y = 0;
+
+      parentStage.addChild(tempBG);
+
+      tempBG.on("click",function(){
+        console.log("next plz");
+
+        parentStage.removeChild(tempBG);
+
+
+        startSceneHandler(0);
+      },null, true)
+
+
     }
 
     var endGoalScreenHandler = function(){
@@ -67,13 +92,8 @@ define(["scenes/story", "SceneManager", "Scene"],function(story, SceneManager, S
       //set vars based on scenes and goals?
       console.log("start Story! "+ourStory.name);
 
-      //$.each([ourStory.scenes], function(key, value){
       startGoalScreenHandler()
 
-
-      //});
-
-    //  debugger;
     };
 
 

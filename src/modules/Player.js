@@ -18,7 +18,7 @@ define([],function (){
     args = args || {};
 
     //private instance variables
-    var stats = {suspense: 0, scared: 0, goodday: 0};
+    var stats = {suspense: 1, scared: 0, goodday: 12};
 
     var updateUIcallback;
 
