@@ -9,7 +9,8 @@ var DEBUG = {showClickArea: true};
 var STARTING_SCENE = "scene2";
 
 
-define(["Scene", "SceneManager", "animations", "Player"],function(Scene, SceneManager, animations, Player){
+define(["Scene", "SceneManager", "animations", "Player", "StoryTimeline"],
+    function(Scene, SceneManager, animations, Player, StoryTimeline){
 
   var STATES = {pregame: 0, ingame: 1, loading: 2};
 
@@ -33,11 +34,9 @@ define(["Scene", "SceneManager", "animations", "Player"],function(Scene, SceneMa
   GAME.init = function(canvas){
     GAME.stage = new createjs.Stage(canvas);
     GAME.state = STATES.pregame;
-    //drawStuff(GAME.stage);
 
     //load shit?
 
-    // GAME.gameplayObject = new GamePlay();
 
     GAME.player = Player();
 
@@ -72,7 +71,7 @@ define(["Scene", "SceneManager", "animations", "Player"],function(Scene, SceneMa
       case STATES.pregame:
         if(GAME.controls.enter){
           GAME.state = STATES.ingame;
-          GAME.startScene();
+          GAME.startStory();
           preContainer.visible = false;
           console.log("end pregame state");
         }
@@ -87,9 +86,10 @@ define(["Scene", "SceneManager", "animations", "Player"],function(Scene, SceneMa
     GAME.prevControls = GAME.controls;
   };
 
-  GAME.startScene = function(){
-    GAME.currentScene = new Scene( {sceneDef: scene, parentStage: GAME.stage} );
-    GAME.currentScene.startScene();
+  GAME.startStory = function(){
+    GAME.story = StoryTimeline({parentStage: GAME.stage});
+    //GAME.currentScene = new Scene( {sceneDef: scene, parentStage: GAME.stage} );
+    //GAME.currentScene.startScene();
 
   };
   GAME.resetGame = function(){

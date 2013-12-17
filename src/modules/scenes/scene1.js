@@ -400,7 +400,7 @@ define(["../animations", "scenes/scripts/script1"],function(animations, script){
       timerDef: {
         type: "fade",
         desc: "end fade",
-        offset: 5000,
+        offset: 2000,
         opaque: {stop: 0},
         exit: true,
         displayLength: 1000

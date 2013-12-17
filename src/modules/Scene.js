@@ -97,13 +97,6 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
       //constructor?
       sceneContainer = new createjs.Container();
 
-      //temp backdrop
-    /*  var rectangle = new createjs.Shape();
-      rectangle.graphics.beginFill("green").drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
-      sceneContainer.addChild(rectangle);
-    */
-
-
       //debug text
       debugText = new createjs.Text("State: ", "20px Arial", "#ff7700");
       debugText.x = 100;
@@ -136,9 +129,7 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
       parentStage.addChild(sceneContainer);
       console.log("Scene init-ed: "+sceneDef.name);
 
-      SceneTimer.setExitSceneCallback(function(){
-        console.log("Scene exited");
-      });
+      SceneTimer.setExitSceneCallback(that.endScene );
 
     }
 
@@ -379,8 +370,10 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
       resetOptionsUI();
 
     };
+    var exitSceneCallback;
 
-    that.startScene = function(){
+    that.startScene = function(_exitSceneCallback){
+      exitSceneCallback = _exitSceneCallback;
       setState(STATES.haunting);
 
       //you can now click on objects
@@ -404,6 +397,10 @@ define(["SceneObject", "SceneTimeline","Utils", "SceneTimer"],function (SceneObj
     that.endScene = function(){
       //clean up sprites? background
       parentStage.removeChild(sceneContainer);
+
+      console.log("Scene exited");
+
+      if(exitSceneCallback) exitSceneCallback();
     };
 
     that.getState = function(){
