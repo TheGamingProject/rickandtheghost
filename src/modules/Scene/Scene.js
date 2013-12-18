@@ -312,6 +312,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer"],
         sceneTimelineText.text = ""+JSON.stringify(stateObj);
     }
 
+    //displaying option text here
     var optionsUiCallback = function( sceneObject){
       /*if(!sceneObject)*/ resetOptionsUI();
 
@@ -323,9 +324,8 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer"],
       selectedObject = sceneObject;
 
       $.each(objDef.actionList, function(index, action){
-        var action = objDef.actionList[a];
         console.log(index+ ": "+action.description);
-        uiOptionsText[index].text = a + ": "+action.description;
+        uiOptionsText[index].text =  " "+action.description;
       });
 
       console.log("object clicked");
