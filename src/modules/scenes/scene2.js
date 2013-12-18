@@ -18,7 +18,7 @@
  */
 
 
-define(["../animations", "scenes/scripts/script2"],function(animations, script){
+define(["animations", "scenes/scripts/script2"],function(animations, script){
   var scene1 = function (){
     var scene = {};
 
