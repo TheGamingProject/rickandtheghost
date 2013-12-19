@@ -15,7 +15,7 @@ define(["../Utils"],function (Utils){
 
   var SceneObject = function(parentStage, args, optionsUiCallback){
     var that;
-    args = args || {};//args is definition via scene1.js
+    args = args || {};//args is definition via scene.js
 
     if(!parentStage)
       throw "null parentStage";//container

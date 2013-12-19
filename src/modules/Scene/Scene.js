@@ -60,7 +60,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer"],
     args = args || {};
 
     // parse args
-    var sceneDef = args.sceneDef; // from modules/scenes/scene1.js
+    var sceneDef = args.sceneDef; // from modules/scenes/scene.js
     if (!sceneDef) throw "No defined scene";
     sceneDef = sceneDef();
 

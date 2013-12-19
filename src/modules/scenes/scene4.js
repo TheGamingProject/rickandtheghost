@@ -18,7 +18,7 @@
  */
 
 
-define(["animations", "scenes/scripts/script4"],function(animations, script){
+define(["Loader", "scenes/scripts/script4"],function(Loader, script){
   var scene4 = function (){
     var scene = {};
 
@@ -27,7 +27,7 @@ define(["animations", "scenes/scripts/script4"],function(animations, script){
     scene.startFade = {r: 0, g: 0, b: 0, o: 0.5};
 
     scene.startingIdle = {
-      spritesheet: animations.get("rickglobal"),
+      spritesheet: Loader.get("rickglobal"),
       starting: "sitl",
       location: {x:514, y:200}
     };
@@ -43,20 +43,20 @@ define(["animations", "scenes/scripts/script4"],function(animations, script){
     scene.animations = {};
     //cabinet (scene object animations don't need new locations)
     scene.animations["possessCabinet"] = {
-      spritesheet: animations.get("cabinet"),
+      spritesheet: Loader.get("cabinet"),
       starting: "reaction-possess"
     };
     scene.animations["sortCabinet"] = {
-      spritesheet: animations.get("cabinet"),
+      spritesheet: Loader.get("cabinet"),
       starting: "reaction-sort"
     };
     //motiv
     scene.animations["placeMotivGood"] = {
-      spritesheet: animations.get("motiv"),
+      spritesheet: Loader.get("motiv"),
       starting: "reaction-positive"
     };
     scene.animations["placeMotivBad"] = {
-      spritesheet: animations.get("motiv"),
+      spritesheet: Loader.get("motiv"),
       starting: "reaction-negative"
     };
 
@@ -71,7 +71,7 @@ define(["animations", "scenes/scripts/script4"],function(animations, script){
       name: "Cabinet",
       clickBounds: {x:363, y:330, w:115, h:170},//to click it
       idleAnimation: {    
-        spritesheet: animations.get("cabinet"),
+        spritesheet: Loader.get("cabinet"),
         starting: "idle",
         location: {x:270,y:200}
       },
@@ -86,7 +86,7 @@ define(["animations", "scenes/scripts/script4"],function(animations, script){
           oaDef: {
             type: "animation",
             animation: {  //animation for during RickAction phase
-              spritesheet: animations.get("cabinet"),
+              spritesheet: Loader.get("cabinet"),
               starting: "objectaction-open"
             },
             timerDef: {
@@ -108,7 +108,7 @@ define(["animations", "scenes/scripts/script4"],function(animations, script){
           oaDef: {
             type: "animation",
             animation: {  //animation for during RickAction phase
-              spritesheet: animations.get("cabinet"),
+              spritesheet: Loader.get("cabinet"),
               starting: "objectaction-open"
             },
             timerDef: {
@@ -125,7 +125,7 @@ define(["animations", "scenes/scripts/script4"],function(animations, script){
           oaDef: {
             type: "animation",
             animation: {  //animation for during RickAction phase
-              spritesheet: animations.get("cabinet"),
+              spritesheet: Loader.get("cabinet"),
               starting: "objectaction-open"
             },
             timerDef: {
@@ -145,7 +145,7 @@ define(["animations", "scenes/scripts/script4"],function(animations, script){
       name: "Motiv",
       clickBounds: {x:894, y:269, w:150, h:100},//to click it
       idleAnimation: {
-        spritesheet: animations.get("motiv"),
+        spritesheet: Loader.get("motiv"),
         starting: "idlenone",
         location: {x:820,y:200}
       },
@@ -216,7 +216,7 @@ define(["animations", "scenes/scripts/script4"],function(animations, script){
       name: "Radio",
       clickBounds: {x:627, y:179, w:57, h:61},//to click it
       idleAnimation: {
-        spritesheet: animations.get("radio"),
+        spritesheet: Loader.get("radio"),
         starting: "idle",
         location: {x:505,y:87}
       },
@@ -300,7 +300,7 @@ define(["animations", "scenes/scripts/script4"],function(animations, script){
       facing: "left",
 
       introAnim: {
-        spritesheet: animations.get("rickglobal"),
+        spritesheet: Loader.get("rickglobal"),
         starting: "sitl",
         location: {x:514, y:200}
       }

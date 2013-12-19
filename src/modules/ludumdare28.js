@@ -139,7 +139,7 @@ define(["Scene/Scene", "Scene/SceneManager", "animations", "Player", "StoryTimel
   }
 
   console.log("loading resources");
-  animations.loadAnimations(["rickglobal","ricka1s1","alarmclock","switch","poster"],function(){
+  Loader.loadAnimations(["rickglobal","ricka1s1","alarmclock","switch","poster"],function(){
     console.log("resources loaded");
     init();
   });

@@ -309,7 +309,7 @@ define([],function(){
     }
   };
 
-
+                     /*
   var that = {};
 
   var spriteSheets = {};
@@ -345,21 +345,9 @@ define([],function(){
   };
 
   that.get = function(name){
-    /*if(!loaded)
-      throw "we need to load!"
-*/
-    if(!animations[name]){
-      throw "Animation doesn't exist: "+name;
-    }
-    if(spriteSheets[name]){
-      console.log("getting cached spritesheet:" +name);
-      return spriteSheets[name];
-    }
-    console.log("loading spritesheet:"+name);
-    spriteSheets[name] = new createjs.SpriteSheet( animations[name]);
-
-    return spriteSheets[name];
+    throw "nooooooo";
   }
 
-  return that;
+  return that;         */
+  return animations;
 });

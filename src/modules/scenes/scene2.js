@@ -18,7 +18,7 @@
  */
 
 
-define(["animations", "scenes/scripts/script2"],function(animations, script){
+define(["Loader", "scenes/scripts/script2"],function(Loader, script){
   var scene1 = function (){
     var scene = {};
 
@@ -27,7 +27,7 @@ define(["animations", "scenes/scripts/script2"],function(animations, script){
     scene.startFade = {r: 0, g: 0, b: 0, o: 0.5};
 
     scene.startingIdle = {
-      spritesheet: animations.get("rickglobal"),
+      spritesheet: Loader.get("rickglobal"),
       starting: "sitl",
       location: {x:900, y:205}
     };
@@ -43,25 +43,25 @@ define(["animations", "scenes/scripts/script2"],function(animations, script){
     scene.animations = {};
     //oatmeal (scene object animations don't need new locations)
     scene.animations["makeOatmealHot"] = {
-      spritesheet: animations.get("oatmeal"),
+      spritesheet: Loader.get("oatmeal"),
       starting: "reaction-heat"
     };
     scene.animations["makeOatmealCold"] = {
-      spritesheet: animations.get("oatmeal"),
+      spritesheet: Loader.get("oatmeal"),
       starting: "reaction-cool"
     };
     //calendar
     scene.animations["swapCalendar"] = {
-      spritesheet: animations.get("calendar"),
+      spritesheet: Loader.get("calendar"),
       starting: "reaction-swap"
     };
     scene.animations["markCalendar"] = {
-      spritesheet: animations.get("calendar"),
+      spritesheet: Loader.get("calendar"),
       starting: "reaction-mark"
     };
     //fridge
     scene.animations["eggTheFridge"] = {
-      spritesheet: animations.get("fridge"),
+      spritesheet: Loader.get("fridge"),
       starting: "reaction-eggs"
     };
 
@@ -76,7 +76,7 @@ define(["animations", "scenes/scripts/script2"],function(animations, script){
       name: "Oatmeal",
       clickBounds: {x:970, y:360, w:40, h:40},//to click it
       idleAnimation: {
-        spritesheet: animations.get("oatmeal"),
+        spritesheet: Loader.get("oatmeal"),
         starting: "idle",
         location: {x:910,y:193}
       },
@@ -147,7 +147,7 @@ define(["animations", "scenes/scripts/script2"],function(animations, script){
       name: "Calendar",
       clickBounds: {x:660, y:200, w:80, h:150},//to click it
       idleAnimation: {
-        spritesheet: animations.get("calendar"),
+        spritesheet: Loader.get("calendar"),
         starting: "idle",
         location: {x:660,y:201}
       },
@@ -228,7 +228,7 @@ define(["animations", "scenes/scripts/script2"],function(animations, script){
       name: "Fridge",
       clickBounds: {x:120, y:200, w:150, h:300},//to click it
       idleAnimation: {
-        spritesheet: animations.get("fridge"),
+        spritesheet: Loader.get("fridge"),
         starting: "idle",
         location: {x:72,y:205}
       },
@@ -245,7 +245,7 @@ define(["animations", "scenes/scripts/script2"],function(animations, script){
           oaDef: {
             type: "animation",
             animation: {  //animation for during RickAction phase
-              spritesheet: animations.get("fridge"),
+              spritesheet: Loader.get("fridge"),
               starting: "objectaction-attack"
             },
             timerDef: {
@@ -267,7 +267,7 @@ define(["animations", "scenes/scripts/script2"],function(animations, script){
           oaDef: {
             type: "animation",
             animation: {  //animation for during RickAction phase
-              spritesheet: animations.get("fridge"),
+              spritesheet: Loader.get("fridge"),
               starting: "objectaction-openeggs"
             },
             timerDef: {
@@ -284,7 +284,7 @@ define(["animations", "scenes/scripts/script2"],function(animations, script){
           oaDef: {
             type: "animation",
             animation: {  //animation for during RickAction phase
-              spritesheet: animations.get("fridge"),
+              spritesheet: Loader.get("fridge"),
               starting: "objectaction-open"
             },
             timerDef: {

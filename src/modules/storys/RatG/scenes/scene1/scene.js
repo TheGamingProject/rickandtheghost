@@ -17,8 +17,9 @@
  *
  */
 
-
-define(["animations", "scenes/scripts/script1"],function(animations, script){
+this;
+//debugger;                ../
+define(["Loader", "storys/RatG/scenes/scene1/script"],function(Loader, script){
   var scene1 = function (){
     var scene = {};
 
@@ -27,7 +28,7 @@ define(["animations", "scenes/scripts/script1"],function(animations, script){
     scene.startFade = {r: 0, g: 0, b: 0, o: .5};
 
     scene.startingIdle = {
-      spritesheet: animations.get("ricka1s1"),
+      spritesheet: Loader.get("ricka1s1"),
       starting: "sleep",
       location: {x:500, y:200}
     };
@@ -41,42 +42,42 @@ define(["animations", "scenes/scripts/script1"],function(animations, script){
     //animations that are during the haunting phase
     scene.animations = {};
     scene.animations["turnoffAlarmClock"] = {
-      spritesheet: animations.get("alarmclock"),
+      spritesheet: Loader.get("alarmclock"),
       starting: "reaction-broken",
       location: {x:100, y:100} // ??
     };
     scene.animations["setAlarmClockEarly"] = {
-      spritesheet: animations.get("alarmclock"),
+      spritesheet: Loader.get("alarmclock"),
       starting: "reaction-activated",
       location: {x:100, y:100} // ??
     };
 
     //light switch
     scene.animations["turnLightsOn"] = {
-      spritesheet: animations.get("switch"),
+      spritesheet: Loader.get("switch"),
       starting: "idleon",
       location: {x:100, y:100} // ??
     };
     scene.animations["breakLightSwitch"] = {
-      spritesheet: animations.get("switch"),
+      spritesheet: Loader.get("switch"),
       starting: "reaction-break",
       location: {x:100, y:100} // ??
     };
     //poster
     scene.animations["unfoldPoster"] = {
-      spritesheet: animations.get("poster"),
+      spritesheet: Loader.get("poster"),
       starting: "reaction-unfold",
       location: {x:100, y:100} // ??
     };
     scene.animations["markPoster"] = {
-      spritesheet: animations.get("poster"),
+      spritesheet: Loader.get("poster"),
       starting: "reaction-mark",
       location: {x:100, y:100} // ??
     };
 
     //window rays
     scene.animations["idleWindowRays"] = {
-      spritesheet: animations.get("windowrays"),
+      spritesheet: Loader.get("windowrays"),
       starting: "idle",
       location: {x:440,y:50}
     };
@@ -91,7 +92,7 @@ define(["animations", "scenes/scripts/script1"],function(animations, script){
       name: "Alarm Clock",
       clickBounds: {x:900, y:310, w:60, h:60},//to click it
       idleAnimation: {
-        spritesheet: animations.get("alarmclock"),
+        spritesheet: Loader.get("alarmclock"),
         starting: "idle",
         location: {x:720,y:200}
       },
@@ -127,7 +128,7 @@ define(["animations", "scenes/scripts/script1"],function(animations, script){
           oaDef: {
             type: "animation",
             animation: {  //animation for during RickAction phase
-              spritesheet: animations.get("alarmclock"),
+              spritesheet: Loader.get("alarmclock"),
               starting: "objectaction-interactl",
               location: {x:720,y:200}
             },
@@ -145,7 +146,7 @@ define(["animations", "scenes/scripts/script1"],function(animations, script){
           oaDef: {
             type: "animation",
             animation: {  //animation for during RickAction phase
-              spritesheet: animations.get("alarmclock"),
+              spritesheet: Loader.get("alarmclock"),
               starting: "objectaction-interactl",
               location: {x:720,y:200}
             },
@@ -166,7 +167,7 @@ define(["animations", "scenes/scripts/script1"],function(animations, script){
       name: "Switch",
       clickBounds: {x:1210, y:290, w:40, h:60},//to click it
       idleAnimation: {
-        spritesheet: animations.get("switch"),
+        spritesheet: Loader.get("switch"),
         starting: "idleoff",
         location: {x:1010,y:201}
       },
@@ -220,7 +221,7 @@ define(["animations", "scenes/scripts/script1"],function(animations, script){
               displayLength: 3000
             },
             animation: {  //animation for during RickAction phase
-              spritesheet: animations.get("switch"),
+              spritesheet: Loader.get("switch"),
               starting: "objectaction-turnonbroken",
               location: {x:1010,y:200}
             }
@@ -244,7 +245,7 @@ define(["animations", "scenes/scripts/script1"],function(animations, script){
                 displayLength: 10
             }],
             animation: {  //animation for during RickAction phase
-              spritesheet: animations.get("switch"),
+              spritesheet: Loader.get("switch"),
               starting: "objectaction-turnon",
               location: {x:1010,y:200}
             }
@@ -259,7 +260,7 @@ define(["animations", "scenes/scripts/script1"],function(animations, script){
       name: "Poster",
       clickBounds: {x:120, y:45, w:120, h:260},//to click it
       idleAnimation: {
-        spritesheet: animations.get("poster"),
+        spritesheet: Loader.get("poster"),
         starting: "idlefold",
         location: {x:122,y:45}
       },
@@ -336,7 +337,7 @@ define(["animations", "scenes/scripts/script1"],function(animations, script){
       facing: "left",
 
       introAnim: {
-        spritesheet: animations.get("ricka1s1"),
+        spritesheet: Loader.get("ricka1s1"),
         starting: "wake",
         location: {x:500, y:200}
       }//,

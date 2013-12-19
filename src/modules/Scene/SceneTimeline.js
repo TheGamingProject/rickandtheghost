@@ -5,7 +5,7 @@
  */
 
 
-define(["", "Utils", "animations", "Scene/SceneTimer"],function (Scene, Utils, animations, SceneTimer){
+define(["Scene", "Utils", "Loader", "Scene/SceneTimer"],function (Scene, Utils, Loader, SceneTimer){
   var STATES = {
     pre: 0,
     inIntro: 1,
@@ -73,7 +73,7 @@ define(["", "Utils", "animations", "Scene/SceneTimer"],function (Scene, Utils, a
                 facing = "idlel";
 
               Utils.updateSprite(rickSprite,{
-                spritesheet: animations.get("rickglobal"),
+                spritesheet: Loader.get("rickglobal"),
                 starting: facing//,
                 //location: {x:500, y:200}
               },function(){
@@ -105,7 +105,7 @@ define(["", "Utils", "animations", "Scene/SceneTimer"],function (Scene, Utils, a
               dir = -1;
             }
             var tempDef = {
-              spritesheet: animations.get("rickglobal"),
+              spritesheet: Loader.get("rickglobal"),
               starting: _startingWalk
             };
 
@@ -128,7 +128,7 @@ define(["", "Utils", "animations", "Scene/SceneTimer"],function (Scene, Utils, a
                 callbackFromMainloop();*/
 
                 Utils.updateSprite(rickSprite,{
-                  spritesheet: animations.get("rickglobal"),
+                  spritesheet: Loader.get("rickglobal"),
                   starting: _startingIdle
                 },function(){
                   console.log("after intro animation");
