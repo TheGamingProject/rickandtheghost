@@ -5,7 +5,7 @@
  */
 
 
-define(["Scene", "Utils", "Loader", "Scene/SceneTimer"],function (Scene, Utils, Loader, SceneTimer){
+define(["Scene/Scene", "Utils", "Loader", "Scene/SceneTimer"],function (Scene, Utils, Loader, SceneTimer){
   var STATES = {
     pre: 0,
     inIntro: 1,
