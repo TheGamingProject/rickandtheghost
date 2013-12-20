@@ -26,7 +26,7 @@ define(["Scene/Scene", "Scene/SceneManager", "animations", "Player", "StoryTimel
 
 
   GAME.init = function(canvas){
-    GAME.stage = new createjs.Stage(canvas);
+    GAME.stage = canvas;
     GAME.state = STATES.pregame;
 
     //load shit?
@@ -131,18 +131,26 @@ define(["Scene/Scene", "Scene/SceneManager", "animations", "Player", "StoryTimel
   var canvas;
   function init() {
     canvas = document.getElementById('myCanvas');
-
-    GAME.init(canvas);
+    canvas = new createjs.Stage(canvas);
 
     document.onkeydown = GAME.keyPressed;
     document.onkeyup = GAME.keyReleased;
+
+    //load!
+
+    console.log("loading");
+    Loader.doLoadScreen(
+        canvas,
+        ["rickglobal","ricka1s1","alarmclock","switch","poster", "windowrays"],
+        ["assets/scenes/a1s1/background.png"],
+        function(){
+          console.log("done loading");
+          GAME.init(canvas);
+        }
+    );
+
   }
 
-  console.log("loading resources");
-  Loader.loadAnimations(["rickglobal","ricka1s1","alarmclock","switch","poster", "windowrays"],function(){
-    console.log("resources.animations loaded");
-    Loader.loadStills(["assets/scenes/a1s1/background.png"],  function(){
-      init();
-    });
-  });
+  console.log("init-ing");
+  init();
 });

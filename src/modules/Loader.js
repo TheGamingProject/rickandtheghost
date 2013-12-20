@@ -9,6 +9,7 @@
 
 define(["animations"],function(animations){
   var LOAD_CHECK_TIME = 1000; //ms
+  var LOADING_UPDATE = 10; //for loading screen TODO rename
 
   var that = {};
 
@@ -16,25 +17,62 @@ define(["animations"],function(animations){
   var spriteSheets = {};
 
 
-  that.doLoadScreen = function(parentContainer, listOfStills, listOfAnimations, callback){
+  that.doLoadScreen = function(parentContainer, listOfStills, listOfAnimations, finishedLoadingCallback){
     //make a new container and add it to parent
+    var loadingContainer = new createjs.Container();
+    parentContainer.addChild(loadingContainer);
 
     //start loading all resources
+    var totalResources = listOfStills.length + listOfAnimations.length;
+    var finishedLoadingCount = 0;
+
+    var individualLoadingCallback = function(){
+      ////////  update load bar //////////
+        //TODO
 
 
-    //update load bar
+      ////////////////////////////////////
+      setTimeout(function(){ //temp for testing
+        finishedLoadingCount++; //is this a possilble error. idk how threads work in javascript, semphores
+        console.log("load: " + finishedLoadingCount);
 
-    //when everythings loaded, call the callback
+      }, 3000)
+    } ;
 
-    //remove the container from parent, and call the callback
+
+    that.loadAnimations(listOfStills, undefined, individualLoadingCallback);
+    that.loadStills(listOfAnimations, undefined, individualLoadingCallback);
+
+
+    //check when everythings loaded
+    var checkIfEverythingsLoaded = function(){
+      LOADING_UPDATE
+      if(finishedLoadingCount > totalResources){
+        throw "wtf, how did this happen!?";
+      } else if (finishedLoadingCount === totalResources){
+        //when everythings loaded...
+        //remove the container from parent, and call the callback
+        parentContainer.removeChild(loadingContainer);
+        finishedLoadingCallback();
+
+        return; //dont forget to break out of this timeout-spawning loop
+      }
+
+      setTimeout(checkIfEverythingsLoaded, LOADING_UPDATE);
+    };
+
+    setTimeout(function(){
+      checkIfEverythingsLoaded();
+    }, 10);
+
   };
 
   //TODO rewrite generically to include stills/animations
-  that.loadAnimations = function(listOfAnimationNames, callback){
+  that.loadAnimations = function(listOfAnimationNames, allAnimationsLoadedCallback, individualLoadedCallback){
     var total = 0;
     $.each(listOfAnimationNames,function(index, value){
       if(!animations[value]){
-        //does not exist in animations.js TODO to be replaced
+        //does not exist in animations.js TODO to be replaced  into scene filestructure
         console.log("resource does not exist")
         return;
       }
@@ -49,10 +87,12 @@ define(["animations"],function(animations){
 
       console.log("loading spritesheet: "+value);
       spriteSheets[value] = new createjs.SpriteSheet(animations[value]);
+      if (individualLoadedCallback)
+        spriteSheets[value].addEventListener("complete", individualLoadedCallback);
 
     });
 
-    if(typeof callback === "function")
+    if(typeof allAnimationsLoadedCallback === "function")
       setTimeout(function(){
 
         do{
@@ -64,13 +104,13 @@ define(["animations"],function(animations){
         }while(not);
 
         loaded = true;
-        callback();
+        allAnimationsLoadedCallback();
       },LOAD_CHECK_TIME);
 
 
   };
 
-  that.loadStills = function(listOfStills, callback){
+  that.loadStills = function(listOfStills, allStillsLoadedCallback, individualLoadedCallback){
     var total = 0;
     $.each(listOfStills,function(index, value){
       /*if(!animations[value]){
@@ -87,6 +127,7 @@ define(["animations"],function(animations){
       var imageObj = new Image();
       imageObj.onload = function(){
         imageObj.complete = true;
+        if (individualLoadedCallback) individualLoadedCallback();
       };
       imageObj.src = value;
 
@@ -94,7 +135,7 @@ define(["animations"],function(animations){
 
     });
 
-    if(typeof callback === "function")
+    if(typeof allStillsLoadedCallback === "function")
       setTimeout(function(){
 
         do{
@@ -106,7 +147,7 @@ define(["animations"],function(animations){
         }while(not);
 
         loaded = true;
-        callback();
+        allStillsLoadedCallback();
       },LOAD_CHECK_TIME);
   };
 
