@@ -356,7 +356,7 @@ define(["Loader", "scenes/scripts/script2"],function(Loader, script){
       timerDef: {
         type: "fade",
         desc: "end fade",
-        offset: 5000,
+        offset: 3000,
         opaque: {stop: 0},
         exit: true,
         displayLength: 1000

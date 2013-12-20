@@ -6,7 +6,8 @@
  * Created by niko on 12/16/13.
  */
 
-define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene"],function(story, SceneManager, Scene){
+define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene", "Fader"],
+    function(story, SceneManager, Scene, Fader){
   var RECIEVE_GOAL_BG = {
     path: "assets/start/startSuspicionLow.png"
   };
@@ -87,16 +88,44 @@ define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene"],function(story
       tempBG.x = 0;
       tempBG.y = 0;
 
+      var aFader = Fader();
+      aFader.setImmediateFade({color: {r: 0, g: 0, b: 0}});
+
       parentStage.addChild(tempBG);
+      parentStage.addChild(aFader)
 
-      tempBG.on("click",function(){
-        console.log("restart");
+      var fadeInCallback = function(){
+        tempBG.on("click",function(){
+          console.log("restart");
 
-        parentStage.removeChild(tempBG);
+          //FADE OUT
+          aFader.startFader({
+            "color": {r: 0, g: 0, b: 0},
+            "startingOpaque": 0,
+            "endingOpaque": 1,
+            "displayLength": 3000,
+            "endFadeCallback": function(){
+              parentStage.removeChild(tempBG);
+              parentStage.removeChild(aFader);
+
+              //start from the beginning
+              startSceneHandler(0);
+            }
+          });//end startFader-out
+        },null, true);//end bg-click event
+      };//end fade-in
 
 
-        startSceneHandler(0);
-      },null, true)
+      //FADE IN
+      aFader.startFader({
+        "color": {r: 0, g: 0, b: 0},
+        "startingOpaque": 1,
+        "endingOpaque": 0,
+        "displayLength": 3000,
+        "endFadeCallback": fadeInCallback
+      });
+
+
     }
 
     var progressStory = function(){
@@ -114,8 +143,7 @@ define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene"],function(story
       //set vars based on scenes and goals?
       console.log("start Story! "+ourStory.name);
 
-      startGoalScreenHandler()
-
+      startGoalScreenHandler();
     };
 
     initStory();
