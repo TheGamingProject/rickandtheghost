@@ -16,9 +16,17 @@ define(["animations"],function(animations){
   var spriteSheets = {};
 
 
-  that.doLoadScreen = function(listOfStills, listOfAnimations){
+  that.doLoadScreen = function(parentContainer, listOfStills, listOfAnimations, callback){
+    //make a new container and add it to parent
+
+    //start loading all resources
 
 
+    //update load bar
+
+    //when everythings loaded, call the callback
+
+    //remove the container from parent, and call the callback
   };
 
   //TODO rewrite generically to include stills/animations
