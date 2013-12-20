@@ -33,7 +33,7 @@ define(["Loader", "scenes/scripts/script2"],function(Loader, script){
     };
 
     scene.background = {
-      path: "assets/scenes/a1s2/background.png"
+      path: Loader.getStill("assets/scenes/a1s2/background.png")
     };
 
     //Scene Animations

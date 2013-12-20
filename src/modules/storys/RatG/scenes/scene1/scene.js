@@ -35,7 +35,7 @@ define(["Loader", "storys/RatG/scenes/scene1/script"],function(Loader, script){
 
     //new createjs.Sprite(spritesheet,"afk");
     scene.background = {
-      path: "assets/scenes/a1s1/background.png"
+      path: Loader.getStill("assets/scenes/a1s1/background.png")
     };
 
     //Scene Animations
