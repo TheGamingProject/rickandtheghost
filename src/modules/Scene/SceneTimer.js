@@ -3,14 +3,13 @@
  *
  * Created by niko on 12/16/13.
  *
- *
  * timerDef: [
- {
-   type: "rickdialog",
-   location: {x: 200, y:200},
-   offset: 10  //timer
- }
- ]
+               {
+                 type: "rickdialog",
+                 location: {x: 200, y:200},
+                 offset: 10  //timer
+               }
+             ]
  */
 
 
@@ -18,19 +17,16 @@
 define(["../Utils"],function (Utils){
   var DEFAULT_DIALOG_LENGTH = 2000;
 
-  var DEFAULT_FADE_RECT = {x: 0, y: 0, w: GAME.SIZE.x, h: 500};
-  var DEFAULT_FADE_COLOR = {r: 0, g: 0, b: 0};
 
   var SceneTimer = function(args){
     var that = {};
 
     //private instance variables
+    var aFader; // from someone else?
     var objectContainer;
     var dialogContainer;
     var exitCallback;
 
-    var prevOpaque;
-    var startFadeRect;
 
     //public methods
     that.setUIContainerForDialog = function(_container){
@@ -39,13 +35,12 @@ define(["../Utils"],function (Utils){
     that.setObjectContainer = function(_container){
       objectContainer = _container;
     }
-    that.setStartFade = function(color){
-      startFadeRect = new createjs.Shape();
-      var r = DEFAULT_FADE_RECT;
-      startFadeRect.graphics.beginFill(createjs.Graphics.getRGB(color.r,color.g,color.b,color.o)).drawRect(r.x, r.y, r.w, r.h);
-      startFadeRect.mouseEnabled = false;
-      prevOpaque = color.o;
-      dialogContainer.addChild(startFadeRect);
+    that.setFaderObject = function(_fadeObj){
+      aFader = _fadeObj;
+    }
+
+    that.setStartFadeColor = function(color){
+      aFader.setImmediateFade({color: color});
     };
 
     that.startTimer = function( timerDefs){
@@ -132,8 +127,8 @@ define(["../Utils"],function (Utils){
             //-opaque (in vs out)
             //-displayLength (ms)
             //-exit (ends scene if true)
-            var refreshTime = 5;
-            var color = timerDef.color || DEFAULT_FADE_COLOR;
+
+            var color = timerDef.color;
             var displayLength = timerDef.displayLength || 5000;
             var exit = timerDef.exit;
 
@@ -151,46 +146,14 @@ define(["../Utils"],function (Utils){
               startingOpaque = 1;
               endingOpaque = 0;
             }
-            var totalChange = startingOpaque - endingOpaque;
 
-            dialogContainer.removeChild(startFadeRect);
-
-            var fadeFunc = function(opaqueness,rect){
-              setTimeout(function(o, r){
-                if(Math.abs(startingOpaque - o ) > Math.abs(totalChange)){
-                  //end fade
-                  //dialogContainer.removeChild(r);
-                  startFadeRect = r;
-                  prevOpaque = o;
-                  if(exit){
-                    if(exitCallback)
-                      exitCallback();
-                  }
-
-                  return;
-                }
-
-                //change opacity
-                if(r){
-                  dialogContainer.removeChild(r);
-                  delete r;
-                }
-
-                var r = new createjs.Shape();
-                r.graphics.beginFill(createjs.Graphics.getRGB(color.r,color.g,color.b,o)).drawRect(DEFAULT_FADE_RECT.x, DEFAULT_FADE_RECT.y, DEFAULT_FADE_RECT.w, DEFAULT_FADE_RECT.h);
-                r.mouseEnabled = false;
-                var delta = (refreshTime/displayLength) * totalChange // * 5;totalChange * 5;
-
-                // Advanced debug:
-                // console.log("fade o: "+o + " c: "+delta+" silly: "+dialogContainer.children.length);
-
-                dialogContainer.addChild(r);
-
-                fadeFunc(o - delta,r);
-              },refreshTime,opaqueness,rect);
-            };
-
-            fadeFunc(startingOpaque);
+            aFader.startFader({
+              "color": color,
+              "startingOpaque": startingOpaque,
+              "endingOpaque": endingOpaque,
+              "displayLength": displayLength,
+              "endFadeCallback": (exit ? exitCallback : undefined)
+            });
 
             break;
         }

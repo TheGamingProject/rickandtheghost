@@ -11,6 +11,10 @@ define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene"],function(story
     path: "assets/start/startSuspicionLow.png"
   };
 
+  var END_GOAL_BG = {
+    path: "assets/end/endneutral.png"
+  };
+
   var CONTINUE_BUTTON = {
     x: 600, y:700,
     path: "assets/ui/arrow0.png"
@@ -27,7 +31,10 @@ define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene"],function(story
     var currentScene;
     var currentNum = 0;
 
+    if (!args.parentStage) throw "wtffffffffffff. no parent stage!!! in StoryTimeline...";
+
     var parentStage = args.parentStage;
+
 
 
     // public functions
@@ -75,6 +82,21 @@ define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene"],function(story
 
     var endGoalScreenHandler = function(){
       console.log("endGoalScreen");
+
+      var tempBG = new createjs.Bitmap(END_GOAL_BG.path);
+      tempBG.x = 0;
+      tempBG.y = 0;
+
+      parentStage.addChild(tempBG);
+
+      tempBG.on("click",function(){
+        console.log("restart");
+
+        parentStage.removeChild(tempBG);
+
+
+        startSceneHandler(0);
+      },null, true)
     }
 
     var progressStory = function(){
@@ -95,8 +117,6 @@ define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene"],function(story
       startGoalScreenHandler()
 
     };
-
-
 
     initStory();
 

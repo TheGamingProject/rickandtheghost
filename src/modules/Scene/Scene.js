@@ -3,8 +3,8 @@
  *
  * Scene.js
  */
-define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer"],
-    function (SceneObject, SceneTimeline, Utils, SceneTimer){
+define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", "Fader"],
+    function (SceneObject, SceneTimeline, Utils, SceneTimer, Fader){
 
   var STATES = {
     preinit: -1,
@@ -117,7 +117,12 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer"],
       //////// setup UI ////////////
       setupUI();
 
-      SceneTimer.setStartFade(sceneDef.startFade || {r: 0, g: 0, b: 0, o: 0});
+      /////// fader    ////////////
+      var aFader = Fader();
+      SceneTimer.setFaderObject(aFader);
+      SceneTimer.setStartFadeColor(sceneDef.startFade || {r: 0, g: 0, b: 0, o: 0});
+      sceneContainer.addChild(aFader);
+
 
       //ending-tricky
       sceneContainer.addEventListener("click", function(){
@@ -172,14 +177,11 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer"],
       var objects = sceneDef.objects;
       if(!objects) throw "No objects defined in scene: "+sceneDef.name;
 
-      for(var o in objects){       //TODO to $.each
-        var object = objects[o];
-
+      $.each(objects, function(index, object){
         var objectSprite = SceneObject(sceneContainer, object, optionsUiCallback);//object and objectSprite
         sceneObjects[object.tag] = objectSprite;
         objectLayerContainer.addChild(objectSprite);
-
-      }
+      });
 
       objectLayerContainer.addChild(rickSprite);
 
