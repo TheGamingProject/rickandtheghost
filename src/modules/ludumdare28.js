@@ -52,7 +52,7 @@ define(["Scene/Scene", "Scene/SceneManager", "animations", "Player", "StoryTimel
 
     GAME.stage.addChild(preContainer);
     //GAME.stage.update();
-    createjs.Ticker.addEventListener("tick", GAME.stage);
+
 
     setInterval(GAME.update, 1000 / GAME.fps);
 
@@ -132,6 +132,7 @@ define(["Scene/Scene", "Scene/SceneManager", "animations", "Player", "StoryTimel
   function init() {
     canvas = document.getElementById('myCanvas');
     canvas = new createjs.Stage(canvas);
+    createjs.Ticker.addEventListener("tick", canvas);
 
     document.onkeydown = GAME.keyPressed;
     document.onkeyup = GAME.keyReleased;

@@ -28,15 +28,30 @@ define(["animations"],function(animations){
 
     var individualLoadingCallback = function(){
       ////////  update load bar //////////
-        //TODO
 
+
+      //loop thru every pixel, or group of pixels??
+   //   for(var x=0 ; x< GAME.SIZE.x; x += 5){
+   //     for(var y=0; y < GAME.SIZE.y; y += 5){
+      //  console.log((y * GAME.SIZE.x + x) % totalResources + " "+ finishedLoadingCount);
+      //    if((y * GAME.SIZE.y + x) % totalResources === finishedLoadingCount){
+            var gap = GAME.SIZE.y / totalResources;
+            var rectangle = new createjs.Shape();
+            rectangle.graphics.beginFill("white").drawRect(0, finishedLoadingCount * gap, GAME.SIZE.x, gap);
+            loadingContainer.addChild(rectangle);
+      //      console.log("win: "+x+", "+y + " cause: "+(y * GAME.SIZE.y + x) );
+    //      }
+    //    }
+    //  }
+
+      //and the ones that ..  (totalPixels % totalResources === finshedLoadingCount)
 
       ////////////////////////////////////
       setTimeout(function(){ //temp for testing
         finishedLoadingCount++; //is this a possilble error. idk how threads work in javascript, semphores
-        console.log("load: " + finishedLoadingCount);
+        //console.log("load: " + finishedLoadingCount);
 
-      }, 3000)
+      }, 10)
     } ;
 
 
@@ -86,10 +101,15 @@ define(["animations"],function(animations){
       } */
 
       console.log("loading spritesheet: "+value);
-      spriteSheets[value] = new createjs.SpriteSheet(animations[value]);
-      if (individualLoadedCallback)
-        spriteSheets[value].addEventListener("complete", individualLoadedCallback);
 
+
+    //  setTimeout(function(){    //temp for testing
+        spriteSheets[value] = new createjs.SpriteSheet(animations[value]);
+        if (individualLoadedCallback)      {
+      //    console.log("added");
+          spriteSheets[value].addEventListener("complete", individualLoadedCallback);
+        }
+    //  },Math.random() * 10000 );
     });
 
     if(typeof allAnimationsLoadedCallback === "function")
