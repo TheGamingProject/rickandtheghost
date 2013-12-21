@@ -7,7 +7,7 @@ GAME.SIZE = { x: 1280, y: 720 };
 var DEBUG = {showClickArea: true};
 
 
-define(["Scene/Scene", "Scene/SceneManager", "animations", "Player", "StoryTimeline", "Loader"],
+define(["Scene/Scene", "Scene/SceneManager", "storys/RatG/animations", "Player", "StoryTimeline", "Loader"],
     function(Scene, SceneManager, animations, Player, StoryTimeline, Loader){
 
   var STATES = {pregame: 0, ingame: 1, loading: 2};

@@ -7,7 +7,7 @@
  *
  */
 
-define(["animations"],function(animations){
+define(["storys/RatG/animations"],function(animations){
   var LOAD_CHECK_TIME = 1000; //ms
   var LOADING_UPDATE = 10; //for loading screen TODO rename
 
