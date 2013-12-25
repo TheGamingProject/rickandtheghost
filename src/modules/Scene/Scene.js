@@ -31,11 +31,11 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
   };
 
   var UI_STATS_COORD = [{
-    x: 10, y: 500, tag: "suspense"
+    x: 10, y: 520, tag: "suspense"
   },{
-    x: 210, y: 500, tag: "goodday"
+    x: 210, y: 520, tag: "goodday"
   },{
-    x: 410, y: 500, tag: "scared"
+    x: 410, y: 520, tag: "scared"
   }];
 
   var TIMELINE_UI_TEXT = {
@@ -91,12 +91,6 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       debugText.textBaseline = "alphabetic";
       sceneContainer.addChild(debugText);
 
-      //beginning-tricky (doing tricky thing to see if nothign else is clicked)
-  /*    sceneContainer.addEventListener("click", function(){
-        if (!tricky2)
-          sceneContainer.hit = false;
-      });
-*/
       //parse sceneDef
       parseSceneDef();
 
@@ -110,22 +104,12 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       sceneContainer.addChild(aFader);
 
 
-      //ending-tricky
- /*     sceneContainer.addEventListener("click", function(){
-        if(!sceneContainer.hit){
-          didntClickaObject();
-        }
-        tricky2 = false;
-      });
-*/
       parentStage.addChild(sceneContainer);
       console.log("Scene init-ed: "+sceneDef.name);
 
       SceneTimer.setExitSceneCallback(that.endScene );
 
     }
-
-//    var tricky2 = false;
 
     var setState = function(_state){
       switch(_state){
@@ -237,12 +221,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       backgroundSprite.addEventListener("click", function(){
         sceneOptionsUIContainer.clearSelectedObject();
       });
-/*
-      objectLayerContainer.addEventListener("click",function(evt){
-        //clicking anywhere else should unselect SceneObject
-        resetOptionsUI();
-      });
-*/
+
       sceneContainer.addChild(uiLayerContainer);
 
       //more debug text
