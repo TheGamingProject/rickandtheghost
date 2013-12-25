@@ -9,7 +9,7 @@
 
 define(["storys/RatG/animations"],function(animations){
   var LOAD_CHECK_TIME = 1000; //ms
-  var LOADING_UPDATE = 10; //for loading screen TODO rename
+  var LOADING_UPDATE = 10; //for loading screen TODO rename the variable
 
   var that = {};
 
@@ -91,14 +91,17 @@ define(["storys/RatG/animations"],function(animations){
         console.log("resource does not exist")
         return;
       }
+
+      if(spriteSheets[value] && spriteSheets[value].complete){
+        console.log("already loaded: "+value);
+        individualLoadedCallback();
+        return;//already loaded
+      }
+
       if(spriteSheets[value]){
-         //currently loading
+        //currently loading
         return;
       }
-      /*if(spriteSheets[value] && !spriteSheets[value].complete){
-        console.log("attempting to reload: "+value+" NO!");
-        return;//already loaded
-      } */
 
       console.log("loading spritesheet: "+value);
 
@@ -137,11 +140,13 @@ define(["storys/RatG/animations"],function(animations){
         //does not exist in stills object
         return;
       } */
+
+      if(spriteSheets[value] && !spriteSheets[value].complete)
+       return individualLoadedCallback();//already loaded   */
+
       if(spriteSheets[value])
       //currently loading
         return;
-      /*if(spriteSheets[value] && !spriteSheets[value].complete)
-       return;//already loaded   */
 
       console.log("loading still: "+value);
       var imageObj = new Image();

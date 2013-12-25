@@ -13,7 +13,7 @@ define(["../Utils"],function (Utils){
 
   var DEFAULT_CHOICE = 2;// 3rd
 
-  var SceneObject = function(parentStage, args, optionsUiCallback){
+  var SceneObject = function(parentStage, args, objectClickedCallback){
     var that;
     args = args || {};//args is definition via scene.js
 
@@ -61,9 +61,7 @@ define(["../Utils"],function (Utils){
       // check if we are within the click
       if (evt.stageX >  clickBounds.x && evt.stageX <  clickBounds.x + clickBounds.w &&
           evt.stageY >  clickBounds.y && evt.stageY <  clickBounds.y + clickBounds.h){
-        optionsUiCallback(that);// to edit ui. to populate ui
-        parentStage.hit = true;
-
+        objectClickedCallback(that);// to edit ui. to populate ui
 
       }else{
 

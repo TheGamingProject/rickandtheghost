@@ -142,8 +142,12 @@ define(["Scene/Scene", "Scene/SceneManager", "storys/RatG/animations", "Player",
     console.log("loading");
     Loader.doLoadScreen(
         canvas,
-        ["rickglobal","ricka1s1","alarmclock","switch","poster", "windowrays"],
-        ["assets/scenes/a1s1/background.png"],
+        ["rickglobal",
+          "ricka1s1","alarmclock","switch","poster", "windowrays",
+          "calendar","fridge", "oatmeal",
+          "cabinet", "motiv", "radio"
+        ],
+        ["assets/scenes/a1s1/background.png","assets/scenes/a1s2/background.png","assets/scenes/a2s1/background.png"],
         function(){
           console.log("done loading");
           GAME.init(canvas);

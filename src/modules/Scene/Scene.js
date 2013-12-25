@@ -3,8 +3,8 @@
  *
  * Scene.js
  */
-define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", "Fader"],
-    function (SceneObject, SceneTimeline, Utils, SceneTimer, Fader){
+define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", "Fader", "Scene/SceneOptionsUI"],
+    function (SceneObject, SceneTimeline, Utils, SceneTimer, Fader, SceneOptionsUI){
 
   var STATES = {
     preinit: -1,
@@ -29,18 +29,6 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
     w: 0,
     h: 0
   };
-
-  var UI_OPTION_TITLE = { // alarm clock
-    x: 600, y: 525
-  }
-
-  var UI_OPTION_BUTTONS = [{
-    x: 775, y: 545, w: 400, h: 50
-  },{
-    x: 775, y: 595, w: 400, h: 50
-  },{
-    x: 775, y: 645, w: 400, h: 50
-  }];
 
   var UI_STATS_COORD = [{
     x: 10, y: 500, tag: "suspense"
@@ -80,11 +68,9 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       uiLayerContainer;
     var continueButton;
 
+    var sceneOptionsUIContainer;
     var rickSprite;
 
-    var selectedObject;
-    var objectActionTitleText;
-    var uiOptionsText = [];
     var statsMeterText = [];
     var sceneTimelineText;
 
@@ -106,11 +92,11 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       sceneContainer.addChild(debugText);
 
       //beginning-tricky (doing tricky thing to see if nothign else is clicked)
-      sceneContainer.addEventListener("click", function(){
+  /*    sceneContainer.addEventListener("click", function(){
         if (!tricky2)
           sceneContainer.hit = false;
       });
-
+*/
       //parse sceneDef
       parseSceneDef();
 
@@ -125,13 +111,13 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
 
 
       //ending-tricky
-      sceneContainer.addEventListener("click", function(){
+ /*     sceneContainer.addEventListener("click", function(){
         if(!sceneContainer.hit){
           didntClickaObject();
         }
         tricky2 = false;
       });
-
+*/
       parentStage.addChild(sceneContainer);
       console.log("Scene init-ed: "+sceneDef.name);
 
@@ -139,7 +125,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
 
     }
 
-    var tricky2 = false;
+//    var tricky2 = false;
 
     var setState = function(_state){
       switch(_state){
@@ -178,7 +164,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       if(!objects) throw "No objects defined in scene: "+sceneDef.name;
 
       $.each(objects, function(index, object){
-        var objectSprite = SceneObject(sceneContainer, object, optionsUiCallback);//object and objectSprite
+        var objectSprite = SceneObject(sceneContainer, object, objectClickedCallback);//object and objectSprite
         sceneObjects[object.tag] = objectSprite;
         objectLayerContainer.addChild(objectSprite);
       });
@@ -199,8 +185,6 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       uiLayerContainer = new createjs.Container();
       uiLayerContainer.setBounds(UI_BOTTOM.x,UI_BOTTOM.y,UI_BOTTOM.w,UI_BOTTOM.h);
 
-     // var purpleRect = new createjs.Shape();
-     // purpleRect.graphics.beginFill("purple").drawRect(UI_BOTTOM.x,UI_BOTTOM.y,UI_BOTTOM.w,UI_BOTTOM.h);
       var bottomRect = new createjs.Bitmap(UI_BOTTOM.path);
       bottomRect.x = UI_BOTTOM.x;
       bottomRect.y = UI_BOTTOM.y;
@@ -230,12 +214,6 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
         uiLayerContainer.addChild(newLabel);
       });
 
-      //set timer container
-      SceneTimer.setUIContainerForDialog(uiLayerContainer);
-      SceneTimer.setObjectContainer(objectLayerContainer);
-
-
-
       GAME.player.addChangeStatCallback(function (){
         // to update labels
         $.each(statsMeterText, function(index, value){
@@ -243,53 +221,22 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
         });
       });
 
-      //action list
-
-      //debug text
-      objectActionTitleText = new createjs.Text("UI_OPTION_TITLE", "20px Arial", "#ff7700");
-      objectActionTitleText.x = UI_OPTION_TITLE.x;
-      objectActionTitleText.y = UI_OPTION_TITLE.y;
-      objectActionTitleText.textBaseline = "alphabetic";
-      uiLayerContainer.addChild(objectActionTitleText);
-
-      var helper = function (i){
-        return function(e){
-          //mid tricky
-          sceneContainer.hit = true;
-          tricky2 = true;
-          //console.log("hit");
-
-          if(selectedObject)
-            selectObjectAction(i);
-        };
-      };
-
-      for(var i=0; i<3; i++){
-        var b = UI_OPTION_BUTTONS[i];
-
-        var buttonRect = new createjs.Shape();
-        buttonRect.graphics.beginFill("black").drawRect(b.x,b.y,b.w,b.h);
+      //set SceneTimer container (for fades and dialog)
+      SceneTimer.setObjectContainer(objectLayerContainer);
+      SceneTimer.setUIContainerForDialog(uiLayerContainer);
 
 
+      //adding SceneOptionsUI
+      sceneOptionsUIContainer = SceneOptionsUI({});
+      uiLayerContainer.addChild(sceneOptionsUIContainer);
 
-        buttonRect.addEventListener("click", helper(i));
-
-        uiOptionsText[i] = new createjs.Text("option "+i, "24px RBNo2", "#ffffff");
-        uiOptionsText[i].x = b.x + 5;
-        uiOptionsText[i].y = b.y + 25;
-        uiOptionsText[i].textBaseline = "alphabetic";
-
-        uiLayerContainer.addChild(buttonRect);
-        uiLayerContainer.addChild(uiOptionsText[i]);
-      }
-
-      //more debug text
-      sceneTimelineText = new createjs.Text("timeline debug text", "20 Arial", "#0000FF");
-      sceneTimelineText.x = TIMELINE_UI_TEXT.x;
-      sceneTimelineText.y = TIMELINE_UI_TEXT.y;
-      sceneTimelineText.textBaseline = "alphabetic";
-
-      uiLayerContainer.addChild(sceneTimelineText);
+      //clicking anywhere else should unselect the current selectedObject via SceneOptionsUI
+      bottomRect.addEventListener("click", function(){
+        sceneOptionsUIContainer.clearSelectedObject();
+      });
+      backgroundSprite.addEventListener("click", function(){
+        sceneOptionsUIContainer.clearSelectedObject();
+      });
 /*
       objectLayerContainer.addEventListener("click",function(evt){
         //clicking anywhere else should unselect SceneObject
@@ -297,17 +244,18 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       });
 */
       sceneContainer.addChild(uiLayerContainer);
+
+      //more debug text
+      sceneTimelineText = new createjs.Text("timeline debug text", "20 Arial", "#0000FF");
+      sceneTimelineText.x = TIMELINE_UI_TEXT.x;
+      sceneTimelineText.y = TIMELINE_UI_TEXT.y;
+      sceneTimelineText.textBaseline = "alphabetic";
+      sceneContainer.addChild(sceneTimelineText);
     }
 
-    var resetOptionsUI = function(){
-      console.log("ui reset");
-
-      objectActionTitleText.text = "UI_OPTION_TITLE";
-      selectedObject = undefined;
-
-      for(var t in uiOptionsText){     //TODO make $.each
-        uiOptionsText[t].text = "option _";
-      }
+    var objectClickedCallback = function(sceneObject){
+      if(state === STATES.haunting)
+        sceneOptionsUIContainer.setSelectedObject(sceneObject);
     }
 
     var sceneTimelineUiCallback = function(stateObj){
@@ -315,62 +263,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
         sceneTimelineText.text = ""+JSON.stringify(stateObj);
     }
 
-    //displaying option text here
-    var optionsUiCallback = function( sceneObject){
-      /*if(!sceneObject)*/ resetOptionsUI();
 
-      if(state != STATES.haunting)
-        return;
-
-      var objDef = sceneObject.getObjDef()
-      objectActionTitleText.text = objDef.name;
-      selectedObject = sceneObject;
-
-      $.each(objDef.actionList, function(index, action){
-        console.log(index+ ": "+action.description);
-        uiOptionsText[index].text =  " "+action.description;
-      });
-
-      console.log("object clicked");
-    }
-
-    var didntClickaObject = function(){
-      resetOptionsUI();
-
-    };
-
-    var selectObjectAction = function(actionNum){
-      if (!selectedObject)
-        throw "invalid Object String";
-      var objDef = selectedObject.getObjDef();
-
-      console.log("Selected Object:" + objDef.name +": action-"+actionNum);
-
-      if(actionNum != 2)
-        selectedObject.setChoice(actionNum);
-
-      //selected action
-      var action = objDef.actionList[actionNum];
-
-      //apply stats
-      GAME.player.changeStat( action.meterStatAffected);
-
-      //start the animation
-      if(action.postAnimation){
-        console.log("started postAnimation: "+action.postAnimation.starting);
-      }
-      //start possible timers
-      SceneTimer.startTimer(action.postTimerDef);
-
-      if (action.postAnimation)
-        selectedObject.gotoAndPlay(action.postAnimation.starting);
-
-      //debugger;
-
-      selectedObject = undefined;
-      resetOptionsUI();
-
-    };
     var exitSceneCallback;
 
     that.startScene = function(_exitSceneCallback){
@@ -389,7 +282,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
 
       //hide button
       continueButton.visible = false;
-      resetOptionsUI();
+      sceneOptionsUIContainer.clearSelectedObject();
 
       //start animation chain
       timeline.start();
