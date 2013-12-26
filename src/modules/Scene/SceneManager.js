@@ -3,7 +3,7 @@
  */
 
 
-define([ "storys/RatG/scenes/scene1/scene", "scenes/scene2", "scenes/scene4"],function(scene1, scene2, scene4){
+define([ "storys/RatG/scenes/scene1/scene", "storys/RatG/scenes/scene2/scene", "storys/RatG/scenes/scene4/scene"],function(scene1, scene2, scene4){
   var that = {};
 
   that.getScene = function(sceneName){

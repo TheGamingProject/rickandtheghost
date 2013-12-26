@@ -18,7 +18,7 @@
  */
 
 
-define(["Loader", "scenes/scripts/script4"],function(Loader, script){
+define(["Loader", "storys/RatG/scenes/scene4/script"],function(Loader, script){
   var scene4 = function (){
     var scene = {};
 
