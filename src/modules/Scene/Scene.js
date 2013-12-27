@@ -40,7 +40,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
 
   var TIMELINE_UI_TEXT = {
     x: 800, y:20
-  }
+  };
 
   //page 52 the goood parts
   var Scene = function(args){
@@ -109,7 +109,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
 
       SceneTimer.setExitSceneCallback(that.endScene );
 
-    }
+    };
 
     var setState = function(_state){
       switch(_state){
@@ -125,7 +125,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       state = _state;
       console.log("Scene State change: "+debugText.text);
 
-    }
+    };
 
     //parse and create the scene
     var parseSceneDef = function(){
@@ -136,7 +136,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
 
       objectLayerContainer = new createjs.Container();
       objectLayerContainer.setBounds(0,0,GAME.SIZE.x,GAME.SIZE.y);
-      sceneContainer.addChild(objectLayerContainer)
+      sceneContainer.addChild(objectLayerContainer);
 
       //make rick
       rickSprite = Utils.makeSprite(sceneDef.startingIdle);
@@ -178,9 +178,9 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       continueButton = new createjs.Bitmap(CONTINUE_BUTTON.path);
       continueButton.x = CONTINUE_BUTTON.x;
       continueButton.y = CONTINUE_BUTTON.y;
-      continueButton.addEventListener("click",function(evt){
+      continueButton.addEventListener("click",function(){
         console.log("continue button clicked");
-        finishHaunting(evt);
+        finishHaunting();
       });
       uiLayerContainer.addChild(continueButton);
 
@@ -230,17 +230,17 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       sceneTimelineText.y = TIMELINE_UI_TEXT.y;
       sceneTimelineText.textBaseline = "alphabetic";
       sceneContainer.addChild(sceneTimelineText);
-    }
+    };
 
     var objectClickedCallback = function(sceneObject){
       if(state === STATES.haunting)
         sceneOptionsUIContainer.setSelectedObject(sceneObject);
-    }
+    };
 
     var sceneTimelineUiCallback = function(stateObj){
       if (sceneTimelineText)
         sceneTimelineText.text = ""+JSON.stringify(stateObj);
-    }
+    };
 
 
     var exitSceneCallback;
@@ -278,7 +278,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
 
     that.getState = function(){
       return state;
-    }
+    };
 
     that.init();
 

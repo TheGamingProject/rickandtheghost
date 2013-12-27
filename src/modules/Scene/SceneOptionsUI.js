@@ -10,7 +10,7 @@ define(["Scene/SceneTimer"], function (SceneTimer) {
 
   var UI_OPTION_TITLE = { // alarm clock
     x: 600, y: 525
-  }
+  };
 
   var UI_OPTION_BUTTONS = [{
     x: 775, y: 545, w: 400, h: 50
@@ -81,7 +81,7 @@ define(["Scene/SceneTimer"], function (SceneTimer) {
 
     //change choice & play animation
     var doButtonPressed = function(choice){
-      return function(e){
+      return function(){
         if(selectedObject)
           selectObjectAction(choice);
       };
