@@ -1,0 +1,24 @@
+{
+  "name": "ludumdare28",
+  "preferGlobal": true,
+  "version": "1.01.313",
+  "author": "tgp: something@thegamingproject.org",
+  "description": "tgp's ludumdare28",
+  "contributors": [
+    {
+      "name": "Nikolas Poklitar",
+      "email": "nikolas.poklitar@gmail.com"
+    }
+  ],
+  "scripts": {
+    "start": "chdir src && python -m SimpleHTTPServer 8000"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/nik0kin/ludumdare28.git"
+  },
+  "keywords": [
+    "ludumdare",
+    "game"
+  ]
+}
