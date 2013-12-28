@@ -12,6 +12,7 @@ Changelog:
 Install Grunt for fun
  - Install Node.js
  - sudo npm install -g grunt-cli
+ - npm install
 
 
 Use any webserver to serve the game

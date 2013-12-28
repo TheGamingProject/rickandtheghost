@@ -20,5 +20,12 @@
   "keywords": [
     "ludumdare",
     "game"
-  ]
+  ],
+  "devDependencies" : {
+    "grunt" : "*",
+    "grunt-contrib-uglify" : "*",
+    "grunt-contrib-jshint" : "*",
+    "grunt-contrib-watch" : "*",
+    "grunt-contrib-concat" : "*"
+  }
 }

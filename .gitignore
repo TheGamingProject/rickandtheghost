@@ -1,2 +1,4 @@
 src/ludumdare28.iml
 .idea
+dist
+node_modules
