@@ -82,7 +82,12 @@ define([],function (){
     return sprite;
   }
 
-
+  //http://stackoverflow.com/questions/1403888/get-escaped-url-parameter
+  that.getURLParameter = function getURLParameter(name) {
+    return decodeURI(
+      (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
+    );
+  }
 
   return that;
 });
