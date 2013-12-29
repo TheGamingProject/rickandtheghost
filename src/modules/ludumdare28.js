@@ -41,14 +41,6 @@ define(["Scene/Scene", "Scene/SceneManager", "storys/RatG/animations", "Player",
     rectangle.graphics.beginFill("black").drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
     preContainer.addChild(rectangle);
 
-  /*
-    var spritesheet = animations.get("menuBG");
-    tempPic = new createjs.Sprite(spritesheet,"afk");
-    tempPic.x = 200;
-    tempPic.y = 100;
-
-    preContainer.addChild(tempPic);
-  */
 
     GAME.stage.addChild(preContainer);
     //GAME.stage.update();
@@ -84,10 +76,8 @@ define(["Scene/Scene", "Scene/SceneManager", "storys/RatG/animations", "Player",
 
   GAME.startStory = function(){
     GAME.story = StoryTimeline({parentStage: GAME.stage});
-    //GAME.currentScene = new Scene( {sceneDef: scene, parentStage: GAME.stage} );
-    //GAME.currentScene.startScene();
-
   };
+
   GAME.resetGame = function(){
     console.log("reseting game");
     init();

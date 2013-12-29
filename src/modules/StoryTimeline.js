@@ -42,9 +42,6 @@ define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene", "Fader"],
 
 
     //private helper functions
-    /*var timelineRunner = function(){
-      //blash
-    };*/
 
     var startSceneHandler = function(key){
       console.log("startPlayScreen: "+ourStory.scenes[key]);
@@ -68,6 +65,11 @@ define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene", "Fader"],
       tempBG.y = 0;
 
       parentStage.addChild(tempBG);
+
+
+      var hitArea = new createjs.Shape();
+      hitArea.graphics.beginFill("#000").drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
+      tempBG.hitArea = hitArea;
 
       tempBG.on("click",function(){
         console.log("next plz");
