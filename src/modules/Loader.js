@@ -26,8 +26,10 @@ define(["storys/RatG/animations"],function(animations){
     var totalResources = listOfStills.length + listOfAnimations.length;
     var finishedLoadingCount = 0;
 
-    var individualLoadingCallback = function(){
+    var individualLoadingCallback = function(evt, resource){
       ////////  update load bar //////////
+    if(!resource) debugger;
+
 
 
       //loop thru every pixel, or group of pixels??
@@ -39,6 +41,8 @@ define(["storys/RatG/animations"],function(animations){
             var rectangle = new createjs.Shape();
             rectangle.graphics.beginFill("white").drawRect(0, finishedLoadingCount * gap, GAME.SIZE.x, gap);
             loadingContainer.addChild(rectangle);
+            console.log("finished loaded: "+resource +" ["+finishedLoadingCount+"]");
+            finishedLoadingCount++
       //      console.log("win: "+x+", "+y + " cause: "+(y * GAME.SIZE.y + x) );
     //      }
     //    }
@@ -47,11 +51,6 @@ define(["storys/RatG/animations"],function(animations){
       //and the ones that ..  (totalPixels % totalResources === finshedLoadingCount)
 
       ////////////////////////////////////
-      setTimeout(function(){ //temp for testing
-        finishedLoadingCount++; //is this a possilble error. idk how threads work in javascript, semphores
-        //console.log("load: " + finishedLoadingCount);
-
-      }, 10)
     } ;
 
 
@@ -106,13 +105,18 @@ define(["storys/RatG/animations"],function(animations){
       console.log("loading spritesheet: "+value);
 
 
-    //  setTimeout(function(){    //temp for testing
-        spriteSheets[value] = new createjs.SpriteSheet(animations[value]);
-        if (individualLoadedCallback)      {
-      //    console.log("added");
-          spriteSheets[value].addEventListener("complete", individualLoadedCallback);
-        }
-    //  },Math.random() * 10000 );
+      spriteSheets[value] = new createjs.SpriteSheet(animations[value]);
+      if (individualLoadedCallback)      {
+        if(spriteSheets[value].complete)
+          individualLoadedCallback(undefined, value);
+        else
+          spriteSheets[value].on("complete", individualLoadedCallback, null, false, value);
+      }
+    //  if(value === "motiv")
+    //    debugger;
+
+
+
     });
 
     if(typeof allAnimationsLoadedCallback === "function")
@@ -142,7 +146,7 @@ define(["storys/RatG/animations"],function(animations){
       } */
 
       if(spriteSheets[value] && !spriteSheets[value].complete)
-       return individualLoadedCallback();//already loaded   */
+       return individualLoadedCallback(undefined, value);//already loaded   */
 
       if(spriteSheets[value])
       //currently loading
@@ -152,7 +156,7 @@ define(["storys/RatG/animations"],function(animations){
       var imageObj = new Image();
       imageObj.onload = function(){
         imageObj.complete = true;
-        if (individualLoadedCallback) individualLoadedCallback();
+        if (individualLoadedCallback) individualLoadedCallback(undefined, value);
       };
       imageObj.src = value;
 
