@@ -73,7 +73,7 @@ define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene", "Fader", "Soun
 
       tempBG.on("click",function(){
         console.log("next plz");
-        SoundManager.playSoundEffect("hauntOptionsClick");
+        SoundManager.playSoundEffect("startGameClick");
 
         parentStage.removeChild(tempBG);
 

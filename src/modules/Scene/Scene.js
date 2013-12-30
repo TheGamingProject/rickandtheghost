@@ -192,7 +192,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       continueButton.y = CONTINUE_BUTTON.y;
       continueButton.addEventListener("click",function(){
         console.log("continue button clicked");
-        SoundManager.playSoundEffect("hauntOptionsClick");
+        SoundManager.playSoundEffect("continueButtonClick");
         finishHaunting();
       });
       uiLayerContainer.addChild(continueButton);
@@ -229,8 +229,6 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       SceneTimer.setObjectContainer(objectLayerContainer);
       SceneTimer.setUIContainerForDialog(uiLayerContainer);
 
-
-
       //adding SceneOptionsUI
       sceneOptionsUIContainer = SceneOptionsUI({});
       uiLayerContainer.addChild(sceneOptionsUIContainer);
@@ -256,8 +254,10 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
     };
 
     var objectClickedCallback = function(sceneObject){
-      if(state === STATES.haunting)
+      if(state === STATES.haunting){
+        SoundManager.playSoundEffect("objectSelectClick");
         sceneOptionsUIContainer.setSelectedObject(sceneObject);
+      }
     };
 
     var sceneTimelineUiCallback = function(stateObj){

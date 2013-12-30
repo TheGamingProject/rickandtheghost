@@ -146,8 +146,6 @@ define(["Scene/Scene", "Utils", "Loader", "Scene/SceneTimer"],function (Scene, U
             }, timeblock.length * WALKSPEED);*/
           };
 
-
-
           break;
         case "oa":
           // -tag - identifies it to the ObjectAction
@@ -189,11 +187,8 @@ define(["Scene/Scene", "Utils", "Loader", "Scene/SceneTimer"],function (Scene, U
             //debugger;
             SceneTimer.startTimer(objAction.oaDef.timerDef);
 
-
-
             //end 'part1()'
           };
-
 
           break;
 
