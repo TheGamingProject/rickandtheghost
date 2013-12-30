@@ -15,9 +15,8 @@ define([], function(){
     instance.addEventListener("complete", createjs.proxy(function(){
       console.log("soundEffectEnded: "+soundClipName);
       instance = null;
-      createjs.Sound.play(soundClipName);
     }, this));
-    instance.volume = 0.5;
+    instance.volume = 0.8;
   };
 
   //would be used for scenes and

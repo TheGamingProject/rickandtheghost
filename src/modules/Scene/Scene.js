@@ -3,8 +3,8 @@
  *
  * Scene.js
  */
-define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", "Fader", "Scene/SceneOptionsUI"],
-    function (SceneObject, SceneTimeline, Utils, SceneTimer, Fader, SceneOptionsUI){
+define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", "Fader", "Scene/SceneOptionsUI", "SoundManager"],
+    function (SceneObject, SceneTimeline, Utils, SceneTimer, Fader, SceneOptionsUI, SoundManager){
 
   var STATES = {
     preinit: -1,
@@ -192,6 +192,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       continueButton.y = CONTINUE_BUTTON.y;
       continueButton.addEventListener("click",function(){
         console.log("continue button clicked");
+        SoundManager.playSoundEffect("hauntOptionsClick");
         finishHaunting();
       });
       uiLayerContainer.addChild(continueButton);
