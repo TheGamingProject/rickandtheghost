@@ -19,7 +19,10 @@ define(["storys/RatG/animations"],function(animations){
   var queue = new createjs.LoadQueue();
   queue.installPlugin(createjs.Sound);
 
-  that.doLoadScreen = function(parentContainer, listOfStills, finishedLoadingCallback){
+  createjs.Sound.registerPlugins([createjs.HTMLAudioPlugin]);
+  createjs.Sound.alternateExtensions = ["mp3"];
+
+  that.doLoadScreen = function(parentContainer, listOfStills, listOfSounds, finishedLoadingCallback){
     //make a new container and add it to parent
     var loadingContainer = new createjs.Container();
     parentContainer.addChild(loadingContainer);
@@ -73,18 +76,20 @@ define(["storys/RatG/animations"],function(animations){
       setTimeout(checkIfEverythingsLoaded, LOADING_UPDATE);
     };
 
-    totalResources = loadList.length;
-    that.startLoad(loadList, undefined, checkIfEverythingsLoaded, individualLoadingCallback);
+    totalResources = loadList.length + listOfSounds.length;
+    that.startLoad(loadList, listOfSounds, checkIfEverythingsLoaded, individualLoadingCallback);
   };
 
   that.startLoad = function(imageList, soundList, allLoadedCallback, individualLoadedCallback){
     queue.on("fileload", individualLoadedCallback, this);
     queue.on("complete", allLoadedCallback, this);
-    //  queue.loadFile(soundList);
+    $.each(soundList, function(key, value){
+      queue.loadFile(value);
+    });
+
     queue.loadManifest(imageList);
 
   };
-
 
   that.getAnimation = function(resourceName){
     if(!animations[resourceName]){

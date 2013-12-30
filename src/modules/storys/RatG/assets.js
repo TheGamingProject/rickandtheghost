@@ -49,6 +49,8 @@ define(function(){
 
     //animations auto loaded if defined in animations.js
 
-    sound: []
+    sounds: [
+      {src:"assets/sounds/Game-Death.ogg", id:"sound"}
+    ]
   };
 });

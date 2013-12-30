@@ -130,13 +130,13 @@ define(["Scene/Scene", "Scene/SceneManager", "storys/RatG/animations", "Player",
       //load!
 
       var ourStillsToBeLoaded = ourAssets.stills;
-   //   var ourAnimationsToBeLoaded = ourAssets.animations;
+      var ourSoundsToBeLoaded = ourAssets.sounds;
 
       console.log("loading");
       Loader.doLoadScreen(
         canvas,
-  //      ourAnimationsToBeLoaded,
         ourStillsToBeLoaded,
+        ourSoundsToBeLoaded,
         function(){
           console.log("done loading");
           GAME.init(canvas);
