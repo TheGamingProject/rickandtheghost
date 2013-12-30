@@ -107,7 +107,7 @@ define(["../Utils"],function (Utils){
               script = "missing script";
 
             //create label
-            var dialogText = new createjs.Text(script, "20px Arial", "#ff7700");
+            var dialogText = Utils.createTextByStoryDef({text: script, fontDef: "rickDialog" }) ;
             dialogText.x = location.x;
             dialogText.y = location.y;
             dialogText.textBaseline = "alphabetic";

@@ -3,7 +3,7 @@
  *
  * Created by niko on 12/21/13.
  */
-define(["Scene/SceneTimer"], function (SceneTimer) {
+define(["Scene/SceneTimer", "storys/RatG/assets", "Utils"], function (SceneTimer, ourAssets, Utils) {
   var OPTIONS_AMOUNT = 3; //hardcoded to 3 right now
 
   //var UI_START = {x: , y: }; TODO un hardcode below #monkeyscenes
@@ -12,18 +12,22 @@ define(["Scene/SceneTimer"], function (SceneTimer) {
     x: 600, y: 525
   };
 
-  var UI_OPTION_BUTTONS = [{
-    x: 775, y: 545, w: 400, h: 50
-  },{
-    x: 775, y: 600, w: 400, h: 50
-  },{
-    x: 775, y: 655, w: 400, h: 50
-  }];
+  var UI_OPTION_BUTTONS = {
+    coords: [
+      {
+        x: 775, y: 540, w: 400, h: 50
+      },{
+        x: 775, y: 595, w: 400, h: 50
+      },{
+        x: 775, y: 650, w: 400, h: 50
+      }],
+    color: "#1a1a1a"
+  };
 
   var UI_OPTION_DASH_PATH = "assets/ui/option-dash.png";
 
-  var UI_OPTION_DASH_OFFSET = {x: 10, y: 15};
-  var UI_OPTION_TEXT_OFFSET = {x: 40, y: 30};
+  var UI_OPTION_DASH_OFFSET = {x: 2, y: 17};
+  var UI_OPTION_TEXT_OFFSET = {x: 18, y: 30};
 
   var SceneOptionsUI = function(args){
     var that = new createjs.Container(); //extends container
@@ -33,6 +37,7 @@ define(["Scene/SceneTimer"], function (SceneTimer) {
     var selectedObject;
     var objectActionTitleText;
 
+    var uiOptionsBlackBox = []; //this isnt the best way...
     var uiOptionsText = [];
     var uiOptionsDash = [];
 
@@ -45,23 +50,24 @@ define(["Scene/SceneTimer"], function (SceneTimer) {
       //make the buttons and add them to 'that' container
 
       //debug text
-      objectActionTitleText = new createjs.Text("UI_OPTION_TITLE", "20px Arial", "#ff7700");
-      objectActionTitleText.x = UI_OPTION_TITLE.x;
-      objectActionTitleText.y = UI_OPTION_TITLE.y;
-      objectActionTitleText.textBaseline = "alphabetic";
-      that.addChild(objectActionTitleText);
+      if(DEBUG.sceneState){
+        objectActionTitleText = new createjs.Text("UI_OPTION_TITLE", "25px "+ourAssets.font, "#ff7700");
+        objectActionTitleText.x = UI_OPTION_TITLE.x;
+        objectActionTitleText.y = UI_OPTION_TITLE.y;
+        objectActionTitleText.textBaseline = "alphabetic";
+        that.addChild(objectActionTitleText);
+      }
 
 
       //set up click bounds and other dash-image
       for(var i=0; i<3; i++){
-        var b = UI_OPTION_BUTTONS[i];
+        var b = UI_OPTION_BUTTONS.coords[i];
+        uiOptionsBlackBox[i] = new createjs.Shape();
+        uiOptionsBlackBox[i].graphics.beginFill(UI_OPTION_BUTTONS.color).drawRect(b.x,b.y,b.w,b.h);
 
-        var buttonRect = new createjs.Shape();
-        buttonRect.graphics.beginFill("black").drawRect(b.x,b.y,b.w,b.h);
+        uiOptionsBlackBox[i].addEventListener("click", doButtonPressed(i));
 
-        buttonRect.addEventListener("click", doButtonPressed(i));
-
-        uiOptionsText[i] = new createjs.Text("option "+i, "24px RBNo2", "#ffffff");
+        uiOptionsText[i] = Utils.createTextByStoryDef({ text: "option "+i, fontDef: "hauntObjectOptions"});
         uiOptionsText[i].x = b.x + UI_OPTION_TEXT_OFFSET.x;
         uiOptionsText[i].y = b.y + UI_OPTION_TEXT_OFFSET.y;
         uiOptionsText[i].textBaseline = "alphabetic";
@@ -71,7 +77,9 @@ define(["Scene/SceneTimer"], function (SceneTimer) {
         uiOptionsDash[i].y = b.y + UI_OPTION_DASH_OFFSET.y;
         uiOptionsDash[i].textBaseline = "alphabetic";
 
-        that.addChild(buttonRect);
+
+
+        that.addChild(uiOptionsBlackBox[i]);
         that.addChild(uiOptionsText[i]);
         that.addChild(uiOptionsDash[i]);
       }
@@ -90,7 +98,7 @@ define(["Scene/SceneTimer"], function (SceneTimer) {
     var resetOptionsUI = function(){
       console.log("ui reset");
 
-      objectActionTitleText.text = "";//"UI_OPTION_TITLE";
+      if(objectActionTitleText) objectActionTitleText.text = "";//"UI_OPTION_TITLE";
       selectedObject = undefined;
 
       $.each(uiOptionsText, function(key, value){
@@ -98,6 +106,10 @@ define(["Scene/SceneTimer"], function (SceneTimer) {
       });
 
       $.each(uiOptionsDash, function(key, value){
+        value.visible = false;
+      });
+
+      $.each(uiOptionsBlackBox, function(key, value){
         value.visible = false;
       });
     }
@@ -128,9 +140,7 @@ define(["Scene/SceneTimer"], function (SceneTimer) {
       if (action.postAnimation)
         selectedObject.gotoAndPlay(action.postAnimation.starting);
 
-      //debugger;
-
-      selectedObject = undefined;
+      selectedObject = null;
       resetOptionsUI();
 
     };
@@ -155,12 +165,13 @@ define(["Scene/SceneTimer"], function (SceneTimer) {
       resetOptionsUI();
 
       var objDef = sceneObject.getObjDef();
-      objectActionTitleText.text = objDef.name;
+      if (objectActionTitleText) objectActionTitleText.text = objDef.name;
       selectedObject = sceneObject;
 
       $.each(objDef.actionList, function(index, action){
         console.log(index+ ": "+action.description);
         uiOptionsText[index].text =  " "+action.description;
+        uiOptionsBlackBox[index].visible = true;
       });
       $.each(uiOptionsDash, function(key, value){
         value.visible = true;

@@ -14,7 +14,6 @@ define([],function(){
       "scene4"
     ],
 
-
     goals: [
       {
         name: "Suspense master",

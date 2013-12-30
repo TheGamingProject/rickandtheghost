@@ -5,7 +5,7 @@
  */
 
 
-define([],function (){
+define(["storys/RatG/assets"],function (ourAssets){
   var that = {}
 
   /*
@@ -80,14 +80,22 @@ define([],function (){
     //sprite.gotoAndPlay(ourAnimSpec.starting);
 
     return sprite;
-  }
+  };
 
   //http://stackoverflow.com/questions/1403888/get-escaped-url-parameter
   that.getURLParameter = function getURLParameter(name) {
     return decodeURI(
       (RegExp(name + '=' + '(.+?)(&|$)').exec(location.search)||[,null])[1]
     );
-  }
+  };
+
+  that.createTextByStoryDef = function(args){
+    if(!args || !ourAssets.fonts[args.fontDef])
+      throw "invalid font..."+args.fontDef;
+
+    var font = ourAssets.fonts[args.fontDef];
+    return new createjs.Text(args.text || "", font.size+"px "+font.fontFamily, font.color);
+  };
 
   return that;
 });

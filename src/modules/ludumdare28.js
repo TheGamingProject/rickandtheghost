@@ -4,148 +4,147 @@
 var GAME = {};
 GAME.SIZE = { x: 1280, y: 720 };
 
-var DEBUG = {showClickArea: true};
+var DEBUG = {showClickArea: true, sceneState: false};
 
 
-define(["Scene/Scene", "Scene/SceneManager", "storys/RatG/animations", "Player", "StoryTimeline", "Loader"],
-    function(Scene, SceneManager, animations, Player, StoryTimeline, Loader){
+define(["Scene/Scene", "Scene/SceneManager", "storys/RatG/animations", "Player", "StoryTimeline", "Loader", "storys/RatG/assets"],
+  function(Scene, SceneManager, animations, Player, StoryTimeline, Loader, ourAssets){
 
-  var STATES = {pregame: 0, ingame: 1, loading: 2};
+    var STATES = {pregame: 0, ingame: 1, loading: 2};
 
-  GAME.fps = 30;
-  GAME.state;
-
-
-  GAME.controls = {
-    //for moving map
-    enter: false
-  };
-
-  //temporary
-  var preContainer;
+    GAME.fps = 30;
+    GAME.state;
 
 
-  GAME.init = function(canvas){
-    GAME.stage = canvas;
-    GAME.state = STATES.pregame;
+    GAME.controls = {
+      //for moving map
+      enter: false
+    };
 
-    //load shit?
-
-
-    GAME.player = Player();
-
-    //GAME.state = STATES.pregame;
-    preContainer = new createjs.Container();
-
-    var rectangle = new createjs.Shape();
-    rectangle.graphics.beginFill("black").drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
-    preContainer.addChild(rectangle);
+    //temporary
+    var preContainer;
 
 
-    GAME.stage.addChild(preContainer);
-    //GAME.stage.update();
+    GAME.init = function(canvas){
+      GAME.stage = canvas;
+      GAME.state = STATES.pregame;
+
+      //load shit?
 
 
-    setInterval(GAME.update, 1000 / GAME.fps);
+      GAME.player = Player();
 
-  };
+      //GAME.state = STATES.pregame;
+      preContainer = new createjs.Container();
 
-  //var tempPic;
-
-  GAME.update = function(){
-
-    switch(GAME.state){
-
-      case STATES.pregame:
-        if(true || GAME.controls.enter){
-          GAME.state = STATES.ingame;
-          GAME.startStory();
-          preContainer.visible = false;
-          console.log("end pregame state");
-        }
-        break;
-      case STATES.ingame:
+      var rectangle = new createjs.Shape();
+      rectangle.graphics.beginFill("black").drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
+      preContainer.addChild(rectangle);
 
 
+      GAME.stage.addChild(preContainer);
+      //GAME.stage.update();
 
-        break;
-    }
 
-    GAME.prevControls = GAME.controls;
-  };
+      setInterval(GAME.update, 1000 / GAME.fps);
 
-  GAME.startStory = function(){
-    GAME.story = StoryTimeline({parentStage: GAME.stage});
-  };
+    };
 
-  GAME.resetGame = function(){
-    console.log("reseting game");
-    init();
-    console.log("reset State: "+GAME.state)
-  };
+    //var tempPic;
 
-  GAME.click = function (loc){
-    //can be delt with thru http://www.createjs.com/Docs/EaselJS/classes/DisplayObject.html#event_click
-  };
+    GAME.update = function(){
 
-  //process key presses
-  GAME.keyPressed = function (evt){
-    if(!evt) return;
-    switch(evt.keyCode){
-      case 13://enter
-        GAME.controls.enter = true;
-        break;
-    }
-  };
-  //process key releases
-  GAME.keyReleased = function (evt){
-    if(!evt) return
-    switch(evt.keyCode){
-      case 13://enter
-        GAME.controls.enter = false;
-        break;
+      switch(GAME.state){
 
-      case 82://r
-        GAME.resetGame();
-        break;
-      case 77://m
+        case STATES.pregame:
+          if(true || GAME.controls.enter){
+            GAME.state = STATES.ingame;
+            GAME.startStory();
+            preContainer.visible = false;
+            console.log("end pregame state");
+          }
+          break;
+        case STATES.ingame:
+
+
+
+          break;
+      }
+
+      GAME.prevControls = GAME.controls;
+    };
+
+    GAME.startStory = function(){
+      GAME.story = StoryTimeline({parentStage: GAME.stage});
+    };
+
+    GAME.resetGame = function(){
+      console.log("reseting game");
+      init();
+      console.log("reset State: "+GAME.state)
+    };
+
+    GAME.click = function (loc){
+      //can be delt with thru http://www.createjs.com/Docs/EaselJS/classes/DisplayObject.html#event_click
+    };
+
+    //process key presses
+    GAME.keyPressed = function (evt){
+      if(!evt) return;
+      switch(evt.keyCode){
+        case 13://enter
+          GAME.controls.enter = true;
+          break;
+      }
+    };
+    //process key releases
+    GAME.keyReleased = function (evt){
+      if(!evt) return
+      switch(evt.keyCode){
+        case 13://enter
+          GAME.controls.enter = false;
+          break;
+
+        case 82://r
+          GAME.resetGame();
+          break;
+        case 77://m
 //    togglemusic();
-        break;
-      case 27://esc
-        //   gameplayobject.stopPlacing();
-        break;
-    }
-  };
+          break;
+        case 27://esc
+          //   gameplayobject.stopPlacing();
+          break;
+      }
+    };
 
-  ////////// MAIN /////////////
-  var canvas;
-  function init() {
-    canvas = document.getElementById('myCanvas');
-    canvas = new createjs.Stage(canvas);
-    createjs.Ticker.addEventListener("tick", canvas);
+    ////////// MAIN /////////////
+    var canvas;
+    function init() {
+      canvas = document.getElementById('myCanvas');
+      canvas = new createjs.Stage(canvas);
+      createjs.Ticker.addEventListener("tick", canvas);
 
-    document.onkeydown = GAME.keyPressed;
-    document.onkeyup = GAME.keyReleased;
+      document.onkeydown = GAME.keyPressed;
+      document.onkeyup = GAME.keyReleased;
 
-    //load!
+      //load!
 
-    console.log("loading");
-    Loader.doLoadScreen(
+      var ourStillsToBeLoaded = ourAssets.stills;
+      var ourAnimationsToBeLoaded = ourAssets.animations;
+
+      console.log("loading");
+      Loader.doLoadScreen(
         canvas,
-        ["rickglobal",
-          "ricka1s1","alarmclock","switch","poster", "windowrays",
-          "calendar","fridge", "oatmeal",
-          "cabinet", "motiv", "radio"
-        ],
-        ["assets/scenes/a1s1/background.png","assets/scenes/a1s2/background.png","assets/scenes/a2s1/background.png"],
+        ourAnimationsToBeLoaded,
+        ourStillsToBeLoaded,
         function(){
           console.log("done loading");
           GAME.init(canvas);
         }
-    );
+      );
 
-  }
+    }
 
-  console.log("init-ing");
-  init();
-});
+    console.log("init-ing");
+    init();
+  });

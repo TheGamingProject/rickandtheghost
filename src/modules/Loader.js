@@ -30,23 +30,12 @@ define(["storys/RatG/animations"],function(animations){
       ////////  update load bar //////////
     if(!resource) debugger;
 
-
-
-      //loop thru every pixel, or group of pixels??
-   //   for(var x=0 ; x< GAME.SIZE.x; x += 5){
-   //     for(var y=0; y < GAME.SIZE.y; y += 5){
-      //  console.log((y * GAME.SIZE.x + x) % totalResources + " "+ finishedLoadingCount);
-      //    if((y * GAME.SIZE.y + x) % totalResources === finishedLoadingCount){
-            var gap = GAME.SIZE.y / totalResources;
-            var rectangle = new createjs.Shape();
-            rectangle.graphics.beginFill("white").drawRect(0, finishedLoadingCount * gap, GAME.SIZE.x, gap);
-            loadingContainer.addChild(rectangle);
-            console.log("finished loaded: "+resource +" ["+finishedLoadingCount+"]");
-            finishedLoadingCount++
-      //      console.log("win: "+x+", "+y + " cause: "+(y * GAME.SIZE.y + x) );
-    //      }
-    //    }
-    //  }
+    var gap = GAME.SIZE.y / totalResources;
+    var rectangle = new createjs.Shape();
+    rectangle.graphics.beginFill("white").drawRect(0, finishedLoadingCount * gap, GAME.SIZE.x, gap);
+    loadingContainer.addChild(rectangle);
+    console.log("finished loaded: "+resource +" ["+finishedLoadingCount+"]");
+    finishedLoadingCount++
 
       //and the ones that ..  (totalPixels % totalResources === finshedLoadingCount)
 
@@ -87,7 +76,7 @@ define(["storys/RatG/animations"],function(animations){
     $.each(listOfAnimationNames,function(index, value){
       if(!animations[value]){
         //does not exist in animations.js TODO to be replaced  into scene filestructure
-        console.log("resource does not exist")
+        console.log("resource does not exist");
         return;
       }
 
@@ -112,10 +101,6 @@ define(["storys/RatG/animations"],function(animations){
         else
           spriteSheets[value].on("complete", individualLoadedCallback, null, false, value);
       }
-    //  if(value === "motiv")
-    //    debugger;
-
-
 
     });
 

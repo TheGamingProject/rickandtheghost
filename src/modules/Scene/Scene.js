@@ -14,6 +14,15 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
 
   //ui locations
 
+  var SCENE_STATE_INDICATOR = {
+    x: 0,
+    y: 0,
+    path : {
+      haunting: "assets/ui/state-haunting.png",
+      recording: "assets/ui/state-recording.png"
+    }
+  }
+
   var UI_BOTTOM = {
     x: 0,
     y: 500,
@@ -24,7 +33,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
 
   var CONTINUE_BUTTON = {
     path: "assets/ui/arrow0.png",
-    x: 575,
+    x: 580,
     y: 572,
     w: 0,
     h: 0
@@ -67,6 +76,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       objectLayerContainer,
       uiLayerContainer;
     var continueButton;
+    var sceneStateIndicator = []; //holds haunting/recording bitmaps
 
     var sceneOptionsUIContainer;
     var rickSprite;
@@ -94,14 +104,16 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       //parse sceneDef
       parseSceneDef();
 
-      //////// setup UI ////////////
-      setupUI();
-
       /////// fader    ////////////
       var aFader = Fader();
       SceneTimer.setFaderObject(aFader);
       SceneTimer.setStartFadeColor(sceneDef.startFade || {r: 0, g: 0, b: 0, o: 0});
       sceneContainer.addChild(aFader);
+
+      //////// setup UI ////////////
+      setupUI();
+
+
 
 
       parentStage.addChild(sceneContainer);
@@ -184,6 +196,13 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       });
       uiLayerContainer.addChild(continueButton);
 
+      //scene states indicator
+      sceneStateIndicator["haunting"] = new createjs.Bitmap(SCENE_STATE_INDICATOR.path.haunting);
+      sceneStateIndicator["recording"] = new createjs.Bitmap(SCENE_STATE_INDICATOR.path.recording);
+      sceneStateIndicator["haunting"].x = sceneStateIndicator["recording"].x = SCENE_STATE_INDICATOR.x;
+      sceneStateIndicator["haunting"].y = sceneStateIndicator["recording"].y = SCENE_STATE_INDICATOR.y;
+      uiLayerContainer.addChild(sceneStateIndicator["haunting"]);
+      uiLayerContainer.addChild(sceneStateIndicator["recording"]);
 
       //add meter stats
       $.each(UI_STATS_COORD, function(index, value){
@@ -210,6 +229,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       SceneTimer.setUIContainerForDialog(uiLayerContainer);
 
 
+
       //adding SceneOptionsUI
       sceneOptionsUIContainer = SceneOptionsUI({});
       uiLayerContainer.addChild(sceneOptionsUIContainer);
@@ -225,11 +245,13 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       sceneContainer.addChild(uiLayerContainer);
 
       //more debug text
-      sceneTimelineText = new createjs.Text("timeline debug text", "20 Arial", "#0000FF");
-      sceneTimelineText.x = TIMELINE_UI_TEXT.x;
-      sceneTimelineText.y = TIMELINE_UI_TEXT.y;
-      sceneTimelineText.textBaseline = "alphabetic";
-      sceneContainer.addChild(sceneTimelineText);
+      if(DEBUG.sceneState){
+        sceneTimelineText = new createjs.Text("timeline debug text", "20 Arial", "#0000FF");
+        sceneTimelineText.x = TIMELINE_UI_TEXT.x;
+        sceneTimelineText.y = TIMELINE_UI_TEXT.y;
+        sceneTimelineText.textBaseline = "alphabetic";
+        sceneContainer.addChild(sceneTimelineText);
+      }
     };
 
     var objectClickedCallback = function(sceneObject){
@@ -262,6 +284,9 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       //hide button
       continueButton.visible = false;
       sceneOptionsUIContainer.clearSelectedObject();
+
+      sceneStateIndicator["haunting"].visible = false;
+      sceneStateIndicator["recording"].visible = true;
 
       //start animation chain
       timeline.start();
