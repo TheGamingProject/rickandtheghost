@@ -3,7 +3,7 @@
  *
  * Created by niko on 12/21/13.
  */
-define(["Scene/SceneTimer", "storys/RatG/assets", "Utils"], function (SceneTimer, ourAssets, Utils) {
+define(["Scene/SceneTimer", "storys/RatG/assets", "Utils", "SoundManager"], function (SceneTimer, ourAssets, Utils, SoundManager) {
   var OPTIONS_AMOUNT = 3; //hardcoded to 3 right now
 
   //var UI_START = {x: , y: }; TODO un hardcode below #monkeyscenes
@@ -120,6 +120,8 @@ define(["Scene/SceneTimer", "storys/RatG/assets", "Utils"], function (SceneTimer
       var objDef = selectedObject.getObjDef();
 
       console.log("Selected Object:" + objDef.name +": action-"+actionNum);
+
+      SoundManager.playSoundEffect("hauntOptionsClick");
 
       if(actionNum != 2)
         selectedObject.setChoice(actionNum);

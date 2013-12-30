@@ -50,7 +50,7 @@ define(function(){
     //animations auto loaded if defined in animations.js
 
     sounds: [
-      {src:"assets/sounds/Game-Death.ogg", id:"sound"}
+      {src:"assets/sounds/Game-Death.ogg", id:"hauntOptionsClick"}
     ]
   };
 });

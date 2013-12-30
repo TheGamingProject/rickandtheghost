@@ -6,8 +6,8 @@
  * Created by niko on 12/16/13.
  */
 
-define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene", "Fader"],
-    function(story, SceneManager, Scene, Fader){
+define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene", "Fader", "SoundManager"],
+    function(story, SceneManager, Scene, Fader, SoundManager){
   var RECIEVE_GOAL_BG = {
     path: "assets/start/startSuspicionLow.png"
   };
@@ -73,6 +73,7 @@ define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene", "Fader"],
 
       tempBG.on("click",function(){
         console.log("next plz");
+        SoundManager.playSoundEffect("hauntOptionsClick");
 
         parentStage.removeChild(tempBG);
 
