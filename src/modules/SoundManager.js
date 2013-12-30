@@ -6,9 +6,14 @@
 
 define([], function(){
 
+  var mute;
   var that = {};
 
+  var bgMusicInstance;
+
   that.playSoundEffect = function(soundClipName){
+    if(mute) return;
+
     console.log("playing SoundEffect: "+soundClipName);
 
     var instance = createjs.Sound.play(soundClipName);  // play using id.  Could also use full sourcepath or event.src.
@@ -21,6 +26,7 @@ define([], function(){
 
   //would be used for scenes and
   that.playBackgroundMusic = function(musicClipName){
+    if(mute) return;
 
   };
 
@@ -29,9 +35,22 @@ define([], function(){
 
   };
 
-  that.setMute = function(enabled){
-
+  that.loadMuteSettings = function(){
+    mute = false;
+    //TODO load from local settings
   };
+
+  that.toggleMute = function(){
+    that.setMute(!mute);
+  };
+  that.setMute = function(enabled){
+    mute = enabled;
+
+    if(mute)
+      ;//kill bgMusicInstance?
+  };
+
+  that.loadMuteSettings();
 
   return that;
 });

@@ -7,8 +7,8 @@ GAME.SIZE = { x: 1280, y: 720 };
 var DEBUG = {showClickArea: true, sceneState: false};
 
 
-define(["Scene/Scene", "Scene/SceneManager", "storys/RatG/animations", "Player", "StoryTimeline", "Loader", "storys/RatG/assets"],
-  function(Scene, SceneManager, animations, Player, StoryTimeline, Loader, ourAssets){
+define(["Scene/Scene", "Scene/SceneManager", "storys/RatG/animations", "Player", "StoryTimeline", "Loader", "storys/RatG/assets", "SoundManager"],
+  function(Scene, SceneManager, animations, Player, StoryTimeline, Loader, ourAssets, SoundManager){
 
     var STATES = {pregame: 0, ingame: 1, loading: 2};
 
@@ -109,7 +109,7 @@ define(["Scene/Scene", "Scene/SceneManager", "storys/RatG/animations", "Player",
           GAME.resetGame();
           break;
         case 77://m
-//    togglemusic();
+          SoundManager.toggleMute();
           break;
         case 27://esc
           //   gameplayobject.stopPlacing();
