@@ -20,46 +20,34 @@ define(function(){
       }
     },
     //stuff that has to be loaded
-    //  for now: (maybe later the story is read scene by scene amd animations are gathered like that)
 
     whenLoad: "allatbeginning", //NYI (placeholder)
 
     stills: [
       //menu/goal ui
-      "assets/start/startbackground.png",
-      "assets/start/startSuspicionLow.png",
-      "assets/end/endneutral.png",
+      {src: "assets/start/startbackground.png", id: "startbackground"},
+      {src: "assets/start/startSuspicionLow.png", id: "startSuspicionLow"},
+      {src: "assets/end/endneutral.png", id: "endneutral"},
 
       //scene ui
-      "assets/ui/lowerbar.png",
-      "assets/ui/option-dash.png",
-      "assets/ui/arrow0.png",
+      {src: "assets/ui/lowerbar.png", id: "lowerbar"},
+      {src: "assets/ui/option-dash.png", id: "option-dash"},
+      {src: "assets/ui/arrow0.png", id: "arrow0"},
 
-      "assets/ui/state-haunting.png",
-      "assets/ui/state-recording.png",
+      {src: "assets/ui/state-haunting.png", id: "state-haunting"},
+      {src: "assets/ui/state-recording.png", id: "state-recording"},
 
       //scene1
-      "assets/scenes/a1s1/background.png",
+      {src: "assets/scenes/a1s1/background.png", id: "scene1-background"},
 
       //scene2
-      "assets/scenes/a1s2/background.png",
+      {src: "assets/scenes/a1s2/background.png", id: "scene2-background"},
 
       //scene4
-      "assets/scenes/a2s1/background.png"
+      {src: "assets/scenes/a2s1/background.png", id: "scene4-background"}
     ],
-    animations: [
-      //global
-      "rickglobal",
 
-      //scene1
-      "ricka1s1","alarmclock","switch","poster", "windowrays",
-
-      //scene2
-      "calendar","fridge", "oatmeal",
-
-      //scene3
-      "cabinet", "motiv", "radio"
-    ],
+    //animations auto loaded if defined in animations.js
 
     sound: []
   };

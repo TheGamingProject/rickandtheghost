@@ -309,45 +309,5 @@ define([],function(){
     }
   };
 
-                     /*
-  var that = {};
-
-  var spriteSheets = {};
-  var loaded = false;
-
-  that.loadAnimations = function (listToBeLoaded,callback){
-    var total = 0;
-    $.each(listToBeLoaded,function(index, value){
-      if(!animations[name]){
-        return;
-      }
-      if(spriteSheets[index].complete)
-        return;//already loaded
-      spriteSheets[index] = new createjs.SpriteSheet(value);
-
-    });
-
-
-    setTimeout(function(){
-
-      do{
-        var not = false;
-        $.each(spriteSheets,function(index, value){
-          if(!spriteSheets[index].complete)
-            not = true;
-        })
-      }while(not);
-
-      loaded = true;
-      callback();
-    },10);
-
-  };
-
-  that.get = function(name){
-    throw "nooooooo";
-  }
-
-  return that;         */
   return animations;
 });

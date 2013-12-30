@@ -73,7 +73,7 @@ define(["Scene/Scene", "Utils", "Loader", "Scene/SceneTimer"],function (Scene, U
                 facing = "idlel";
 
               Utils.updateSprite(rickSprite,{
-                spritesheet: Loader.get("rickglobal"),
+                spritesheet: Loader.getAnimation("rickglobal"),
                 starting: facing//,
                 //location: {x:500, y:200}
               },function(){
@@ -105,7 +105,7 @@ define(["Scene/Scene", "Utils", "Loader", "Scene/SceneTimer"],function (Scene, U
               dir = -1;
             }
             var tempDef = {
-              spritesheet: Loader.get("rickglobal"),
+              spritesheet: Loader.getAnimation("rickglobal"),
               starting: _startingWalk
             };
 
@@ -128,7 +128,7 @@ define(["Scene/Scene", "Utils", "Loader", "Scene/SceneTimer"],function (Scene, U
                 callbackFromMainloop();*/
 
                 Utils.updateSprite(rickSprite,{
-                  spritesheet: Loader.get("rickglobal"),
+                  spritesheet: Loader.getAnimation("rickglobal"),
                   starting: _startingIdle
                 },function(){
                   console.log("after intro animation");

@@ -27,7 +27,7 @@ define(["Loader", "storys/RatG/scenes/scene4/script"],function(Loader, script){
     scene.startFade = {r: 0, g: 0, b: 0, o: 0.5};
 
     scene.startingIdle = {
-      spritesheet: Loader.get("rickglobal"),
+      spritesheet: Loader.getAnimation("rickglobal"),
       starting: "sitl",
       location: {x:514, y:200}
     };
@@ -43,20 +43,20 @@ define(["Loader", "storys/RatG/scenes/scene4/script"],function(Loader, script){
     scene.animations = {};
     //cabinet (scene object animations don't need new locations)
     scene.animations["possessCabinet"] = {
-      spritesheet: Loader.get("cabinet"),
+      spritesheet: Loader.getAnimation("cabinet"),
       starting: "reaction-possess"
     };
     scene.animations["sortCabinet"] = {
-      spritesheet: Loader.get("cabinet"),
+      spritesheet: Loader.getAnimation("cabinet"),
       starting: "reaction-sort"
     };
     //motiv
     scene.animations["placeMotivGood"] = {
-      spritesheet: Loader.get("motiv"),
+      spritesheet: Loader.getAnimation("motiv"),
       starting: "reaction-positive"
     };
     scene.animations["placeMotivBad"] = {
-      spritesheet: Loader.get("motiv"),
+      spritesheet: Loader.getAnimation("motiv"),
       starting: "reaction-negative"
     };
 
@@ -71,7 +71,7 @@ define(["Loader", "storys/RatG/scenes/scene4/script"],function(Loader, script){
       name: "Cabinet",
       clickBounds: {x:363, y:330, w:115, h:170},//to click it
       idleAnimation: {    
-        spritesheet: Loader.get("cabinet"),
+        spritesheet: Loader.getAnimation("cabinet"),
         starting: "idle",
         location: {x:270,y:200}
       },
@@ -86,7 +86,7 @@ define(["Loader", "storys/RatG/scenes/scene4/script"],function(Loader, script){
           oaDef: {
             type: "animation",
             animation: {  //animation for during RickAction phase
-              spritesheet: Loader.get("cabinet"),
+              spritesheet: Loader.getAnimation("cabinet"),
               starting: "objectaction-open"
             },
             timerDef: {
@@ -108,7 +108,7 @@ define(["Loader", "storys/RatG/scenes/scene4/script"],function(Loader, script){
           oaDef: {
             type: "animation",
             animation: {  //animation for during RickAction phase
-              spritesheet: Loader.get("cabinet"),
+              spritesheet: Loader.getAnimation("cabinet"),
               starting: "objectaction-open"
             },
             timerDef: {
@@ -125,7 +125,7 @@ define(["Loader", "storys/RatG/scenes/scene4/script"],function(Loader, script){
           oaDef: {
             type: "animation",
             animation: {  //animation for during RickAction phase
-              spritesheet: Loader.get("cabinet"),
+              spritesheet: Loader.getAnimation("cabinet"),
               starting: "objectaction-open"
             },
             timerDef: {
@@ -145,7 +145,7 @@ define(["Loader", "storys/RatG/scenes/scene4/script"],function(Loader, script){
       name: "Motiv",
       clickBounds: {x:894, y:269, w:150, h:100},//to click it
       idleAnimation: {
-        spritesheet: Loader.get("motiv"),
+        spritesheet: Loader.getAnimation("motiv"),
         starting: "idlenone",
         location: {x:820,y:200}
       },
@@ -216,7 +216,7 @@ define(["Loader", "storys/RatG/scenes/scene4/script"],function(Loader, script){
       name: "Radio",
       clickBounds: {x:627, y:179, w:57, h:61},//to click it
       idleAnimation: {
-        spritesheet: Loader.get("radio"),
+        spritesheet: Loader.getAnimation("radio"),
         starting: "idle",
         location: {x:505,y:87}
       },
@@ -300,7 +300,7 @@ define(["Loader", "storys/RatG/scenes/scene4/script"],function(Loader, script){
       facing: "left",
 
       introAnim: {
-        spritesheet: Loader.get("rickglobal"),
+        spritesheet: Loader.getAnimation("rickglobal"),
         starting: "sitl",
         location: {x:514, y:200}
       }

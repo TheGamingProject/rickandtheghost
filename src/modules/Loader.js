@@ -16,36 +16,45 @@ define(["storys/RatG/animations"],function(animations){
   var stills = {};
   var spriteSheets = {};
 
+  var queue = new createjs.LoadQueue();
+  queue.installPlugin(createjs.Sound);
 
-  that.doLoadScreen = function(parentContainer, listOfStills, listOfAnimations, finishedLoadingCallback){
+  that.doLoadScreen = function(parentContainer, listOfStills, finishedLoadingCallback){
     //make a new container and add it to parent
     var loadingContainer = new createjs.Container();
     parentContainer.addChild(loadingContainer);
 
     //start loading all resources
-    var totalResources = listOfStills.length + listOfAnimations.length;
+    var totalResources = 0;
     var finishedLoadingCount = 0;
 
-    var individualLoadingCallback = function(evt, resource){
+    var individualLoadingCallback = function(evt){
       ////////  update load bar //////////
-    if(!resource) debugger;
+      var resource = evt.item.id;
+      if(!resource) debugger;
 
-    var gap = GAME.SIZE.y / totalResources;
-    var rectangle = new createjs.Shape();
-    rectangle.graphics.beginFill("white").drawRect(0, finishedLoadingCount * gap, GAME.SIZE.x, gap);
-    loadingContainer.addChild(rectangle);
-    console.log("finished loaded: "+resource +" ["+finishedLoadingCount+"]");
-    finishedLoadingCount++
+      var gap = GAME.SIZE.y / totalResources;
+      var rectangle = new createjs.Shape();
+      rectangle.graphics.beginFill("white").drawRect(0, finishedLoadingCount * gap, GAME.SIZE.x, gap);
+      loadingContainer.addChild(rectangle);
+      console.log("finished loaded: "+resource +" ["+finishedLoadingCount+"]");
+      finishedLoadingCount++
 
       //and the ones that ..  (totalPixels % totalResources === finshedLoadingCount)
 
       ////////////////////////////////////
     } ;
 
+    //find all animations from animations.js
+    var listOfAnimations = [];
+    $.each(animations, function(key, value){
+      var path = value.images[0];
+      listOfAnimations.push({id: path, src: path});
+    });
 
-    that.loadAnimations(listOfStills, undefined, individualLoadingCallback);
-    that.loadStills(listOfAnimations, undefined, individualLoadingCallback);
-
+    var loadList = [];
+    $.merge(loadList, listOfAnimations);
+    $.merge(loadList, listOfStills);
 
     //check when everythings loaded
     var checkIfEverythingsLoaded = function(){
@@ -64,113 +73,20 @@ define(["storys/RatG/animations"],function(animations){
       setTimeout(checkIfEverythingsLoaded, LOADING_UPDATE);
     };
 
-    setTimeout(function(){
-      checkIfEverythingsLoaded();
-    }, 10);
+    totalResources = loadList.length;
+    that.startLoad(loadList, undefined, checkIfEverythingsLoaded, individualLoadingCallback);
+  };
+
+  that.startLoad = function(imageList, soundList, allLoadedCallback, individualLoadedCallback){
+    queue.on("fileload", individualLoadedCallback, this);
+    queue.on("complete", allLoadedCallback, this);
+    //  queue.loadFile(soundList);
+    queue.loadManifest(imageList);
 
   };
 
-  //TODO rewrite generically to include stills/animations
-  that.loadAnimations = function(listOfAnimationNames, allAnimationsLoadedCallback, individualLoadedCallback){
-    var total = 0;
-    $.each(listOfAnimationNames,function(index, value){
-      if(!animations[value]){
-        //does not exist in animations.js TODO to be replaced  into scene filestructure
-        console.log("resource does not exist");
-        return;
-      }
 
-      if(spriteSheets[value] && spriteSheets[value].complete){
-        console.log("already loaded: "+value);
-        individualLoadedCallback();
-        return;//already loaded
-      }
-
-      if(spriteSheets[value]){
-        //currently loading
-        return;
-      }
-
-      console.log("loading spritesheet: "+value);
-
-
-      spriteSheets[value] = new createjs.SpriteSheet(animations[value]);
-      if (individualLoadedCallback)      {
-        if(spriteSheets[value].complete)
-          individualLoadedCallback(undefined, value);
-        else
-          spriteSheets[value].on("complete", individualLoadedCallback, null, false, value);
-      }
-
-    });
-
-    if(typeof allAnimationsLoadedCallback === "function")
-      setTimeout(function(){
-
-        do{
-          var not = false;
-          $.each(listOfAnimationNames,function(index, value){
-            if(!spriteSheets[value].complete)
-              not = true;
-          })
-        }while(not);
-
-        loaded = true;
-        allAnimationsLoadedCallback();
-      },LOAD_CHECK_TIME);
-
-
-  };
-
-  that.loadStills = function(listOfStills, allStillsLoadedCallback, individualLoadedCallback){
-    var total = 0;
-    $.each(listOfStills,function(index, value){
-      /*if(!animations[value]){
-        //does not exist in stills object
-        return;
-      } */
-
-      if(spriteSheets[value] && !spriteSheets[value].complete)
-       return individualLoadedCallback(undefined, value);//already loaded   */
-
-      if(spriteSheets[value])
-      //currently loading
-        return;
-
-      console.log("loading still: "+value);
-      var imageObj = new Image();
-      imageObj.onload = function(){
-        imageObj.complete = true;
-        if (individualLoadedCallback) individualLoadedCallback(undefined, value);
-      };
-      imageObj.src = value;
-
-      stills[value] = imageObj;
-
-    });
-
-    if(typeof allStillsLoadedCallback === "function")
-      setTimeout(function(){
-
-        do{
-          var not = false;
-          $.each(listOfStills,function(index, value){
-            if(!stills[value].complete)
-              not = true;
-          })
-        }while(not);
-
-        loaded = true;
-        allStillsLoadedCallback();
-      },LOAD_CHECK_TIME);
-  };
-
-  //load all sounds
-  that.loadSounds = function(listOfSounds, allSoundsLoadedCallback, individualLoadedCallback){
-
-  };
-
-  that.get = function(resourceName){
+  that.getAnimation = function(resourceName){
     if(!animations[resourceName]){
       throw "Animation doesn't exist: "+resourceName;
     }
@@ -178,7 +94,7 @@ define(["storys/RatG/animations"],function(animations){
       console.log("getting cached spritesheet:" +resourceName);
       return spriteSheets[resourceName];
     }
-    console.log("flyloading spritesheet:"+resourceName);
+    console.log("(not-fly) loading spritesheet:"+resourceName); //still making a spritesheet but using cached image
     spriteSheets[resourceName] = new createjs.SpriteSheet( animations[resourceName]);
 
     return spriteSheets[resourceName];

@@ -23,7 +23,7 @@ define([], function(){
   };
 
   that.setMute = function(enabled){
-    
+
   };
 
   return that;

@@ -27,7 +27,7 @@ define(["Loader", "storys/RatG/scenes/scene2/script"],function(Loader, script){
     scene.startFade = {r: 0, g: 0, b: 0, o: 0.5};
 
     scene.startingIdle = {
-      spritesheet: Loader.get("rickglobal"),
+      spritesheet: Loader.getAnimation("rickglobal"),
       starting: "sitl",
       location: {x:900, y:205}
     };
@@ -43,25 +43,25 @@ define(["Loader", "storys/RatG/scenes/scene2/script"],function(Loader, script){
     scene.animations = {};
     //oatmeal (scene object animations don't need new locations)
     scene.animations["makeOatmealHot"] = {
-      spritesheet: Loader.get("oatmeal"),
+      spritesheet: Loader.getAnimation("oatmeal"),
       starting: "reaction-heat"
     };
     scene.animations["makeOatmealCold"] = {
-      spritesheet: Loader.get("oatmeal"),
+      spritesheet: Loader.getAnimation("oatmeal"),
       starting: "reaction-cool"
     };
     //calendar
     scene.animations["swapCalendar"] = {
-      spritesheet: Loader.get("calendar"),
+      spritesheet: Loader.getAnimation("calendar"),
       starting: "reaction-swap"
     };
     scene.animations["markCalendar"] = {
-      spritesheet: Loader.get("calendar"),
+      spritesheet: Loader.getAnimation("calendar"),
       starting: "reaction-mark"
     };
     //fridge
     scene.animations["eggTheFridge"] = {
-      spritesheet: Loader.get("fridge"),
+      spritesheet: Loader.getAnimation("fridge"),
       starting: "reaction-eggs"
     };
 
@@ -76,7 +76,7 @@ define(["Loader", "storys/RatG/scenes/scene2/script"],function(Loader, script){
       name: "Oatmeal",
       clickBounds: {x:970, y:360, w:40, h:40},//to click it
       idleAnimation: {
-        spritesheet: Loader.get("oatmeal"),
+        spritesheet: Loader.getAnimation("oatmeal"),
         starting: "idle",
         location: {x:910,y:193}
       },
@@ -147,7 +147,7 @@ define(["Loader", "storys/RatG/scenes/scene2/script"],function(Loader, script){
       name: "Calendar",
       clickBounds: {x:660, y:200, w:80, h:150},//to click it
       idleAnimation: {
-        spritesheet: Loader.get("calendar"),
+        spritesheet: Loader.getAnimation("calendar"),
         starting: "idle",
         location: {x:660,y:201}
       },
@@ -228,7 +228,7 @@ define(["Loader", "storys/RatG/scenes/scene2/script"],function(Loader, script){
       name: "Fridge",
       clickBounds: {x:120, y:200, w:150, h:300},//to click it
       idleAnimation: {
-        spritesheet: Loader.get("fridge"),
+        spritesheet: Loader.getAnimation("fridge"),
         starting: "idle",
         location: {x:72,y:205}
       },
@@ -245,7 +245,7 @@ define(["Loader", "storys/RatG/scenes/scene2/script"],function(Loader, script){
           oaDef: {
             type: "animation",
             animation: {  //animation for during RickAction phase
-              spritesheet: Loader.get("fridge"),
+              spritesheet: Loader.getAnimation("fridge"),
               starting: "objectaction-attack"
             },
             timerDef: {
@@ -267,7 +267,7 @@ define(["Loader", "storys/RatG/scenes/scene2/script"],function(Loader, script){
           oaDef: {
             type: "animation",
             animation: {  //animation for during RickAction phase
-              spritesheet: Loader.get("fridge"),
+              spritesheet: Loader.getAnimation("fridge"),
               starting: "objectaction-openeggs"
             },
             timerDef: {
@@ -284,7 +284,7 @@ define(["Loader", "storys/RatG/scenes/scene2/script"],function(Loader, script){
           oaDef: {
             type: "animation",
             animation: {  //animation for during RickAction phase
-              spritesheet: Loader.get("fridge"),
+              spritesheet: Loader.getAnimation("fridge"),
               starting: "objectaction-open"
             },
             timerDef: {
