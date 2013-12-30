@@ -165,6 +165,11 @@ define(["storys/RatG/animations"],function(animations){
       },LOAD_CHECK_TIME);
   };
 
+  //load all sounds
+  that.loadSounds = function(listOfSounds, allSoundsLoadedCallback, individualLoadedCallback){
+
+  };
+
   that.get = function(resourceName){
     if(!animations[resourceName]){
       throw "Animation doesn't exist: "+resourceName;
@@ -194,6 +199,11 @@ define(["storys/RatG/animations"],function(animations){
 
     stills[resourceName] = imageObj;
     return stills[resourceName];
+  };
+
+  //returning sound resource
+  that.getSound = function(resourceName){
+
   };
 
   return that;
