@@ -129,6 +129,11 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
           debugText.text = "haunting";
           break;
         case STATES.rickAction:
+          //set everything to unclickable
+          $.each(sceneObjects, function(key, value){
+            value.setChoice();
+          });
+
           debugText.text = "rickAction";
           break;
         default:
@@ -153,7 +158,6 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       //make rick
       rickSprite = Utils.makeSprite(sceneDef.startingIdle);
       //rickSprite.stop();
-
 
       //create objects
       var objects = sceneDef.objects;

@@ -1,5 +1,6 @@
 /**
  * SceneTimeline.js
+ *   - this is for 'record mode'
  *
  * Created by niko on 12/15/13.
  */

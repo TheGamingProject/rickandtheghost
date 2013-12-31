@@ -4,7 +4,7 @@
 var GAME = {};
 GAME.SIZE = { x: 1280, y: 720 };
 
-var DEBUG = {showClickArea: true, sceneState: false};
+var DEBUG = {showClickArea: false, sceneState: false};
 
 
 define(["Scene/Scene", "Scene/SceneManager", "storys/RatG/animations", "Player", "StoryTimeline", "Loader", "storys/RatG/assets", "SoundManager"],
@@ -120,8 +120,11 @@ define(["Scene/Scene", "Scene/SceneManager", "storys/RatG/animations", "Player",
     ////////// MAIN /////////////
     var canvas;
     function init() {
-      canvas = document.getElementById('myCanvas');
-      canvas = new createjs.Stage(canvas);
+      canvas = new createjs.Stage(document.getElementById('myCanvas'));
+      canvas.enableMouseOver({frequency: 30});
+
+      //trying: http://stackoverflow.com/questions/20805311/what-is-the-best-practice-in-easeljs-for-ticker
+      createjs.Ticker.setFPS(30);
       createjs.Ticker.addEventListener("tick", canvas);
 
       document.onkeydown = GAME.keyPressed;

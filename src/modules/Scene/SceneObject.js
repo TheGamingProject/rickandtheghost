@@ -4,7 +4,7 @@
  * Created by niko on 12/14/13.
  */
 
-define(["../Utils"],function (Utils){
+define(["../Utils", "Loader"],function (Utils, Loader){
   var STATES = {
     idle: 0,
     beingclicked: 1, //showing list with options
@@ -31,6 +31,8 @@ define(["../Utils"],function (Utils){
     var state = STATES.idle;
     var choice = DEFAULT_CHOICE; //which objectAction was picked
 
+    var myHoverAnimations;
+
     // object definition  and  set idle Animation
     //that = new createjs.Sprite(args.idleAnimation.spritesheet, args.idleAnimation.starting);// extends Sprite
     that = Utils.makeSprite(args.idleAnimation,function(){
@@ -55,6 +57,9 @@ define(["../Utils"],function (Utils){
     //set click size?
     var clickBounds = args.clickBounds;
 
+    //setup hover animation
+    var spritesheet = Loader.getAnimation(args.tag);
+
     var handleClick = function(evt){
       if(state == STATES.postclicked) return;
 
@@ -69,10 +74,23 @@ define(["../Utils"],function (Utils){
 
     };
 
-    //parentStage.addEventListener("click", handleClick);
-    //parentStage.addChild(that);
-    //I think there is a bug, so we have to use abuse the system?
-    parentStage.addEventListener("click", handleClick);
+    var handleHoverOn = function(evt){
+      if(state == STATES.postclicked) return;
+
+      Utils.updateSprite(that, {spritesheet: spritesheet, starting: "hover"});
+    };
+
+    var handleHoverOff = function(evt){
+      if(state == STATES.postclicked) return;
+
+      Utils.updateSprite(that, args.idleAnimation);
+    };
+
+    that.on("rollover", handleHoverOn, null, false, undefined);
+    that.on("rollout", handleHoverOff, null, false, undefined);
+
+    //handling click from parent? because im retarded (i want custom click-size)
+    that.addEventListener("click", handleClick);
 
 
     //public functions
@@ -81,15 +99,27 @@ define(["../Utils"],function (Utils){
     };
     that.setChoice = function(_choice){
       if(state === STATES.postclicked) return;
+
+      if(!_choice){//this sets it to default if nothing was pressed during the scene
+        if(state === STATES.postclicked)
+          return;
+        else{
+          choice = 2;
+          state = STATES.postclicked;
+          return;
+        }
+      }
+
       choice = _choice;
       state = STATES.postclicked;
-    }
+    };
     that.getObjDef = function(){
       return args;
-    }
+    };
     that.getChoiceAction = function(){
+      debugger;
       return args.actionList[choice];
-    }
+    };
 
     return that;
   };

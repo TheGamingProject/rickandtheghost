@@ -77,12 +77,16 @@ define([],function(){
         frames: [1]
       },
 
+      hover: [2, 2, "hover"],
+
       "reaction-activated": [10,39,"idle"],
       "reaction-broken": [40,54,"idlebroken"],
       "objectaction-interactl": [60,89,"idle"]
 
     }
   };
+
+  // Scene 1
 
   animations["switch"] = {
     framerate: 33,
@@ -101,6 +105,9 @@ define([],function(){
       idleonbroken: {
         frames: [3]
       },
+
+      hover: [4, 4, "hover"],
+
       "reaction-break": [10,39,"idleoffbroken"],
       "objectaction-turnon":  [40,54,"idleon"],
       "objectaction-turnonbroken": [60,74,"idleonbroken"]
@@ -121,13 +128,16 @@ define([],function(){
       idlemarked: {
         frames: [2]
       },
+
+      hover: [3, 3, "hover"],
+
       "reaction-unfold": [10,24,"idleunfold"],
       "reaction-mark": [30,59,"idlemarked"]
     }
   };
 
 
-  //A1S2
+  //Scene 2
 
   animations.oatmeal = {
     framerate: 33,
@@ -137,6 +147,9 @@ define([],function(){
       idle: {
         frames: [0]
       },
+
+      //hover: [3, 3, "hover"], doesnt exist
+
       "reaction-heat": [10,19,false],
       "reaction-cool": [20,29,false]
     }
@@ -150,12 +163,15 @@ define([],function(){
       idle: {
         frames: [0]
       },
+
+      hover: [1, 1, "hover"],
+
       "reaction-swap": [10,19,false],
       "reaction-mark": [20,29,false]
     }
   };
 
-  
+
   animations.fridge = {
     framerate: 33,
     images: ["assets/scenes/scene2/fridge.png"],
@@ -164,15 +180,16 @@ define([],function(){
       idle: {
         frames: [0]
       },
+      hover: [1, 1, "hover"],
       "reaction-eggs": [10,24,"idle"],
       "objectaction-open": [30,44,false],
       "objectaction-openeggs": [50,64,false],
       "objectaction-attack": [70,119,false]
     }
   };
-  
 
-  //A1S3
+
+  //Scene 3
 
 
   animations.faucet = {
@@ -210,7 +227,7 @@ define([],function(){
       "reaction-sort": [30,44,"idle"]
     }
   };
-  
+
   animations.leaves = {
     framerate: 33,
     images: ["assets/scenes/scene3/leaves.png"],
@@ -227,17 +244,16 @@ define([],function(){
     }
   };
 
-
-  //A2S1
-
+  //Scene 4
 
   animations.cabinet = {
     framerate: 33,
     images: ["assets/scenes/scene4/cabinet.png"],
     frames: {width: 300, height: 300, count: 170},
     animations: {
-	  "idle": [0],
-	  "idleopen": [1],
+      "idle": [0],
+      "idleopen": [1],
+      hover: [2, 2, "hover"],
       "objectaction-open": [10,24,"idleopen"],
       "objectaction-close": [30,44,"idle"],
       "reaction-sort": [50,109,"idle"],
@@ -251,34 +267,34 @@ define([],function(){
     frames: {width: 300, height: 300, count: 70},
     animations: {
       "idle": [0],
-	  "idlealt": [1],
-	  "idlenone": [2],
+      "idlealt": [1],
+      "idlenone": [2],
+      hover: [2, 2, "hover"],
       "reaction-positive": [10,39,"idle"],
       "reaction-negative": [40,69,"idlealt"]
     }
   };
-  
+
   animations.radio = {
     framerate: 33,
     images: ["assets/scenes/scene4/radio.png"],
     frames: {width: 300, height: 300, count: 20},
     animations: {
-      "idle": [0]
+      "idle": [0],
+      hover: [1, 1, "hover"]
     }
   };
 
-  
-  //A3S1
-
+  //Scene 7
 
   animations.bookshelf = {
     framerate: 33,
     images: ["assets/scenes/scene7/bookshelf.png"],
     frames: {width: 300, height: 320, count: 70},
     animations: {
-	  "idle": [0],
-	  "idlesorted": [1],
-	  "idleempty": [2],
+      "idle": [0],
+      "idlesorted": [1],
+      "idleempty": [2],
       "reaction-sort": [10,39,"idlesorted"],
       "reaction-empty": [40,69,"idleempty"]
     }
@@ -290,12 +306,12 @@ define([],function(){
     frames: {width: 300, height: 300, count: 40},
     animations: {
       "idle": [0],
-	  "idlebroken": [1],
+      "idlebroken": [1],
       "objectaction-possess": [10,21,"idle"],
       "reaction-break": [30,39,"idlebroken"]
     }
   };
-  
+
   animations.vent = {
     framerate: 33,
     images: ["assets/scenes/scene7/vent.png"],

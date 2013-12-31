@@ -109,6 +109,8 @@ define(["../Utils"],function (Utils){
             else
               script = "missing script";
 
+            if(!script) //no script for this event
+              return;
 
             //create text
             var dialogText = Utils.createTextByStoryDef({text: script, fontDef: "rickDialog" }) ;

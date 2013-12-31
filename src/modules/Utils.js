@@ -8,7 +8,7 @@
 define(["storys/RatG/assets"],function (ourAssets){
   var that = {}
 
-  /*
+  /* Example: ourAnimSpec
     spritesheet: animations("alarmclock"),
     starting: "objectaction-setearly",
     location: {x:150,y:150}
