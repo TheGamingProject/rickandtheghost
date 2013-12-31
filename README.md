@@ -6,7 +6,7 @@ Changelog:
   - v1.01 - 12/21/13 - First round of bug Fixes
                      - Added End Screen, abstracted fade mechanic
                      - fixed up object-action dialog buttons (and dumb clicking bug)
-  - v1.02 - 12/??/13 - UI overhaul
+  - v1.02 - 12/31/13 - UI overhaul
                      - Added Sound
                      - Loader Updates (PreloadJS)
 
