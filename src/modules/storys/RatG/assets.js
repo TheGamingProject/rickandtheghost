@@ -9,7 +9,7 @@ define(function(){
     fonts: {
       "rickDialog": {
         fontFamily: "RBNo2",
-        color: "#ff7700",
+        color: "#ffffff",
         size: 26
       },
 

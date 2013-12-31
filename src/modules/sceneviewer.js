@@ -7,8 +7,8 @@ GAME.SIZE = { x: 1280, y: 720 };
 var DEBUG = {showClickArea: true};
 
 
-define(["Scene/Scene", "Scene/SceneManager", "storys/RatG/animations", "Player", "StoryTimeline", "Loader", "Utils"],
-    function(Scene, SceneManager, animations, Player, StoryTimeline, Loader, Utils){
+define(["Scene/Scene", "Scene/SceneManager", "storys/RatG/animations", "Player", "StoryTimeline", "Loader", "Utils", "storys/RatG/assets"],
+    function(Scene, SceneManager, animations, Player, StoryTimeline, Loader, Utils, ourAssets){
 
   var STATES = {pregame: 0, ingame: 1, loading: 2};
 
@@ -67,19 +67,18 @@ define(["Scene/Scene", "Scene/SceneManager", "storys/RatG/animations", "Player",
 
     //load!
 
+    var ourStillsToBeLoaded = ourAssets.stills;
+    var ourSoundsToBeLoaded = ourAssets.sounds;
+
     console.log("loading");
     Loader.doLoadScreen(
-        canvas,
-        ["rickglobal",
-          "ricka1s1","alarmclock","switch","poster", "windowrays",
-          "calendar","fridge", "oatmeal",
-          "cabinet", "motiv", "radio"
-        ],
-        ["assets/scenes/a1s1/background.png","assets/scenes/a1s2/background.png","assets/scenes/a2s1/background.png"],
-        function(){
-          console.log("done loading");
-          GAME.init(canvas);
-        }
+      canvas,
+      ourStillsToBeLoaded,
+      ourSoundsToBeLoaded,
+      function(){
+        console.log("done loading");
+        GAME.init(canvas);
+      }
     );
 
   }

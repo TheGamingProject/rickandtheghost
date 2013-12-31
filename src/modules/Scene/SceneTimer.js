@@ -17,6 +17,9 @@
 define(["../Utils"],function (Utils){
   var DEFAULT_DIALOG_LENGTH = 2000;
 
+  var DIALOG_BOX_ALPHA = .6;
+  var DIALOG_BOX_HEIGHT = 40;
+  var DIALOG_TEXT_OFFSET = {x: 5, y: 29};
 
   var SceneTimer = function(args){
     var that = {};
@@ -106,17 +109,28 @@ define(["../Utils"],function (Utils){
             else
               script = "missing script";
 
-            //create label
+
+            //create text
             var dialogText = Utils.createTextByStoryDef({text: script, fontDef: "rickDialog" }) ;
-            dialogText.x = location.x;
-            dialogText.y = location.y;
+            dialogText.x = location.x + DIALOG_TEXT_OFFSET.x;
+            dialogText.y = location.y + DIALOG_TEXT_OFFSET.y;
             dialogText.textBaseline = "alphabetic";
+
+            //create blackbox behind text
+            var dialogRect = new createjs.Shape();
+            dialogRect.mouseEnabled = false;
+            dialogRect.graphics.beginFill(createjs.Graphics.getRGB(0,0,0,DIALOG_BOX_ALPHA)).drawRect(location.x, location.y, dialogText.getMeasuredWidth() + DIALOG_TEXT_OFFSET.x * 2, DIALOG_BOX_HEIGHT, .5);
+
+            dialogContainer.addChild(dialogRect);
             dialogContainer.addChild(dialogText);
 
             //timeout to kill a textlabel
             setTimeout(function(){
-              dialogContainer.removeChild((dialogText));
-              delete dialogText;
+              dialogContainer.removeChild(dialogText);
+              dialogContainer.removeChild(dialogRect);
+
+              dialogText = null;
+              dialogRect = null;
             },displayLength);
 
 

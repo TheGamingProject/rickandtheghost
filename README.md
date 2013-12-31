@@ -1,4 +1,4 @@
-ludumdare28
+Rick and the Ghost
 ===========
 
 Changelog:
@@ -6,7 +6,9 @@ Changelog:
   - v1.01 - 12/21/13 - First round of bug Fixes
                      - Added End Screen, abstracted fade mechanic
                      - fixed up object-action dialog buttons (and dumb clicking bug)
-
+  - v1.02 - 12/??/13 - UI overhaul
+                     - Added Sound
+                     - Loader Updates (PreloadJS)
 
 ===========
 Install Grunt for fun
@@ -14,6 +16,8 @@ Install Grunt for fun
  - sudo npm install -g grunt-cli
  - npm install
 
+Grunt Tasks
+ - 'grunt' - everything
 
 Use any webserver to serve the game
 

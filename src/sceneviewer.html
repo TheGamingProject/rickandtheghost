@@ -5,15 +5,18 @@
     <link rel="stylesheet" href="font.css" type="text/css" charset="utf-8">
     <link rel="stylesheet" href="style.css" type="text/css">
     <script src="lib/jquery-1.10.2.js"></script>
-    <!--<script src="lib/easeljs-0.7.0.min.js"></script> -->
 
-
-    <script src="lib/preloadjs-NEXT.min.js"></script>
-
-      <!-- Note: All core EaselJS classes are listed here: -->
     <script type="text/javascript" src="lib/createjs/events/Event.js"></script>
     <script type="text/javascript" src="lib/createjs/events/EventDispatcher.js"></script>
     <script type="text/javascript" src="lib/createjs/utils/IndexOf.js"></script>
+    <script type="text/javascript" src="lib/createjs/utils/Proxy.js"></script>
+
+    <script type="text/javascript" src="lib/preloadjs/AbstractLoader.js"></script>
+    <script type="text/javascript" src="lib/preloadjs/LoadQueue.js"></script>
+    <script type="text/javascript" src="lib/preloadjs/TagLoader.js"></script>
+    <script type="text/javascript" src="lib/preloadjs/XHRLoader.js"></script>
+
+    <!-- Note: All core EaselJS classes are listed here: -->
     <script type="text/javascript" src="lib/easeljs/utils/UID.js"></script>
     <script type="text/javascript" src="lib/easeljs/utils/Ticker.js"></script>
     <script type="text/javascript" src="lib/easeljs/geom/Matrix2D.js"></script>
@@ -38,6 +41,15 @@
     <script type="text/javascript" src="lib/easeljs/ui/Touch.js"></script>
     <script type="text/javascript" src="lib/easeljs/utils/SpriteSheetUtils.js"></script>
     <script type="text/javascript" src="lib/easeljs/utils/SpriteSheetBuilder.js"></script>
+
+    <script type="text/javascript" src="lib/soundjs/Sound.js"></script>
+    <script type="text/javascript" src="lib/soundjs/WebAudioPlugin.js"></script>
+    <script type="text/javascript" src="lib/soundjs/HTMLAudioPlugin.js"></script>
+
+    <!-- Note: FlashPlugin is only needed to support older browsers -->
+    <script type="text/javascript" src="lib/swfobject.js"></script>
+    <script type="text/javascript" src="lib/soundjs/FlashPlugin.js"></script>
+
 
     <script data-main="modules/sceneviewer" src="lib/require.js"></script>
 

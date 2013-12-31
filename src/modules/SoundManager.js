@@ -59,9 +59,11 @@ define([], function(){
     mute = enabled;
 
     if(mute){
-      if(bgMusicInstance) bgMusicInstance.pause();//kill bgMusicInstance?
+      if(bgMusicInstance)
+        bgMusicInstance.pause();//kill bgMusicInstance?
     } else {
-      if (bgMusicInstance) bgMusicInstance.play();
+      if (bgMusicInstance)
+        bgMusicInstance.play();
     }
 
   };

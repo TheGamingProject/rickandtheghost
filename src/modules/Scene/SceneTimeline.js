@@ -39,7 +39,7 @@ define(["Scene/Scene", "Utils", "Loader", "Scene/SceneTimer"],function (Scene, U
           if(timeblockCount < timelineDef.length)
             recursiveCallback(num+1);
         });
-      }
+      };
       recursiveCallback(0);
 
 
