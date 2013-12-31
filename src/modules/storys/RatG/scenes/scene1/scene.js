@@ -34,7 +34,7 @@ define(["Loader", "storys/RatG/scenes/scene1/script"],function(Loader, script){
 
     scene.music = "scene1";
     scene.background = {
-      path: Loader.getStill("assets/scenes/a1s1/background.png")
+      path: Loader.getStill("assets/scenes/scene1/background.png")
     };
 
     //Scene Animations

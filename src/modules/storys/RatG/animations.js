@@ -42,7 +42,7 @@ define([],function(){
 
   animations.ricka1s1 = {
     framerate: 33,
-    images: ["assets/scenes/a1s1/ricka1s1.png"],
+    images: ["assets/scenes/scene1/ricka1s1.png"],
     frames: {width: 300, height: 300, count: 40},
     animations: {
       sleep: {
@@ -56,7 +56,7 @@ define([],function(){
   //misc
   animations.windowrays = {
     framerate: 33,
-    images: ["assets/scenes/a1s1/windowrays.png"],
+    images: ["assets/scenes/scene1/windowrays.png"],
     frames: {width: 280, height: 340, count: 1},
     animations: {
       idle: [0]
@@ -67,7 +67,7 @@ define([],function(){
 
   animations.alarmclock = {
     framerate: 33,
-    images: ["assets/scenes/a1s1/alarmclock.png"],
+    images: ["assets/scenes/scene1/alarmclock.png"],
     frames: {width: 300, height: 300, count: 90},
     animations: {
       idle: {
@@ -86,7 +86,7 @@ define([],function(){
 
   animations["switch"] = {
     framerate: 33,
-    images: ["assets/scenes/a1s1/switch.png"],
+    images: ["assets/scenes/scene1/switch.png"],
     frames: {width: 300, height: 300, count: 80},
     animations: {
       idleoff: {
@@ -109,7 +109,7 @@ define([],function(){
 
   animations.poster = {
     framerate: 33,
-    images: ["assets/scenes/a1s1/poster.png"],
+    images: ["assets/scenes/scene1/poster.png"],
     frames: {width: 120, height: 250, count: 60},
     animations: {
       idlefold: {
@@ -131,7 +131,7 @@ define([],function(){
 
   animations.oatmeal = {
     framerate: 33,
-    images: ["assets/scenes/a1s2/oatmeal.png"],
+    images: ["assets/scenes/scene2/oatmeal.png"],
     frames: {width: 300, height: 300, count: 30},
     animations: {
       idle: {
@@ -144,7 +144,7 @@ define([],function(){
 
   animations.calendar = {
     framerate: 33,
-    images: ["assets/scenes/a1s2/calendar.png"],
+    images: ["assets/scenes/scene2/calendar.png"],
     frames: {width: 75, height: 140, count: 30},
     animations: {
       idle: {
@@ -158,7 +158,7 @@ define([],function(){
   
   animations.fridge = {
     framerate: 33,
-    images: ["assets/scenes/a1s2/fridge.png"],
+    images: ["assets/scenes/scene2/fridge.png"],
     frames: {width: 600, height: 300, count: 120},
     animations: {
       idle: {
@@ -177,7 +177,7 @@ define([],function(){
 
   animations.faucet = {
     framerate: 33,
-    images: ["assets/scenes/a1s3/faucet.png"],
+    images: ["assets/scenes/scene3/faucet.png"],
     frames: {width: 300, height: 300, count: 100},
     animations: {
       idle: {
@@ -197,7 +197,7 @@ define([],function(){
 
   animations.garbage = {
     framerate: 33,
-    images: ["assets/scenes/a1s3/garbage.png"],
+    images: ["assets/scenes/scene3/garbage.png"],
     frames: {width: 300, height: 300, count: 50},
     animations: {
       idle: {
@@ -213,7 +213,7 @@ define([],function(){
   
   animations.leaves = {
     framerate: 33,
-    images: ["assets/scenes/a1s3/leaves.png"],
+    images: ["assets/scenes/scene3/leaves.png"],
     frames: {width: 300, height: 500, count: 70},
     animations: {
       idle: {
@@ -233,7 +233,7 @@ define([],function(){
 
   animations.cabinet = {
     framerate: 33,
-    images: ["assets/scenes/a2s1/cabinet.png"],
+    images: ["assets/scenes/scene4/cabinet.png"],
     frames: {width: 300, height: 300, count: 170},
     animations: {
 	  "idle": [0],
@@ -247,7 +247,7 @@ define([],function(){
 
   animations.motiv = {
     framerate: 33,
-    images: ["assets/scenes/a2s1/motiv.png"],
+    images: ["assets/scenes/scene4/motiv.png"],
     frames: {width: 300, height: 300, count: 70},
     animations: {
       "idle": [0],
@@ -260,7 +260,7 @@ define([],function(){
   
   animations.radio = {
     framerate: 33,
-    images: ["assets/scenes/a2s1/radio.png"],
+    images: ["assets/scenes/scene4/radio.png"],
     frames: {width: 300, height: 300, count: 20},
     animations: {
       "idle": [0]
@@ -273,7 +273,7 @@ define([],function(){
 
   animations.bookshelf = {
     framerate: 33,
-    images: ["assets/scenes/a3s1/bookshelf.png"],
+    images: ["assets/scenes/scene7/bookshelf.png"],
     frames: {width: 300, height: 320, count: 70},
     animations: {
 	  "idle": [0],
@@ -286,7 +286,7 @@ define([],function(){
 
   animations.phone = {
     framerate: 33,
-    images: ["assets/scenes/a3s1/phone.png"],
+    images: ["assets/scenes/scene7/phone.png"],
     frames: {width: 300, height: 300, count: 40},
     animations: {
       "idle": [0],
@@ -298,7 +298,7 @@ define([],function(){
   
   animations.vent = {
     framerate: 33,
-    images: ["assets/scenes/a3s1/vent.png"],
+    images: ["assets/scenes/scene7/vent.png"],
     frames: {width: 300, height: 300, count: 70},
     animations: {
       "idle": [0],

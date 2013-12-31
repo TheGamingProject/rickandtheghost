@@ -38,13 +38,13 @@ define(function(){
       {src: "assets/ui/state-recording.png", id: "state-recording"},
 
       //scene1
-      {src: "assets/scenes/a1s1/background.png", id: "scene1-background"},
+      {src: "assets/scenes/scene1/background.png", id: "scene1-background"},
 
       //scene2
-      {src: "assets/scenes/a1s2/background.png", id: "scene2-background"},
+      {src: "assets/scenes/scene2/background.png", id: "scene2-background"},
 
       //scene4
-      {src: "assets/scenes/a2s1/background.png", id: "scene4-background"}
+      {src: "assets/scenes/scene4/background.png", id: "scene4-background"}
     ],
 
     //animations auto loaded if defined in animations.js
