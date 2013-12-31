@@ -32,6 +32,7 @@ define(["Loader", "storys/RatG/scenes/scene4/script"],function(Loader, script){
       location: {x:514, y:200}
     };
 
+    scene.music = "scene4";
     scene.background = {
       path: Loader.getStill("assets/scenes/a2s1/background.png")
     };
@@ -41,7 +42,7 @@ define(["Loader", "storys/RatG/scenes/scene4/script"],function(Loader, script){
     //  or arent associated with timeblocks
 
     scene.animations = {};
-    //cabinet (scene object animations don't need new locations)
+    //cabinet (scene object animations don't need new locations <- what does this mean?)
     scene.animations["possessCabinet"] = {
       spritesheet: Loader.getAnimation("cabinet"),
       starting: "reaction-possess"

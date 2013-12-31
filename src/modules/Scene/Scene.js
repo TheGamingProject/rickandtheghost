@@ -270,6 +270,9 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
 
     that.startScene = function(_exitSceneCallback){
       exitSceneCallback = _exitSceneCallback;
+
+      SoundManager.playBackgroundMusic(sceneDef.music);
+
       setState(STATES.haunting);
 
       //you can now click on objects

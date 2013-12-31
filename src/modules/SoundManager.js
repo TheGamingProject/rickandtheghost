@@ -58,8 +58,12 @@ define([], function(){
   that.setMute = function(enabled){
     mute = enabled;
 
-    if(mute)
-      ;//kill bgMusicInstance?
+    if(mute){
+      if(bgMusicInstance) bgMusicInstance.pause();//kill bgMusicInstance?
+    } else {
+      if (bgMusicInstance) bgMusicInstance.play();
+    }
+
   };
 
   that.loadMuteSettings();

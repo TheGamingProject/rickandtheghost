@@ -32,7 +32,7 @@ define(["Loader", "storys/RatG/scenes/scene1/script"],function(Loader, script){
       location: {x:500, y:200}
     };
 
-    //new createjs.Sprite(spritesheet,"afk");
+    scene.music = "scene1";
     scene.background = {
       path: Loader.getStill("assets/scenes/a1s1/background.png")
     };

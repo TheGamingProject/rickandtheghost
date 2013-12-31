@@ -45,13 +45,16 @@ define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene", "Fader", "Soun
     var startSceneHandler = function(key){
       console.log("startPlayScreen: "+ourStory.scenes[key]);
 
+      var sceneDef = SceneManager.getScene(ourStory.scenes[key]);
+
       currentNum = key;
-      currentScene = new Scene( {sceneDef: SceneManager.getScene(ourStory.scenes[key]), parentStage: parentStage} );
+      currentScene = new Scene( {"sceneDef": sceneDef, parentStage: parentStage} );
       currentScene.startScene(exitSceneCallback);
     };
 
     var exitSceneCallback = function(){
       console.log("stopPlayScreen: "+ourStory.scenes[currentNum]);
+      SoundManager.stopBackgroundMusic();
 
       progressStory();
     };

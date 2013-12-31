@@ -32,6 +32,7 @@ define(["Loader", "storys/RatG/scenes/scene2/script"],function(Loader, script){
       location: {x:900, y:205}
     };
 
+    scene.music = "scene2";
     scene.background = {
       path: Loader.getStill("assets/scenes/a1s2/background.png")
     };

@@ -52,6 +52,9 @@ define(function(){
     sounds: [
     //background music
       {src: "assets/sounds/badmusic.ogg", id: "backgroundMusic"},
+      {src: "assets/sounds/badmusic1.ogg", id: "scene1"},
+      {src: "assets/sounds/badmusic2.ogg", id: "scene2"},
+      {src: "assets/sounds/badmusic3.ogg", id: "scene4"},
 
     //sound effects
       {src:"assets/sounds/transition.ogg", id:"startGameClick"},
