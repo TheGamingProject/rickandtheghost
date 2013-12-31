@@ -117,7 +117,6 @@ define(["../Utils", "Loader"],function (Utils, Loader){
       return args;
     };
     that.getChoiceAction = function(){
-      debugger;
       return args.actionList[choice];
     };
 

@@ -51,10 +51,10 @@ define(function(){
 
     sounds: [
     //background music
-      {src: "assets/music/Haunted.ogg", id: "backgroundMusic", volume: .5},
-      {src: "assets/music/Haunted1.ogg", id: "scene1", volume: .5},
-      {src: "assets/music/Haunted2.ogg", id: "scene2", volume: .5},
-      {src: "assets/music/office1.ogg", id: "scene4", volume:.1},
+      {src: "assets/music/Haunted.ogg", id: "backgroundMusic", volume: .4},
+      {src: "assets/music/Haunted1.ogg", id: "scene1", volume: .4},
+      {src: "assets/music/Haunted2.ogg", id: "scene2", volume: .4},
+      {src: "assets/music/office1.ogg", id: "scene4", volume:.2},
 
     //sound effects
       {src:"assets/sounds/transition.ogg", id:"startGameClick"},
