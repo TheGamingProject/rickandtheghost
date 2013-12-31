@@ -7,7 +7,7 @@
  *
  */
 
-define(["storys/RatG/animations"],function(animations){
+define(["storys/RatG/animations"], function(animations){
   var LOAD_CHECK_TIME = 1000; //ms
   var LOADING_UPDATE = 10; //for loading screen TODO rename the variable
 
@@ -15,6 +15,8 @@ define(["storys/RatG/animations"],function(animations){
 
   var stills = {};
   var spriteSheets = {};
+
+  var loadedList = {};
 
   var queue = new createjs.LoadQueue();
   queue.installPlugin(createjs.Sound);
@@ -32,21 +34,21 @@ define(["storys/RatG/animations"],function(animations){
     var finishedLoadingCount = 0;
 
     var individualLoadingCallback = function(evt){
-      ////////  update load bar //////////
-      var resource = evt.item.id;
-      if(!resource) debugger;
+      var resource = evt.item;
+      if(!resource.id) debugger;
 
+      ////////  update load bar //////////
       var gap = GAME.SIZE.y / totalResources;
       var rectangle = new createjs.Shape();
       rectangle.graphics.beginFill("white").drawRect(0, finishedLoadingCount * gap, GAME.SIZE.x, gap);
       loadingContainer.addChild(rectangle);
-      console.log("finished loaded: "+resource +" ["+finishedLoadingCount+"]");
-      finishedLoadingCount++
-
-      //and the ones that ..  (totalPixels % totalResources === finshedLoadingCount)
-
       ////////////////////////////////////
-    } ;
+
+      console.log("finished loaded: "+resource.id +" ["+finishedLoadingCount+"]");
+      finishedLoadingCount++;
+
+      loadedList[resource.id] = resource;
+    };
 
     //find all animations from animations.js
     var listOfAnimations = [];
@@ -88,9 +90,9 @@ define(["storys/RatG/animations"],function(animations){
     });
 
     queue.loadManifest(imageList);
-
   };
 
+  //TODO redo these get functions sometime, they look ugly
   that.getAnimation = function(resourceName){
     if(!animations[resourceName]){
       throw "Animation doesn't exist: "+resourceName;
@@ -111,10 +113,10 @@ define(["storys/RatG/animations"],function(animations){
       return stills[resourceName];
     }
 
-    console.log("flyloading still: "+resourceName);
+    console.log("(not-fly)loading still: "+resourceName);
 
     var imageObj = new Image();
-    imageObj.onload = function(){};
+    //imageObj.onload = function(){};
     imageObj.src = resourceName;
 
 
@@ -122,9 +124,27 @@ define(["storys/RatG/animations"],function(animations){
     return stills[resourceName];
   };
 
-  //returning sound resource
-  that.getSound = function(resourceName){
+  //dont need a getSound() because SoundJS knowz
 
+  that.getResourceInfo = function(args){
+    var resourceName = args.resourceName;
+    if (!resourceName)
+      throw "no resourceName";
+
+    var type = args.type; //sound, animation, or still
+
+    var resource = loadedList[resourceName];
+    if(!resource /* TODO or if not loaded */)
+      return null;
+
+    if(!type)
+      return resource;
+    
+    if (type === resource.type)
+      return resource;
+
+    debugger;
+    return null;
   };
 
   return that;

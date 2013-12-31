@@ -4,7 +4,7 @@
  * Created by niko on 12/29/13.
  */
 
-define([], function(){
+define(["Loader"], function(Loader){
 
   var mute;
   var that = {};
@@ -28,13 +28,16 @@ define([], function(){
   that.playBackgroundMusic = function(musicClipName){
     if(mute) return;
 
-    console.log("playing background music: "+musicClipName);
+    var resourceInfo = Loader.getResourceInfo({resourceName: musicClipName});
 
-    var volume = .2;
+    if (!resourceInfo || resourceInfo.type !== "sound")
+      throw "resource doesn't exist";
 
+    var volume = resourceInfo.volume || .2;
     var instance = createjs.Sound.play(musicClipName, createjs.Sound.INTERRUPT_ANY, 0, 0, -1, volume, 0);
 
     bgMusicInstance = instance;
+    console.log("playing background music: "+musicClipName);
   };
 
   //pauses background music if any is playing
