@@ -19,7 +19,7 @@ define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene", "Fader", "Soun
   var CONTINUE_BUTTON = {
     x: 600, y:700,
     path: "assets/ui/arrow0.png"
-  }
+  };
 
 
   var StoryTimeline = function(args){
@@ -35,7 +35,6 @@ define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene", "Fader", "Soun
     if (!args.parentStage) throw "wtffffffffffff. no parent stage!!! in StoryTimeline...";
 
     var parentStage = args.parentStage;
-
 
 
     // public functions
@@ -55,7 +54,7 @@ define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene", "Fader", "Soun
       console.log("stopPlayScreen: "+ourStory.scenes[currentNum]);
 
       progressStory();
-    }
+    };
 
     var startGoalScreenHandler = function(){
       console.log("startGoalScreen");
@@ -65,13 +64,14 @@ define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene", "Fader", "Soun
       tempBG.y = 0;
 
       parentStage.addChild(tempBG);
-
+      SoundManager.playBackgroundMusic("backgroundMusic");
 
       var hitArea = new createjs.Shape();
       hitArea.graphics.beginFill("#000").drawRect(0,0,GAME.SIZE.x,GAME.SIZE.y);
       tempBG.hitArea = hitArea;
 
       tempBG.on("click",function(){
+        SoundManager.stopBackgroundMusic();
         console.log("next plz");
         SoundManager.playSoundEffect("startGameClick");
 
@@ -82,7 +82,7 @@ define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene", "Fader", "Soun
       },null, true)
 
 
-    }
+    };
 
     var endGoalScreenHandler = function(){
       console.log("endGoalScreen");

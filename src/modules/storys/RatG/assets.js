@@ -50,7 +50,11 @@ define(function(){
     //animations auto loaded if defined in animations.js
 
     sounds: [
-      {src:"assets/sounds/Game-Death1.ogg", id:"startGameClick"},
+    //background music
+      {src: "assets/sounds/badmusic.ogg", id: "backgroundMusic"},
+
+    //sound effects
+      {src:"assets/sounds/transition.ogg", id:"startGameClick"},
       {src:"assets/sounds/Game-Death2.ogg", id:"continueButtonClick"},
       {src:"assets/sounds/Game-Death3.ogg", id:"objectSelectClick"},
       {src:"assets/sounds/Game-Death.ogg", id:"hauntOptionsClick"}

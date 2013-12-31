@@ -28,11 +28,23 @@ define([], function(){
   that.playBackgroundMusic = function(musicClipName){
     if(mute) return;
 
+    console.log("playing background music: "+musicClipName);
+
+    var volume = .2;
+
+    var instance = createjs.Sound.play(musicClipName, createjs.Sound.INTERRUPT_ANY, 0, 0, -1, volume, 0);
+
+    bgMusicInstance = instance;
   };
 
   //pauses background music if any is playing
   that.pauseBackgroundMusic = function(){
+    if(bgMusicInstance) bgMusicInstance.pause();
+  };
 
+  that.stopBackgroundMusic = function(){
+    if(bgMusicInstance) bgMusicInstance.stop();
+    bgMusicInstance = null;
   };
 
   that.loadMuteSettings = function(){
