@@ -15,8 +15,8 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
   //ui locations
 
   var SCENE_STATE_INDICATOR = {
-    x: 0,
-    y: 0,
+    x: 9,
+    y: 2,
     path : {
       haunting: "assets/ui/state-haunting.png",
       recording: "assets/ui/state-recording.png"
@@ -202,6 +202,8 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       sceneStateIndicator["recording"] = new createjs.Bitmap(SCENE_STATE_INDICATOR.path.recording);
       sceneStateIndicator["haunting"].x = sceneStateIndicator["recording"].x = SCENE_STATE_INDICATOR.x;
       sceneStateIndicator["haunting"].y = sceneStateIndicator["recording"].y = SCENE_STATE_INDICATOR.y;
+      sceneStateIndicator["recording"].visible = false;
+
       uiLayerContainer.addChild(sceneStateIndicator["haunting"]);
       uiLayerContainer.addChild(sceneStateIndicator["recording"]);
 
