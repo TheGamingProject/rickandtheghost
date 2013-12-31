@@ -15,7 +15,7 @@ define(["Scene/Scene", "Utils", "Loader", "Scene/SceneTimer"],function (Scene, U
     over: 4
   };
 
-  var WALKSPEED = 4; //20 pixel x per second?
+  var WALKSPEED = 3; //what does this mean?
 
   var SceneTimeline = function(rickSprite, sceneObjects, timelineDef){
     var that = {};
