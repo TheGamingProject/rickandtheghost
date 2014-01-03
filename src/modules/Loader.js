@@ -7,11 +7,12 @@
  *
  */
 
-define(["storys/RatG/animations"], function(animations){
-  var LOAD_CHECK_TIME = 1000; //ms
-  var LOADING_UPDATE = 10; //for loading screen TODO rename the variable
+define(["storys/RatG/animations", "LoadScreen"], function(animations, LoadScreen){
+//  var LOADING_UPDATE = 10; //for loading screen TODO rename the variable
 
   var that = {};
+
+  var loadScreen;
 
   var stills = {};
   var spriteSheets = {};
@@ -24,31 +25,10 @@ define(["storys/RatG/animations"], function(animations){
   createjs.Sound.registerPlugins([createjs.HTMLAudioPlugin]);
   createjs.Sound.alternateExtensions = ["mp3"];
 
+  // Public Functions
+
   that.doLoadScreen = function(parentContainer, listOfStills, listOfSounds, finishedLoadingCallback){
-    //make a new container and add it to parent
-    var loadingContainer = new createjs.Container();
-    parentContainer.addChild(loadingContainer);
-
-    //start loading all resources
     var totalResources = 0;
-    var finishedLoadingCount = 0;
-
-    var individualLoadingCallback = function(evt){
-      var resource = evt.item;
-      if(!resource.id) debugger;
-
-      ////////  update load bar //////////
-      var gap = GAME.SIZE.y / totalResources;
-      var rectangle = new createjs.Shape();
-      rectangle.graphics.beginFill("white").drawRect(0, finishedLoadingCount * gap, GAME.SIZE.x, gap);
-      loadingContainer.addChild(rectangle);
-      ////////////////////////////////////
-
-      console.log("finished loaded: "+resource.id +" ["+finishedLoadingCount+"]");
-      finishedLoadingCount++;
-
-      loadedList[resource.id] = resource;
-    };
 
     //find all animations from animations.js
     var listOfAnimations = [];
@@ -60,26 +40,39 @@ define(["storys/RatG/animations"], function(animations){
     var loadList = [];
     $.merge(loadList, listOfAnimations);
     $.merge(loadList, listOfStills);
+    totalResources = loadList.length + listOfSounds.length;
 
-    //check when everythings loaded
-    var checkIfEverythingsLoaded = function(){
-      LOADING_UPDATE
-      if(finishedLoadingCount > totalResources){
-        throw "wtf, how did this happen!?";
-      } else if (finishedLoadingCount === totalResources){
-        //when everythings loaded...
-        //remove the container from parent, and call the callback
-        parentContainer.removeChild(loadingContainer);
-        finishedLoadingCallback();
+    //callback defs
+    var individualLoadingCallback = function(evt){
+      var resource = evt.item;
+      if(!resource.id) debugger;
 
-        return; //dont forget to break out of this timeout-spawning loop
-      }
+      if(loadScreen)
+        loadScreen.progressByOneResource(resource.id);
 
-      setTimeout(checkIfEverythingsLoaded, LOADING_UPDATE);
+      console.log("finished loaded: "+resource.id +" ["+loadScreen.getLoadedCount()+"]");
+
+      loadedList[resource.id] = resource;
     };
 
-    totalResources = loadList.length + listOfSounds.length;
-    that.startLoad(loadList, listOfSounds, checkIfEverythingsLoaded, individualLoadingCallback);
+    //check when everythings loaded
+    var allLoadedCallback = function(){
+      var loadedCount = loadScreen.getLoadedCount();
+      if(loadedCount > totalResources){
+        throw "wtf, how did this happen!?";
+      } else if (loadedCount === totalResources){ //when everythings loaded...
+        //remove the container from parent, and call the callback
+        loadScreen.removeFromParent();
+
+        return finishedLoadingCallback(); //dont forget to break out of this timeout-spawning loop
+      }
+    };
+
+    //init the loadscreen
+    loadScreen = LoadScreen({id: "default", "parentContainer": parentContainer, "totalResources": totalResources});
+
+    //then start the load
+    that.startLoad(loadList, listOfSounds, allLoadedCallback, individualLoadingCallback);
   };
 
   that.startLoad = function(imageList, soundList, allLoadedCallback, individualLoadedCallback){
@@ -139,7 +132,7 @@ define(["storys/RatG/animations"], function(animations){
 
     if(!type)
       return resource;
-    
+
     if (type === resource.type)
       return resource;
 
