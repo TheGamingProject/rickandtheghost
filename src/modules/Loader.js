@@ -64,7 +64,7 @@ define(["storys/RatG/animations", "LoadScreen"], function(animations, LoadScreen
         //remove the container from parent, and call the callback
         loadScreen.removeFromParent();
 
-        return finishedLoadingCallback(); //dont forget to break out of this timeout-spawning loop
+        return finishedLoadingCallback();
       }
     };
 
