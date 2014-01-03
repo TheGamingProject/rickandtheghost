@@ -81,6 +81,9 @@ define(["storys/RatG/animations", "LoadScreen"], function(animations, LoadScreen
     $.each(soundList, function(key, value){
       queue.loadFile(value);
     });
+    queue.on("error", function(evt){
+      throw "error on resource: "+evt.item.id+"=\"" + evt.item.src + "\"";
+    });
 
     queue.loadManifest(imageList);
   };
