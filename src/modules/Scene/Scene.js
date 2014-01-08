@@ -3,6 +3,7 @@
  *
  * Scene.js
  */
+
 define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", "Fader", "Scene/SceneOptionsUI", "SoundManager"],
     function (SceneObject, SceneTimeline, Utils, SceneTimer, Fader, SceneOptionsUI, SoundManager){
 
@@ -21,7 +22,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       haunting: "assets/ui/state-haunting.png",
       recording: "assets/ui/state-recording.png"
     }
-  }
+  };
 
   var UI_BOTTOM = {
     x: 0,
@@ -51,7 +52,6 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
     x: 800, y:20
   };
 
-  //page 52 the goood parts
   var Scene = function(args){
     var that;
     args = args || {};
@@ -68,7 +68,6 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
     var state = STATES.preinit;
     var timeline;
     var sceneObjects = {};
-
 
     //ui variables
     var sceneContainer;
@@ -89,8 +88,8 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
     // object definition
     that = {};
 
- // object methods / public variables
-    that.init = function(){
+    // object methods / public variables
+    var init = function(){
       //constructor?
       sceneContainer = new createjs.Container();
 
@@ -113,12 +112,11 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       //////// setup UI ////////////
       setupUI();
 
-
-
-
+     //TODO take this out and make Scene a container? 
       parentStage.addChild(sceneContainer);
+      parentStage.update();
+      
       console.log("Scene init-ed: "+sceneDef.name);
-
       SceneTimer.setExitSceneCallback(that.endScene );
 
     };
@@ -315,7 +313,7 @@ define(["Scene/SceneObject", "Scene/SceneTimeline","Utils", "Scene/SceneTimer", 
       return state;
     };
 
-    that.init();
+    init();
 
     return that;
   };

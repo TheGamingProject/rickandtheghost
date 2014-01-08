@@ -79,7 +79,7 @@ define(["storys/RatG/story", "Scene/SceneManager", "Scene/Scene", "Fader", "Soun
         SoundManager.playSoundEffect("startGameClick");
 
         parentStage.removeChild(tempBG);
-
+parentStage.update();
 
         startSceneHandler(0);
       },null, true)

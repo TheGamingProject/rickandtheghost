@@ -24,7 +24,7 @@ define(["Loader", "storys/RatG/scenes/scene1/script"],function(Loader, script){
 
     scene.name = "Bedroom";
 
-    scene.startFade = {r: 0, g: 0, b: 0, o: .5};
+    scene.startFade = {r: 0, g: 0, b: 0, o: 1};
 
     scene.startingIdle = {
       spritesheet: Loader.getAnimation("ricka1s1"),
@@ -326,7 +326,7 @@ define(["Loader", "storys/RatG/scenes/scene1/script"],function(Loader, script){
         start: 1,
         stop:.5
       },
-      displayLength: 500
+      displayLength: 1000
     };
 
 

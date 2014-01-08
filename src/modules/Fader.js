@@ -20,9 +20,8 @@ define(function(){
     var fadeRect;
     var startFadeRect;
 
-    var prevOpaque;
-    var currectOpaqueness
-
+    var prevOpaque; //or current Opaqueness..
+    
     that.setImmediateFade = function (argz){
 
       if(argz.color){
@@ -49,7 +48,7 @@ define(function(){
       var endFadeCallback = argz.endFadeCallback;
       var refreshTime = argz.refreshTime || 5;
 
-      //TODO
+      //TODO ???
 
       /////////////////
 
